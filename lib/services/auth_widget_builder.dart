@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 /*
 * This class is mainly to help with creating user dependent object that
-* need to be available by all downstream widgets.
+* need to be available to all downstream widgets.
 * Thus, this widget builder is a must to live above [MaterialApp].
 * As we rely on uid to decide which main screen to display (eg: Home or Sign In),
 * this class will helps to create all providers needed that depends on

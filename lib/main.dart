@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_starter/auth_widget_builder.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/constants/app_themes.dart';
 import 'package:flutter_starter/models/user_model.dart';
 import 'package:flutter_starter/providers/auth_provider.dart';
 import 'package:flutter_starter/providers/theme_provider.dart';
-import 'package:flutter_starter/routes.dart';
-import 'package:flutter_starter/services/firestore_database.dart';
+import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/auth/sign_in_screen.dart';
 import 'package:flutter_starter/ui/home/home.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

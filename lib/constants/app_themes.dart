@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/constants/app_font_family.dart';
+//import 'package:flutter_starter/constants/app_font_family.dart';
 
 class AppThemes {
   AppThemes._();
-
+  static String font1 = "ProductSans";
+  static String font2 = "Roboto";
   //constants color range for light theme
   static const Color _lightPrimaryColor = Colors.black;
   static const Color _lightPrimaryVariantColor = Colors.white;
@@ -70,7 +71,7 @@ class AppThemes {
 
   //the light theme
   static final ThemeData lightTheme = ThemeData(
-    fontFamily: AppFontFamily.productSans,
+    fontFamily: font1,
     scaffoldBackgroundColor: _lightPrimaryVariantColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: _lightButtonPrimaryColor,
@@ -106,7 +107,7 @@ class AppThemes {
 
   //the dark theme
   static final ThemeData darkTheme = ThemeData(
-    fontFamily: AppFontFamily.productSans,
+    fontFamily: font1,
     scaffoldBackgroundColor: _darkPrimaryVariantColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: _darkButtonPrimaryColor,

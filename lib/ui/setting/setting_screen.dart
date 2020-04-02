@@ -3,7 +3,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/providers/auth_provider.dart';
 import 'package:flutter_starter/providers/theme_provider.dart';
-import 'package:flutter_starter/routes.dart';
+import 'package:flutter_starter/services/services.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {

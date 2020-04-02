@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/models/user_model.dart';
 import 'package:flutter_starter/providers/auth_provider.dart';
-import 'package:flutter_starter/routes.dart';
+import 'package:flutter_starter/services/services.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
