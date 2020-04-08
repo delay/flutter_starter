@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../services/services.dart';
-
 /*
 LabelButton(
                 labelText: 'Some Text',
@@ -18,7 +16,7 @@ class LabelButton extends StatelessWidget {
     return FlatButton(
       child: Text(
         labelText,
-        style: TextStyle(color: Palette.textColor),
+        //style: TextStyle(color: Palette.textColor),
       ),
       onPressed: onPressed,
     );

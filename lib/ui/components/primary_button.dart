@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../services/services.dart';
 
 /*
 PrimaryButton(
@@ -22,9 +21,7 @@ class PrimaryButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       padding: EdgeInsets.all(12),
-      color: Palette.primaryButtonColor,
-      child: Text(labelText,
-          style: TextStyle(color: Palette.primaryButtonTextColor)),
+      child: Text(labelText),
     );
   }
 }

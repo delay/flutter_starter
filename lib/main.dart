@@ -7,7 +7,7 @@ import 'package:flutter_starter/models/user_model.dart';
 import 'package:flutter_starter/providers/auth_provider.dart';
 import 'package:flutter_starter/providers/theme_provider.dart';
 import 'package:flutter_starter/services/services.dart';
-import 'package:flutter_starter/ui/auth/sign_in_screen.dart';
+import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/home/home.dart';
 
 void main() {

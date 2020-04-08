@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-//import '../../services/helpers/helpers.dart';
-import '../../services/services.dart';
-
 /*
 FormInputFieldWithIcon(
                 controller: _email,
@@ -48,17 +45,18 @@ class FormInputFieldWithIcon extends StatelessWidget {
           Radius.circular(8.0),
         )),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Palette.inputBorderColor, width: 1.0),
+          borderSide: BorderSide(color: Colors.black45, width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: Palette.focusedinputBorderColor, width: 1.0),
+          borderSide: BorderSide(
+              color: /*Palette.focusedinputBorderColor*/ Colors.black45,
+              width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
         filled: true,
         prefixIcon: Icon(iconPrefix),
-        fillColor: Palette.inputFillColor,
+        fillColor: Colors.black45, //Palette.inputFillColor,
         labelText: labelText,
       ),
       controller: controller,

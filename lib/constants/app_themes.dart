@@ -28,12 +28,12 @@ class AppThemes {
       fontSize: 12.0, color: _lightAppBarColor, fontWeight: FontWeight.w100);
 
   static final TextTheme _lightTextTheme = TextTheme(
-    headline: _lightScreenHeadingTextStyle,
-    body1: _lightScreenTaskNameTextStyle,
-    body2: _lightScreenTaskDurationTextStyle,
+    headline1: _lightScreenHeadingTextStyle,
+    bodyText1: _lightScreenTaskNameTextStyle,
+    bodyText2: _lightScreenTaskDurationTextStyle,
     button: _lightScreenButtonTextStyle,
-    title: _lightScreenTaskNameTextStyle,
-    subhead: _lightScreenTaskNameTextStyle,
+    headline6: _lightScreenTaskNameTextStyle,
+    subtitle1: _lightScreenTaskNameTextStyle,
     caption: _lightScreenCaptionTextStyle,
   );
 
@@ -60,12 +60,12 @@ class AppThemes {
       fontSize: 12.0, color: _darkAppBarColor, fontWeight: FontWeight.w100);
 
   static final TextTheme _darkTextTheme = TextTheme(
-    headline: _darkScreenHeadingTextStyle,
-    body1: _darkScreenTaskNameTextStyle,
-    body2: _darkScreenTaskDurationTextStyle,
+    headline1: _darkScreenHeadingTextStyle,
+    bodyText1: _darkScreenTaskNameTextStyle,
+    bodyText2: _darkScreenTaskDurationTextStyle,
     button: _darkScreenButtonTextStyle,
-    title: _darkScreenTaskNameTextStyle,
-    subhead: _darkScreenTaskNameTextStyle,
+    headline6: _darkScreenTaskNameTextStyle,
+    subtitle1: _darkScreenTaskNameTextStyle,
     caption: _darkScreenCaptionTextStyle,
   );
 

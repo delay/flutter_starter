@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class UserGraphicHeader extends StatelessWidget {
-  UserGraphicHeader();
+class LogoGraphicHeader extends StatelessWidget {
+  LogoGraphicHeader();
 
   @override
   Widget build(BuildContext context) {
