@@ -16,7 +16,6 @@ class LabelButton extends StatelessWidget {
     return FlatButton(
       child: Text(
         labelText,
-        //style: TextStyle(color: Palette.textColor),
       ),
       onPressed: onPressed,
     );

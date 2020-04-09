@@ -4,30 +4,34 @@ import 'package:flutter/material.dart';
 class AppThemes {
   AppThemes._();
   static const Color mayaBlue = Color.fromRGBO(117, 190, 255, 1);
+  static const Color dodgerBlue = Color.fromRGBO(29, 161, 242, 1);
   static const Color dullLavender = Color.fromRGBO(171, 157, 242, 1);
   static const Color turquoiseBlue = Color.fromRGBO(120, 220, 232, 1);
-  static const Color feijoa = Color.fromRGBO(169, 220, 118, 1);
   static const Color brinkPink = Color.fromRGBO(255, 97, 136, 1);
   static const Color juneBud = Color.fromRGBO(186, 215, 97, 1);
   static const Color ebonyClay = Color.fromRGBO(40, 42, 58, 1);
   static const Color vulcan = Color.fromRGBO(22, 24, 33, 1);
   static const Color nevada = Color.fromRGBO(105, 109, 119, 1);
+  static const Color orchid = Color.fromRGBO(218, 112, 214, 1);
+  static const Color goldenrod = Color.fromRGBO(255, 216, 102, 1);
+  static const Color blackPearl = Color.fromRGBO(30, 31, 43, 1);
+  static const Color white = Color.fromRGBO(255, 255, 255, 1);
+  static const Color mystic = Color.fromRGBO(225, 234, 246, 1);
+  static const Color whiteLilac = Color.fromRGBO(248, 250, 252, 1);
 
   static String font1 = "ProductSans";
   static String font2 = "Roboto";
   //constants color range for light theme
   //main color
-  static const Color _lightPrimaryColor = Colors.blue;
+  static const Color _lightPrimaryColor = dodgerBlue;
 
   //Background Colors
-  static const Color _lightBackgroundColor = Color.fromRGBO(248, 250, 252, 1);
+  static const Color _lightBackgroundColor = whiteLilac;
   static const Color _lightBackgroundAppBarColor = _lightPrimaryColor;
-  static const Color _lightBackgroundSecondaryColor = Colors.white;
-  static const Color _lightBackgroundAlertColor = Colors.black;
-  static const Color _lightBackgroundErrorColor =
-      Color.fromRGBO(255, 97, 136, 1);
-  static const Color _lightBackgroundSuccessColor =
-      Color.fromRGBO(186, 215, 97, 1);
+  static const Color _lightBackgroundSecondaryColor = white;
+  static const Color _lightBackgroundAlertColor = blackPearl;
+  static const Color _lightBackgroundErrorColor = brinkPink;
+  static const Color _lightBackgroundSuccessColor = juneBud;
 
   //Text Colors
   static const Color _lightTextColor = Colors.black;
@@ -45,27 +49,15 @@ class AppThemes {
   static const Color _lightBorderErrorColor = brinkPink;
 
   //text theme for light theme
-  static final TextStyle _lightScreenHeadingTextStyle =
-      TextStyle(fontSize: 20.0, color: _lightTextColor);
-  static final TextStyle _lightScreenTaskNameTextStyle =
-      TextStyle(fontSize: 16.0, color: _lightTextColor);
-  static final TextStyle _lightScreenTaskDurationTextStyle =
-      TextStyle(fontSize: 14.0, color: Colors.grey);
-  static final TextStyle _lightScreenButtonTextStyle = TextStyle(
-      fontSize: 14.0, color: _lightTextColor, fontWeight: FontWeight.w500);
-  static final TextStyle _lightScreenCaptionTextStyle = TextStyle(
-      fontSize: 12.0,
-      color: _lightBackgroundAppBarColor,
-      fontWeight: FontWeight.w100);
-
   static final TextTheme _lightTextTheme = TextTheme(
-    headline1: _lightScreenHeadingTextStyle,
-    bodyText1: _lightScreenTaskNameTextStyle,
-    bodyText2: _lightScreenTaskDurationTextStyle,
-    button: _lightScreenButtonTextStyle,
-    headline6: _lightScreenTaskNameTextStyle,
-    subtitle1: _lightScreenTaskNameTextStyle,
-    caption: _lightScreenCaptionTextStyle,
+    headline1: TextStyle(fontSize: 20.0, color: _lightTextColor),
+    bodyText1: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
+    button: TextStyle(
+        fontSize: 15.0, color: _lightTextColor, fontWeight: FontWeight.w600),
+    headline6: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    subtitle1: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    caption: TextStyle(fontSize: 12.0, color: _lightBackgroundAppBarColor),
   );
 
   //constants color range for dark theme
@@ -97,7 +89,7 @@ class AppThemes {
   static const Color _darkBorderErrorColor = brinkPink;
 
   //text theme for dark theme
-  static final TextStyle _darkScreenHeadingTextStyle =
+  /*static final TextStyle _darkScreenHeadingTextStyle =
       _lightScreenHeadingTextStyle.copyWith(color: _darkTextColor);
   static final TextStyle _darkScreenTaskNameTextStyle =
       _lightScreenTaskNameTextStyle.copyWith(color: _darkTextColor);
@@ -108,16 +100,17 @@ class AppThemes {
   static final TextStyle _darkScreenCaptionTextStyle = TextStyle(
       fontSize: 12.0,
       color: _darkBackgroundAppBarColor,
-      fontWeight: FontWeight.w100);
+      fontWeight: FontWeight.w100);*/
 
   static final TextTheme _darkTextTheme = TextTheme(
-    headline1: _darkScreenHeadingTextStyle,
-    bodyText1: _darkScreenTaskNameTextStyle,
-    bodyText2: _darkScreenTaskDurationTextStyle,
-    button: _darkScreenButtonTextStyle,
-    headline6: _darkScreenTaskNameTextStyle,
-    subtitle1: _darkScreenTaskNameTextStyle,
-    caption: _darkScreenCaptionTextStyle,
+    headline1: TextStyle(fontSize: 20.0, color: _darkTextColor),
+    bodyText1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
+    button: TextStyle(
+        fontSize: 15.0, color: _darkTextColor, fontWeight: FontWeight.w600),
+    headline6: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    subtitle1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    caption: TextStyle(fontSize: 12.0, color: _darkBackgroundAppBarColor),
   );
 
   //the light theme
@@ -145,7 +138,11 @@ class AppThemes {
     popupMenuTheme: PopupMenuThemeData(color: _lightBackgroundAppBarColor),
     textTheme: _lightTextTheme,
     buttonTheme: ButtonThemeData(
-        buttonColor: _lightPrimaryColor, textTheme: ButtonTextTheme.primary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        buttonColor: _lightPrimaryColor,
+        textTheme: ButtonTextTheme.primary),
     unselectedWidgetColor: _lightPrimaryColor,
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
@@ -199,7 +196,11 @@ class AppThemes {
     popupMenuTheme: PopupMenuThemeData(color: _darkBackgroundAppBarColor),
     textTheme: _darkTextTheme,
     buttonTheme: ButtonThemeData(
-        buttonColor: _darkPrimaryColor, textTheme: ButtonTextTheme.primary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        buttonColor: _darkPrimaryColor,
+        textTheme: ButtonTextTheme.primary),
     unselectedWidgetColor: _darkPrimaryColor,
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(color: nevada),
