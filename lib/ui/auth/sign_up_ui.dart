@@ -5,12 +5,13 @@ import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/helpers/helpers.dart';
+import 'package:flutter_starter/services/services.dart';
 
-class SignUpScreen extends StatefulWidget {
-  _SignUpScreenState createState() => _SignUpScreenState();
+class SignUpUI extends StatefulWidget {
+  _SignUpUIState createState() => _SignUpUIState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpUIState extends State<SignUpUI> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _name = new TextEditingController();
   final TextEditingController _email = new TextEditingController();
@@ -38,7 +39,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
       body: LoadingScreen(
           child: Form(
             key: _formKey,
@@ -102,9 +102,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                        labelText: 'Have an Account? Sign In.',
-                        onPressed: () => Navigator.pushNamed(context, '/'),
-                      ),
+                          labelText: 'Have an Account? Sign In.',
+                          onPressed: () => Navigator.of(context)
+                              .pushReplacementNamed(Routes.signin)),
                     ],
                   ),
                 ),
@@ -115,51 +115,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
-/*void _emailSignUp(
-      {String name,
-      String email,
-      String password,
-      BuildContext context}) async {
-    if (_formKey.currentState.validate()) {
-      try {
-        SystemChannels.textInput.invokeMethod('TextInput.hide');
-        await _toggleLoadingVisible();
-        //need await so it has chance to go through error if found.
-        await auth.signUp(email, password).then((uID) {
-          print('uID: ' + uID);
-          print('email: ' + email);
-          auth.updateUserDB(new User(
-              id: uID,
-              email: email,
-              name: name,
-              //role: 'user',
-              workouts: [],
-              workoutExercisesOrder: [],
-              showArchive: false,
-              useTimers: true,
-              useVoiceCount: true,
-              voiceCountDuration: 10));
-        });
-        //now automatically login user too
-        //await StateWidget.of(context).logInUser(email, password);
-        await auth.signIn(email, password);
-        await Navigator.pushReplacementNamed(context, '/home');
-        /*Route route =
-            MaterialPageRoute(builder: (context) => AuthCheckScreen());
-        Navigator.push(context, route);*/
-        //await Navigator.pushNamed(context, '/signin');
-      } catch (e) {
-        _toggleLoadingVisible();
-        //print("Sign Up Error: $e");
-        String exception = auth.getExceptionText(e);
-        Flushbar(
-          title: "Sign Up Error",
-          message: exception,
-          duration: Duration(seconds: 5),
-        )..show(context);
-      }
-    } else {
-      setState(() => _autoValidate = true);
-    }
-  }
-}*/

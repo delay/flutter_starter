@@ -20,8 +20,11 @@ class PrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       onPressed: onPressed,
-      padding: EdgeInsets.all(12),
-      child: Text(labelText),
+      padding: EdgeInsets.all(22),
+      child: Text(
+        labelText,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

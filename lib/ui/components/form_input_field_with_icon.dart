@@ -40,23 +40,8 @@ class FormInputFieldWithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-          Radius.circular(8.0),
-        )),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black45, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: /*Palette.focusedinputBorderColor*/ Colors.black45,
-              width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        ),
         filled: true,
         prefixIcon: Icon(iconPrefix),
-        fillColor: Colors.black45, //Palette.inputFillColor,
         labelText: labelText,
       ),
       controller: controller,

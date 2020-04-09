@@ -25,7 +25,7 @@ class SettingScreen extends StatelessWidget {
           subtitle: Text(AppStrings.settingThemeListSubTitle),
           trailing: Switch(
             activeColor: Theme.of(context).appBarTheme.color,
-            activeTrackColor: Theme.of(context).textTheme.title.color,
+            activeTrackColor: Theme.of(context).textTheme.headline1.color,
             value: Provider.of<ThemeProvider>(context).isDarkModeOn,
             onChanged: (booleanValue) {
               Provider.of<ThemeProvider>(context, listen: false)
@@ -69,7 +69,7 @@ class SettingScreen extends StatelessWidget {
 
                     Navigator.pop(context);
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                        Routes.login, ModalRoute.withName(Routes.login));
+                        Routes.signin, ModalRoute.withName(Routes.signin));
                   },
                 )
               ],

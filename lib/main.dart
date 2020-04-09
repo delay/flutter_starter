@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
               home: Consumer<AuthProvider>(
                 builder: (_, authProviderRef, __) {
                   if (userSnapshot.connectionState == ConnectionState.active) {
-                    return userSnapshot.hasData ? HomeScreen() : SignInScreen();
+                    return userSnapshot.hasData ? HomeScreen() : SignInUI();
                   }
 
                   return Material(

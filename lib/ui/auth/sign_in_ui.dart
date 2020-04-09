@@ -4,16 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/helpers/helpers.dart';
+import 'package:flutter_starter/services/services.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+class SignInUI extends StatefulWidget {
+  _SignInUIState createState() => _SignInUIState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _SignInUIState extends State<SignInUI> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = new TextEditingController();
+  final TextEditingController _password = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isButtonDisabled = false;
 
   @override
   void initState() {
@@ -23,6 +24,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   void dispose() {
     _email.dispose();
+    _password.dispose();
     super.dispose();
   }
 
@@ -32,9 +34,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
     }
+
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
       body: LoadingScreen(
           child: Form(
             key: _formKey,
@@ -54,35 +56,46 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         labelText: 'Email',
                         validator: Validator.email,
                         keyboardType: TextInputType.emailAddress,
-                        onChanged: (value) =>
-                            setState(() => _isButtonDisabled = false),
+                        onChanged: (value) => null,
                         onSaved: (value) => _email.text = value,
                       ),
                       FormVerticalSpace(),
+                      FormInputFieldWithIcon(
+                        controller: _password,
+                        iconPrefix: CustomIcon.lock,
+                        labelText: 'Password',
+                        validator: Validator.password,
+                        obscureText: true,
+                        onChanged: (value) => null,
+                        onSaved: (value) => _password.text = value,
+                        maxLines: 1,
+                      ),
+                      FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: 'FORGOT PASSWORD',
-                          onPressed: _isButtonDisabled
-                              ? null
-                              : () async {
-                                  if (_formKey.currentState.validate()) {
-                                    setState(() =>
-                                        _isButtonDisabled = !_isButtonDisabled);
+                          labelText: 'SIGN IN',
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              bool status =
+                                  await authProvider.signInWithEmailAndPassword(
+                                      _email.text, _password.text);
 
-                                    await authProvider
-                                        .sendPasswordResetEmail(_email.text);
-
-                                    _scaffoldKey.currentState
-                                        .showSnackBar(SnackBar(
-                                      content: Text(
-                                          'Check your email and follow the instructions to reset your password.'),
-                                    ));
-                                  }
-                                }),
+                              if (!status) {
+                                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                  content: Text(
+                                      'Login failed: email or password incorrect.'),
+                                ));
+                              }
+                            }
+                          }),
                       FormVerticalSpace(),
                       LabelButton(
-                        labelText: 'Sign In',
-                        onPressed: () => Navigator.pushNamed(context, '/'),
-                      ),
+                          labelText: 'Forgot password?',
+                          onPressed: () => Navigator.of(context)
+                              .pushReplacementNamed(Routes.forgotPassword)),
+                      LabelButton(
+                          labelText: 'Create an Account',
+                          onPressed: () => Navigator.of(context)
+                              .pushReplacementNamed(Routes.signup)),
                     ],
                   ),
                 ),

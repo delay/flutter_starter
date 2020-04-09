@@ -4,16 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/helpers/helpers.dart';
+import 'package:flutter_starter/services/services.dart';
 
-class SignInScreen extends StatefulWidget {
-  _SignInScreenState createState() => _SignInScreenState();
+class ForgotPasswordUI extends StatefulWidget {
+  _ForgotPasswordUIState createState() => _ForgotPasswordUIState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = new TextEditingController();
-  final TextEditingController _password = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _isButtonDisabled = false;
 
   @override
   void initState() {
@@ -23,7 +24,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void dispose() {
     _email.dispose();
-    _password.dispose();
     super.dispose();
   }
 
@@ -33,10 +33,8 @@ class _SignInScreenState extends State<SignInScreen> {
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
     }
-
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
       body: LoadingScreen(
           child: Form(
             key: _formKey,
@@ -56,48 +54,35 @@ class _SignInScreenState extends State<SignInScreen> {
                         labelText: 'Email',
                         validator: Validator.email,
                         keyboardType: TextInputType.emailAddress,
-                        onChanged: (value) => null,
+                        onChanged: (value) =>
+                            setState(() => _isButtonDisabled = false),
                         onSaved: (value) => _email.text = value,
                       ),
                       FormVerticalSpace(),
-                      FormInputFieldWithIcon(
-                        controller: _password,
-                        iconPrefix: CustomIcon.lock,
-                        labelText: 'Password',
-                        validator: Validator.password,
-                        obscureText: true,
-                        onChanged: (value) => null,
-                        onSaved: (value) => _password.text = value,
-                        maxLines: 1,
-                      ),
-                      FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: 'SIGN IN',
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              bool status =
-                                  await authProvider.signInWithEmailAndPassword(
-                                      _email.text, _password.text);
+                          labelText: 'FORGOT PASSWORD',
+                          onPressed: _isButtonDisabled
+                              ? null
+                              : () async {
+                                  if (_formKey.currentState.validate()) {
+                                    setState(() =>
+                                        _isButtonDisabled = !_isButtonDisabled);
 
-                              if (!status) {
-                                _scaffoldKey.currentState.showSnackBar(SnackBar(
-                                  content: Text(
-                                      'Login failed: email or password incorrect.'),
-                                ));
-                              }
-                            }
-                          }),
+                                    await authProvider
+                                        .sendPasswordResetEmail(_email.text);
+
+                                    _scaffoldKey.currentState
+                                        .showSnackBar(SnackBar(
+                                      content: Text(
+                                          'Check your email and follow the instructions to reset your password.'),
+                                    ));
+                                  }
+                                }),
                       FormVerticalSpace(),
                       LabelButton(
-                        labelText: 'Forgot password?',
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/forgot-password'),
-                      ),
-                      LabelButton(
-                        labelText: 'Create an Account',
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/signup'),
-                      ),
+                          labelText: 'Sign In',
+                          onPressed: () => Navigator.of(context)
+                              .pushReplacementNamed(Routes.signin)),
                     ],
                   ),
                 ),
