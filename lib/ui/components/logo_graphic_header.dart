@@ -6,8 +6,9 @@ class LogoGraphicHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: 'hero',
+      tag: 'App Logo',
       child: CircleAvatar(
+          foregroundColor: Colors.blue,
           backgroundColor: Colors.transparent,
           radius: 60.0,
           child: ClipOval(

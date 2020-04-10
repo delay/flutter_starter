@@ -39,26 +39,15 @@ class AppThemes {
   static const Color _lightTextSecondaryColor = Colors.black;
 
   //Border Color
-  static const Color _lightBorderColor = Color.fromRGBO(224, 227, 234, 1);
+  static const Color _lightBorderColor = nevada;
 
   //Icon Color
-  static const Color _lightIconColor = Color.fromRGBO(224, 227, 234, 1);
+  static const Color _lightIconColor = nevada;
 
+  //form input colors
   static const Color _lightInputFillColor = _lightBackgroundSecondaryColor;
   static const Color _lightBorderActiveColor = _lightPrimaryColor;
   static const Color _lightBorderErrorColor = brinkPink;
-
-  //text theme for light theme
-  static final TextTheme _lightTextTheme = TextTheme(
-    headline1: TextStyle(fontSize: 20.0, color: _lightTextColor),
-    bodyText1: TextStyle(fontSize: 16.0, color: _lightTextColor),
-    bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
-    button: TextStyle(
-        fontSize: 15.0, color: _lightTextColor, fontWeight: FontWeight.w600),
-    headline6: TextStyle(fontSize: 16.0, color: _lightTextColor),
-    subtitle1: TextStyle(fontSize: 16.0, color: _lightTextColor),
-    caption: TextStyle(fontSize: 12.0, color: _lightBackgroundAppBarColor),
-  );
 
   //constants color range for dark theme
   static const Color _darkPrimaryColor = Colors.blue;
@@ -82,39 +71,27 @@ class AppThemes {
   static const Color _darkBorderColor = nevada;
 
   //Icon Color
-  static const Color _darkIconColor = Color.fromRGBO(224, 227, 234, 1);
+  static const Color _darkIconColor = nevada;
 
   static const Color _darkInputFillColor = _darkBackgroundSecondaryColor;
   static const Color _darkBorderActiveColor = _darkPrimaryColor;
   static const Color _darkBorderErrorColor = brinkPink;
 
-  //text theme for dark theme
-  /*static final TextStyle _darkScreenHeadingTextStyle =
-      _lightScreenHeadingTextStyle.copyWith(color: _darkTextColor);
-  static final TextStyle _darkScreenTaskNameTextStyle =
-      _lightScreenTaskNameTextStyle.copyWith(color: _darkTextColor);
-  static final TextStyle _darkScreenTaskDurationTextStyle =
-      _lightScreenTaskDurationTextStyle;
-  static final TextStyle _darkScreenButtonTextStyle = TextStyle(
-      fontSize: 14.0, color: _darkTextColor, fontWeight: FontWeight.w500);
-  static final TextStyle _darkScreenCaptionTextStyle = TextStyle(
-      fontSize: 12.0,
-      color: _darkBackgroundAppBarColor,
-      fontWeight: FontWeight.w100);*/
-
-  static final TextTheme _darkTextTheme = TextTheme(
-    headline1: TextStyle(fontSize: 20.0, color: _darkTextColor),
-    bodyText1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+  //text theme for light theme
+  static final TextTheme _lightTextTheme = TextTheme(
+    headline1: TextStyle(fontSize: 20.0, color: _lightTextColor),
+    bodyText1: TextStyle(fontSize: 16.0, color: _lightTextColor),
     bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
     button: TextStyle(
-        fontSize: 15.0, color: _darkTextColor, fontWeight: FontWeight.w600),
-    headline6: TextStyle(fontSize: 16.0, color: _darkTextColor),
-    subtitle1: TextStyle(fontSize: 16.0, color: _darkTextColor),
-    caption: TextStyle(fontSize: 12.0, color: _darkBackgroundAppBarColor),
+        fontSize: 15.0, color: _lightTextColor, fontWeight: FontWeight.w600),
+    headline6: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    subtitle1: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    caption: TextStyle(fontSize: 12.0, color: _lightBackgroundAppBarColor),
   );
 
   //the light theme
   static final ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
     fontFamily: font1,
     scaffoldBackgroundColor: _lightBackgroundColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -145,6 +122,7 @@ class AppThemes {
         textTheme: ButtonTextTheme.primary),
     unselectedWidgetColor: _lightPrimaryColor,
     inputDecorationTheme: InputDecorationTheme(
+      //prefixStyle: TextStyle(color: _lightIconColor),
       border: OutlineInputBorder(
           borderSide: BorderSide(width: 1.0),
           borderRadius: BorderRadius.all(
@@ -171,8 +149,37 @@ class AppThemes {
     ),
   );
 
+//text theme for dark theme
+  /*static final TextStyle _darkScreenHeadingTextStyle =
+      _lightScreenHeadingTextStyle.copyWith(color: _darkTextColor);
+  static final TextStyle _darkScreenTaskNameTextStyle =
+      _lightScreenTaskNameTextStyle.copyWith(color: _darkTextColor);
+  static final TextStyle _darkScreenTaskDurationTextStyle =
+      _lightScreenTaskDurationTextStyle;
+  static final TextStyle _darkScreenButtonTextStyle = TextStyle(
+      fontSize: 14.0, color: _darkTextColor, fontWeight: FontWeight.w500);
+  static final TextStyle _darkScreenCaptionTextStyle = TextStyle(
+      fontSize: 12.0,
+      color: _darkBackgroundAppBarColor,
+      fontWeight: FontWeight.w100);*/
+
+  static final TextTheme _darkTextTheme = TextTheme(
+    headline1: TextStyle(fontSize: 20.0, color: _darkTextColor),
+    bodyText1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
+    button: TextStyle(
+        fontSize: 15.0, color: _darkTextColor, fontWeight: FontWeight.w600),
+    headline6: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    subtitle1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    caption: TextStyle(fontSize: 12.0, color: _darkBackgroundAppBarColor),
+  );
+
   //the dark theme
   static final ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primarySwatch: _darkPrimaryColor,
+    accentColor: _darkPrimaryColor, //prefix icon color form input on focus
+
     fontFamily: font1,
     scaffoldBackgroundColor: _darkBackgroundColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -186,12 +193,13 @@ class AppThemes {
     colorScheme: ColorScheme.dark(
       primary: _darkPrimaryColor,
       primaryVariant: _darkBackgroundColor,
+
       // secondary: _darkSecondaryColor,
     ),
     snackBarTheme:
         SnackBarThemeData(backgroundColor: _darkBackgroundAlertColor),
     iconTheme: IconThemeData(
-      color: _darkIconColor,
+      color: Colors.white, //_darkIconColor,
     ),
     popupMenuTheme: PopupMenuThemeData(color: _darkBackgroundAppBarColor),
     textTheme: _darkTextTheme,
@@ -203,7 +211,8 @@ class AppThemes {
         textTheme: ButtonTextTheme.primary),
     unselectedWidgetColor: _darkPrimaryColor,
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: TextStyle(color: nevada),
+      prefixStyle: TextStyle(color: _darkIconColor),
+      //labelStyle: TextStyle(color: nevada),
       border: OutlineInputBorder(
           borderSide: BorderSide(width: 1.0),
           borderRadius: BorderRadius.all(
