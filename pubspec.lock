@@ -134,14 +134,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
-  flushbar:
-    dependency: "direct main"
-    description:
-      name: flushbar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.10.0"
   flutter:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_localizations:
     dependency: "direct main"
     description: flutter
     source: sdk
@@ -184,6 +182,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.12"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.16.1"
   js:
     dependency: transitive
     description:

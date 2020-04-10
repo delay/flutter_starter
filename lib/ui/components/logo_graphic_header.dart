@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_starter/providers/providers.dart';
 
 class LogoGraphicHeader extends StatelessWidget {
   LogoGraphicHeader();
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    String _imageLogo = 'assets/images/default.png';
+    if (themeProvider.isDarkModeOn) {
+      _imageLogo = 'assets/images/defaultDark.png';
+    }
     return Hero(
       tag: 'App Logo',
       child: CircleAvatar(
@@ -13,7 +20,7 @@ class LogoGraphicHeader extends StatelessWidget {
           radius: 60.0,
           child: ClipOval(
             child: Image.asset(
-              'assets/images/default.png',
+              _imageLogo,
               fit: BoxFit.cover,
               width: 120.0,
               height: 120.0,
