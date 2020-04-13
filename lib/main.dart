@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'localizations.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/constants/app_themes.dart';
 import 'package:flutter_starter/models/user_model.dart';
@@ -55,6 +57,19 @@ class MyApp extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<UserModel> userSnapshot) {
             return MaterialApp(
+              //begin language translation stuff
+              //https://github.com/aloisdeniel/flutter_sheet_localization
+              //https://github.com/aloisdeniel/flutter_sheet_localization/tree/master/flutter_sheet_localization_generator/example
+              locale:
+                  AppLocalizations.languages.keys.first, // <- Current locale
+              localizationsDelegates: [
+                const AppLocalizationsDelegate(), // <- Your custom delegate
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.languages.keys
+                  .toList(), // <- Supported locales
+              //end language translation stuff
               debugShowCheckedModeBanner: false,
               title: AppStrings.appName,
               routes: Routes.routes,

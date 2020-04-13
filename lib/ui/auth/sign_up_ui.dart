@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/ui/components/components.dart';
@@ -32,6 +33,7 @@ class _SignUpUIState extends State<SignUpUI> {
   }
 
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context);
     bool _loading = false;
     final authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.status == Status.Authenticating) {
@@ -55,7 +57,7 @@ class _SignUpUIState extends State<SignUpUI> {
                       FormInputFieldWithIcon(
                         controller: _name,
                         iconPrefix: CustomIcon.user,
-                        labelText: 'Name',
+                        labelText: labels.auth.nameFormField,
                         validator: Validator.name,
                         onChanged: (value) => null,
                         onSaved: (value) => _name.text = value,
@@ -64,7 +66,7 @@ class _SignUpUIState extends State<SignUpUI> {
                       FormInputFieldWithIcon(
                         controller: _email,
                         iconPrefix: CustomIcon.mail,
-                        labelText: 'Email',
+                        labelText: labels.auth.emailFormField,
                         validator: Validator.email,
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (value) => null,
@@ -74,7 +76,7 @@ class _SignUpUIState extends State<SignUpUI> {
                       FormInputFieldWithIcon(
                         controller: _password,
                         iconPrefix: CustomIcon.lock,
-                        labelText: 'Password',
+                        labelText: labels.auth.passwordFormField,
                         validator: Validator.password,
                         obscureText: true,
                         maxLines: 1,
@@ -83,7 +85,7 @@ class _SignUpUIState extends State<SignUpUI> {
                       ),
                       FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: 'SIGN UP',
+                          labelText: labels.auth.signUpButton.toUpperCase(),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               SystemChannels.textInput.invokeMethod(
@@ -95,14 +97,14 @@ class _SignUpUIState extends State<SignUpUI> {
 
                               if (userModel == null) {
                                 _scaffoldKey.currentState.showSnackBar(SnackBar(
-                                  content: Text('Sign up failed.'),
+                                  content: Text(labels.auth.signUpError),
                                 ));
                               }
                             }
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                          labelText: 'Have an Account? Sign In.',
+                          labelText: labels.auth.signInLabelButton,
                           onPressed: () => Navigator.of(context)
                               .pushReplacementNamed(Routes.signin)),
                     ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/helpers/helpers.dart';
@@ -29,6 +30,7 @@ class _SignInUIState extends State<SignInUI> {
   }
 
   Widget build(BuildContext context) {
+    final labels = AppLocalizations.of(context);
     bool _loading = false;
     final authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.status == Status.Authenticating) {
@@ -53,7 +55,7 @@ class _SignInUIState extends State<SignInUI> {
                       FormInputFieldWithIcon(
                         controller: _email,
                         iconPrefix: CustomIcon.mail,
-                        labelText: 'Email',
+                        labelText: labels.auth.emailFormField,
                         validator: Validator.email,
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (value) => null,
@@ -63,7 +65,7 @@ class _SignInUIState extends State<SignInUI> {
                       FormInputFieldWithIcon(
                         controller: _password,
                         iconPrefix: CustomIcon.lock,
-                        labelText: 'Password',
+                        labelText: labels.auth.passwordFormField,
                         validator: Validator.password,
                         obscureText: true,
                         onChanged: (value) => null,
@@ -72,7 +74,7 @@ class _SignInUIState extends State<SignInUI> {
                       ),
                       FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: 'SIGN IN',
+                          labelText: labels.auth.signInButton.toUpperCase(),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               bool status =
@@ -81,19 +83,18 @@ class _SignInUIState extends State<SignInUI> {
 
                               if (!status) {
                                 _scaffoldKey.currentState.showSnackBar(SnackBar(
-                                  content: Text(
-                                      'Login failed: email or password incorrect.'),
+                                  content: Text(labels.auth.signInError),
                                 ));
                               }
                             }
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                          labelText: 'Forgot password?',
+                          labelText: labels.auth.forgotPasswordLabelButton,
                           onPressed: () => Navigator.of(context)
                               .pushReplacementNamed(Routes.forgotPassword)),
                       LabelButton(
-                          labelText: 'Create an Account',
+                          labelText: labels.auth.signUpLabelButton,
                           onPressed: () => Navigator.of(context)
                               .pushReplacementNamed(Routes.signup)),
                     ],
