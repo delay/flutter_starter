@@ -5,6 +5,8 @@ import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/services/services.dart';
+import 'package:flutter_starter/ui/components/components.dart';
+import 'package:flutter_starter/constants/constants.dart';
 
 class SettingScreen extends StatelessWidget {
   @override
@@ -35,10 +37,18 @@ class SettingScreen extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: Text('Language'),
-          subtitle: Text('Select your language'),
-          trailing: _languageDropdown(context),
-        ),
+            title: Text('Language'),
+            subtitle: Text('Select your language'),
+            //trailing: _languageDropdown(context),
+            trailing: DropdownPicker(
+              menuOptions: AppLanguages.languageOptions,
+              selectedOption:
+                  Provider.of<LanguageProvider>(context).currentLanguage,
+              onChanged: (value) {
+                Provider.of<LanguageProvider>(context, listen: false)
+                    .updateLanguage(value);
+              },
+            )),
         ListTile(
           title: Text(AppStrings.settingLogoutListTitle),
           subtitle: Text(AppStrings.settingLogoutListSubTitle),
@@ -50,52 +60,6 @@ class SettingScreen extends StatelessWidget {
         )
       ],
     );
-  }
-
-  _languageDrop(BuildContext context) {
-    ValueChanged<Locale> onLocaleChanged;
-    return DropdownButton<Locale>(
-      key: Key("Picker"),
-      value: AppLocalizations.languages.keys.first,
-      items: AppLocalizations.languages.keys.map((locale) {
-        return DropdownMenuItem<Locale>(
-          value: locale,
-          child: Text(
-            locale.toString(),
-          ),
-        );
-      }).toList(),
-      onChanged: onLocaleChanged,
-    );
-  }
-
-  _languageDropdown(BuildContext context) {
-    return DropdownButton<String>(
-        items: [
-          DropdownMenuItem(
-            value: "en",
-            child: Text(
-              "English",
-            ),
-          ),
-          DropdownMenuItem(
-            value: "es",
-            child: Text(
-              "Spanish",
-            ),
-          ),
-          DropdownMenuItem(
-            value: "fr",
-            child: Text(
-              "French",
-            ),
-          ),
-        ],
-        value: Provider.of<LanguageProvider>(context).currentLanguage,
-        onChanged: (value) {
-          Provider.of<LanguageProvider>(context, listen: false)
-              .updateLanguage(value);
-        });
   }
 
   _confirmSignOut(BuildContext context) {
