@@ -19,7 +19,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       padding: EdgeInsets.all(22),
       child: Text(
-        labelText,
+        labelText.toUpperCase(),
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );

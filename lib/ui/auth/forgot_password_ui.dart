@@ -62,8 +62,7 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
                       ),
                       FormVerticalSpace(),
                       PrimaryButton(
-                          labelText:
-                              labels.auth.forgotPasswordButton.toUpperCase(),
+                          labelText: labels.auth.forgotPasswordButton,
                           onPressed: _isButtonDisabled
                               ? null
                               : () async {

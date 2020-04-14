@@ -74,7 +74,7 @@ class _SignInUIState extends State<SignInUI> {
                       ),
                       FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: labels.auth.signInButton.toUpperCase(),
+                          labelText: labels.auth.signInButton,
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               bool status =

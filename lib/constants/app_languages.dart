@@ -11,5 +11,6 @@ class AppLanguages {
     LanguageModel(key: "हिन्दी", value: "hi"), //Hindi
     LanguageModel(key: "日本語", value: "ja"), //Japanese
     LanguageModel(key: "Português", value: "pt"), //Portuguese
+    LanguageModel(key: "русский", value: "ru"), //Russian
   ];
 }

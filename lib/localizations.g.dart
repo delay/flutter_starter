@@ -31,7 +31,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Settings",
-        language: "Japanese",
+        language: "Language",
+        theme: "Theme",
+        signOut: "Sign Out",
       ),
     ),
     Locale.fromSubtags(languageCode: "fr"): AppLocalizations_Labels(
@@ -53,7 +55,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Réglages",
-        language: "Japonais",
+        language: "Langue",
+        theme: "Thème",
+        signOut: "Déconnexion",
       ),
     ),
     Locale.fromSubtags(languageCode: "es"): AppLocalizations_Labels(
@@ -76,7 +80,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "ajustes",
-        language: "japonés",
+        language: "Idioma",
+        theme: "Tema",
+        signOut: "Desconectar",
       ),
     ),
     Locale.fromSubtags(languageCode: "de"): AppLocalizations_Labels(
@@ -98,7 +104,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "die Einstellungen",
-        language: "japanisch",
+        language: "Sprache",
+        theme: "Thema",
+        signOut: "Ausloggen",
       ),
     ),
     Locale.fromSubtags(languageCode: "hi"): AppLocalizations_Labels(
@@ -120,7 +128,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "समायोजन",
-        language: "जापानी",
+        language: "भाषा: हिन्दी",
+        theme: "विषय",
+        signOut: "प्रस्थान करें",
       ),
     ),
     Locale.fromSubtags(languageCode: "pt"): AppLocalizations_Labels(
@@ -142,7 +152,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Configurações",
-        language: "japonês",
+        language: "Língua",
+        theme: "Tema",
+        signOut: "Sair",
       ),
     ),
     Locale.fromSubtags(languageCode: "zh"): AppLocalizations_Labels(
@@ -163,7 +175,9 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "设置",
-        language: "日本",
+        language: "语言",
+        theme: "主题",
+        signOut: "登出",
       ),
     ),
     Locale.fromSubtags(languageCode: "ja"): AppLocalizations_Labels(
@@ -184,7 +198,34 @@ class AppLocalizations {
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "設定",
-        language: "日本語",
+        language: "言語",
+        theme: "テーマ",
+        signOut: "サインアウト",
+      ),
+    ),
+    Locale.fromSubtags(languageCode: "ru"): AppLocalizations_Labels(
+      auth: AppLocalizations_Labels_Auth(
+        signInButton: "Войти в систему",
+        signUpButton: "Зарегистрироваться",
+        forgotPasswordButton: "Забыл пароль",
+        emailFormField: "Электронное письмо",
+        passwordFormField: "пароль",
+        nameFormField: "название",
+        signInError:
+            "Войти не удалось: адрес электронной почты или пароль неверен.",
+        forgotPasswordLabelButton: "Забыли пароль?",
+        signUpLabelButton: "Завести аккаунт",
+        signUpError: "Регистрация прошла неудачно.",
+        signInLabelButton: "Иметь аккаунт? Войти в систему.",
+        forgotPasswordNotice:
+            "Проверьте электронную почту и следуйте инструкциям, чтобы сбросить пароль.",
+        signInonForgotPasswordLabelButton: "Войти в систему",
+      ),
+      settings: AppLocalizations_Labels_Settings(
+        title: "настройки",
+        language: "язык",
+        theme: "тема",
+        signOut: "Выход",
       ),
     ),
   };
@@ -239,11 +280,16 @@ class AppLocalizations_Labels_Auth {
 }
 
 class AppLocalizations_Labels_Settings {
-  const AppLocalizations_Labels_Settings({this.title, this.language});
+  const AppLocalizations_Labels_Settings(
+      {this.title, this.language, this.theme, this.signOut});
 
   final String title;
 
   final String language;
+
+  final String theme;
+
+  final String signOut;
 }
 
 class AppLocalizations_Labels {

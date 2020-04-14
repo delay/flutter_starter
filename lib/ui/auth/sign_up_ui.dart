@@ -85,7 +85,7 @@ class _SignUpUIState extends State<SignUpUI> {
                       ),
                       FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: labels.auth.signUpButton.toUpperCase(),
+                          labelText: labels.auth.signUpButton,
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               SystemChannels.textInput.invokeMethod(

@@ -21,11 +21,11 @@ class SettingScreen extends StatelessWidget {
   }
 
   Widget _buildLayoutSection(BuildContext context) {
+    final labels = AppLocalizations.of(context);
     return ListView(
       children: <Widget>[
         ListTile(
-          title: Text(AppStrings.settingThemeListTitle),
-          subtitle: Text(AppStrings.settingThemeListSubTitle),
+          title: Text(labels.settings.theme),
           trailing: Switch.adaptive(
             activeColor: Theme.of(context).appBarTheme.color,
             activeTrackColor: Theme.of(context).textTheme.headline1.color,
@@ -37,8 +37,7 @@ class SettingScreen extends StatelessWidget {
           ),
         ),
         ListTile(
-            title: Text('Language'),
-            subtitle: Text('Select your language'),
+            title: Text(labels.settings.language),
             //trailing: _languageDropdown(context),
             trailing: DropdownPicker(
               menuOptions: AppLanguages.languageOptions,
@@ -50,14 +49,15 @@ class SettingScreen extends StatelessWidget {
               },
             )),
         ListTile(
-          title: Text(AppStrings.settingLogoutListTitle),
-          subtitle: Text(AppStrings.settingLogoutListSubTitle),
-          trailing: RaisedButton(
+            title: Text(labels.settings.signOut),
+            trailing: RaisedButton(
               onPressed: () {
                 _confirmSignOut(context);
               },
-              child: Text(AppStrings.settingLogoutButton)),
-        )
+              child: Text(
+                labels.settings.signOut,
+              ),
+            ))
       ],
     );
   }
