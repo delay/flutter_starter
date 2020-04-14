@@ -29,6 +29,9 @@ class AppLocalizations {
             "Check your email and follow the instructions to reset your password.",
         signInonForgotPasswordLabelButton: "Sign In",
       ),
+      settings: AppLocalizations_Labels_Settings(
+        title: "Settings",
+      ),
     ),
     Locale.fromSubtags(languageCode: "fr"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
@@ -46,6 +49,9 @@ class AppLocalizations {
         forgotPasswordNotice:
             "Vérifiez votre e-mail et suivez les instructions pour réinitialiser votre mot de passe.",
         signInonForgotPasswordLabelButton: "Se connecter",
+      ),
+      settings: AppLocalizations_Labels_Settings(
+        title: "Réglages",
       ),
     ),
     Locale.fromSubtags(languageCode: "es"): AppLocalizations_Labels(
@@ -65,6 +71,9 @@ class AppLocalizations {
         forgotPasswordNotice:
             "Consultar su correo electrónico y siga las instrucciones para restablecer su contraseña.",
         signInonForgotPasswordLabelButton: "Registrarse",
+      ),
+      settings: AppLocalizations_Labels_Settings(
+        title: "ajustes",
       ),
     ),
   };
@@ -118,8 +127,16 @@ class AppLocalizations_Labels_Auth {
   final String signInonForgotPasswordLabelButton;
 }
 
+class AppLocalizations_Labels_Settings {
+  const AppLocalizations_Labels_Settings({this.title});
+
+  final String title;
+}
+
 class AppLocalizations_Labels {
-  const AppLocalizations_Labels({this.auth});
+  const AppLocalizations_Labels({this.auth, this.settings});
 
   final AppLocalizations_Labels_Auth auth;
+
+  final AppLocalizations_Labels_Settings settings;
 }

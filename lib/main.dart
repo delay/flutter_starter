@@ -6,8 +6,8 @@ import 'localizations.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/constants/app_themes.dart';
 import 'package:flutter_starter/models/user_model.dart';
-import 'package:flutter_starter/providers/auth_provider.dart';
-import 'package:flutter_starter/providers/theme_provider.dart';
+import 'package:flutter_starter/providers/providers.dart';
+
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/home/home.dart';
@@ -25,6 +25,9 @@ void main() {
         providers: [
           ChangeNotifierProvider<ThemeProvider>(
             create: (context) => ThemeProvider(),
+          ),
+          ChangeNotifierProvider<LanguageProvider>(
+            create: (context) => LanguageProvider(),
           ),
           ChangeNotifierProvider<AuthProvider>(
             create: (context) => AuthProvider(),
@@ -49,46 +52,51 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (_, themeProviderRef, __) {
-        //{context, data, child}
-        return AuthWidgetBuilder(
-          databaseBuilder: databaseBuilder,
-          builder:
-              (BuildContext context, AsyncSnapshot<UserModel> userSnapshot) {
-            return MaterialApp(
-              //begin language translation stuff
-              //https://github.com/aloisdeniel/flutter_sheet_localization
-              //https://github.com/aloisdeniel/flutter_sheet_localization/tree/master/flutter_sheet_localization_generator/example
-              locale:
-                  AppLocalizations.languages.keys.first, // <- Current locale
-              localizationsDelegates: [
-                const AppLocalizationsDelegate(), // <- Your custom delegate
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.languages.keys
-                  .toList(), // <- Supported locales
-              //end language translation stuff
-              debugShowCheckedModeBanner: false,
-              title: AppStrings.appName,
-              routes: Routes.routes,
-              theme: AppThemes.lightTheme,
-              darkTheme: AppThemes.darkTheme,
-              themeMode: themeProviderRef.isDarkModeOn
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
-              home: Consumer<AuthProvider>(
-                builder: (_, authProviderRef, __) {
-                  if (userSnapshot.connectionState == ConnectionState.active) {
-                    return userSnapshot.hasData ? HomeScreen() : SignInUI();
-                  }
+    return Consumer<LanguageProvider>(
+      builder: (_, languageProviderRef, __) {
+        return Consumer<ThemeProvider>(
+          builder: (_, themeProviderRef, __) {
+            //{context, data, child}
+            return AuthWidgetBuilder(
+              databaseBuilder: databaseBuilder,
+              builder: (BuildContext context,
+                  AsyncSnapshot<UserModel> userSnapshot) {
+                return MaterialApp(
+                  //begin language translation stuff
+                  //https://github.com/aloisdeniel/flutter_sheet_localization
+                  //https://github.com/aloisdeniel/flutter_sheet_localization/tree/master/flutter_sheet_localization_generator/example
+                  locale: languageProviderRef.getLocale, // <- Current locale
+                  localizationsDelegates: [
+                    const AppLocalizationsDelegate(), // <- Your custom delegate
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.languages.keys
+                      .toList(), // <- Supported locales
 
-                  return Material(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
+                  //end language translation stuff
+                  debugShowCheckedModeBanner: false,
+                  title: AppStrings.appName,
+                  routes: Routes.routes,
+                  theme: AppThemes.lightTheme,
+                  darkTheme: AppThemes.darkTheme,
+                  themeMode: themeProviderRef.isDarkModeOn
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
+                  home: Consumer<AuthProvider>(
+                    builder: (_, authProviderRef, __) {
+                      if (userSnapshot.connectionState ==
+                          ConnectionState.active) {
+                        return userSnapshot.hasData ? HomeScreen() : SignInUI();
+                      }
+
+                      return Material(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                );
+              },
             );
           },
         );
