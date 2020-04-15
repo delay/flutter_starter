@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/models/models.dart';
 
 class AppThemes {
   AppThemes._();
-
-  static final List<ThemeModel> themeOptions = [
-    ThemeModel(key: "light", value: "light"),
-    ThemeModel(key: "dark", value: "dark"),
-    ThemeModel(key: "system", value: "system"), //Chinese
-  ];
 
   static const Color mayaBlue = Color.fromRGBO(117, 190, 255, 1);
   static const Color dodgerBlue = Color.fromRGBO(29, 161, 242, 1);

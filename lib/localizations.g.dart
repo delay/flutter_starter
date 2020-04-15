@@ -34,6 +34,9 @@ class AppLocalizations {
         language: "Language",
         theme: "Theme",
         signOut: "Sign Out",
+        dark: "Dark",
+        light: "Light",
+        system: "System",
       ),
     ),
     Locale.fromSubtags(languageCode: "fr"): AppLocalizations_Labels(
@@ -58,6 +61,9 @@ class AppLocalizations {
         language: "Langue",
         theme: "Thème",
         signOut: "Déconnexion",
+        dark: "Foncé",
+        light: "Lumière",
+        system: "Système",
       ),
     ),
     Locale.fromSubtags(languageCode: "es"): AppLocalizations_Labels(
@@ -83,6 +89,9 @@ class AppLocalizations {
         language: "Idioma",
         theme: "Tema",
         signOut: "Desconectar",
+        dark: "Oscuro",
+        light: "Ligero",
+        system: "Sistema",
       ),
     ),
     Locale.fromSubtags(languageCode: "de"): AppLocalizations_Labels(
@@ -107,6 +116,9 @@ class AppLocalizations {
         language: "Sprache",
         theme: "Thema",
         signOut: "Ausloggen",
+        dark: "Dunkel",
+        light: "Licht",
+        system: "System",
       ),
     ),
     Locale.fromSubtags(languageCode: "hi"): AppLocalizations_Labels(
@@ -131,6 +143,9 @@ class AppLocalizations {
         language: "भाषा: हिन्दी",
         theme: "विषय",
         signOut: "प्रस्थान करें",
+        dark: "अंधेरा",
+        light: "रोशनी",
+        system: "प्रणाली",
       ),
     ),
     Locale.fromSubtags(languageCode: "pt"): AppLocalizations_Labels(
@@ -155,6 +170,9 @@ class AppLocalizations {
         language: "Língua",
         theme: "Tema",
         signOut: "Sair",
+        dark: "Sombrio",
+        light: "Luz",
+        system: "Sistema",
       ),
     ),
     Locale.fromSubtags(languageCode: "zh"): AppLocalizations_Labels(
@@ -178,6 +196,9 @@ class AppLocalizations {
         language: "语言",
         theme: "主题",
         signOut: "登出",
+        dark: "暗",
+        light: "光",
+        system: "系统",
       ),
     ),
     Locale.fromSubtags(languageCode: "ja"): AppLocalizations_Labels(
@@ -201,6 +222,9 @@ class AppLocalizations {
         language: "言語",
         theme: "テーマ",
         signOut: "サインアウト",
+        dark: "闇",
+        light: "光",
+        system: "システム",
       ),
     ),
     Locale.fromSubtags(languageCode: "ru"): AppLocalizations_Labels(
@@ -226,6 +250,9 @@ class AppLocalizations {
         language: "язык",
         theme: "тема",
         signOut: "Выход",
+        dark: "Темно",
+        light: "Светлый",
+        system: "система",
       ),
     ),
   };
@@ -281,7 +308,13 @@ class AppLocalizations_Labels_Auth {
 
 class AppLocalizations_Labels_Settings {
   const AppLocalizations_Labels_Settings(
-      {this.title, this.language, this.theme, this.signOut});
+      {this.title,
+      this.language,
+      this.theme,
+      this.signOut,
+      this.dark,
+      this.light,
+      this.system});
 
   final String title;
 
@@ -290,6 +323,12 @@ class AppLocalizations_Labels_Settings {
   final String theme;
 
   final String signOut;
+
+  final String dark;
+
+  final String light;
+
+  final String system;
 }
 
 class AppLocalizations_Labels {

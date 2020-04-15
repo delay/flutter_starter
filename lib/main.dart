@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
                   routes: Routes.routes,
                   theme: AppThemes.lightTheme,
                   darkTheme: AppThemes.darkTheme,
-                  themeMode: themeProviderRef.isDarkModeOn
+                  themeMode: themeProviderRef.isDarkModeOn(_)
                       ? ThemeMode.dark
                       : ThemeMode.light,
                   home: Consumer<AuthProvider>(
