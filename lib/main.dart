@@ -14,6 +14,7 @@ import 'package:flutter_starter/ui/home/home.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  LanguageProvider().setInitialLocalLanguage();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) async {
     runApp(

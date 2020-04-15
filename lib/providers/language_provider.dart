@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/caches/sharedpref/shared_preference_helper.dart';
 
@@ -12,21 +13,39 @@ class LanguageProvider extends ChangeNotifier {
     _sharedPrefsHelper = SharedPreferenceHelper();
   }
 
+  setInitialLocalLanguage() async {
+    //begin taken from devicelocale flutter plugin
+    //gets language code (en-US)
+    if ((currentLanguage == "") || (currentLanguage == null)) {
+      const MethodChannel _channel =
+          const MethodChannel('uk.spiralarm.flutter/devicelocale');
+      final List deviceLanguages =
+          await _channel.invokeMethod('preferredLanguages');
+      //end taken from devicelocale flutter plugin
+      String deviceLanguage = deviceLanguages.first;
+      deviceLanguage =
+          deviceLanguage.substring(0, 2); //only get 1st 2 characters
+      print('deviceLanguage: ' + deviceLanguage);
+      updateLanguage(deviceLanguage);
+    }
+  }
+
   String get currentLanguage {
     _sharedPrefsHelper.appCurrentLanguage.then((value) {
       _currentLanguage = value;
     });
+
     return _currentLanguage;
   }
 
   Locale get getLocale {
-    Locale updatedLocal = AppLocalizations.languages.keys.first;
+    Locale _updatedLocal = AppLocalizations.languages.keys.first;
     AppLocalizations.languages.keys.forEach((locale) {
       if (locale.languageCode == currentLanguage) {
-        updatedLocal = locale;
+        _updatedLocal = locale;
       }
     });
-    return updatedLocal;
+    return _updatedLocal;
   }
 
   void updateLanguage(String selectedLanguage) {

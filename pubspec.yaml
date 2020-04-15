@@ -18,6 +18,7 @@ dependencies:
   shared_preferences:
   flutter_platform_widgets:
   flutter_sheet_localization: ^1.0.0
+  devicelocale:
 
 dev_dependencies:
   flutter_test:

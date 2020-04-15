@@ -32,7 +32,7 @@ class SharedPreferenceHelper {
 
   Future<String> get appCurrentLanguage {
     return _sharedPreference.then((prefs) {
-      return prefs.getString(current_language) ?? 'en';
+      return prefs.getString(current_language);
     });
   }
 }
