@@ -3,7 +3,6 @@ import 'package:flutter_starter/models/models.dart';
 class AppLanguages {
   //AppLanguages._();
   static final List<LanguageModel> languageOptions = [
-    LanguageModel(key: "Blank", value: ""),
     LanguageModel(key: "中文", value: "zh"), //Chinese
     LanguageModel(key: "Deutsche", value: "de"), //German
     LanguageModel(key: "English", value: "en"), //English
