@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
   Future<SharedPreferences> _sharedPreference;
-  static const String is_dark_mode = "is_dark_mode";
   static const String current_language = "en";
   static const String current_theme = "system";
 
@@ -11,19 +9,7 @@ class SharedPreferenceHelper {
     _sharedPreference = SharedPreferences.getInstance();
   }
 
-  //Theme module
-  /*Future<void> changeTheme(bool value) {
-    return _sharedPreference.then((prefs) {
-      return prefs.setBool(is_dark_mode, value);
-    });
-  }*/
-
-  /*Future<bool> get isDarkMode {
-    return _sharedPreference.then((prefs) {
-      return prefs.getBool(is_dark_mode) ?? false;
-    });
-  }*/
-
+//Theme
   Future<void> changeTheme(String value) {
     return _sharedPreference.then((prefs) {
       return prefs.setString(current_theme, value);
@@ -32,7 +18,7 @@ class SharedPreferenceHelper {
 
   Future<String> get getCurrentTheme {
     return _sharedPreference.then((prefs) {
-      String currentTheme = prefs.getString(current_theme);
+      String currentTheme = prefs.getString(current_theme) ?? 'system';
       return currentTheme;
     });
   }

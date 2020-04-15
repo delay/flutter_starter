@@ -32,7 +32,7 @@ class SettingScreen extends StatelessWidget {
           title: Text(labels.settings.theme),
           trailing: DropdownPicker(
             menuOptions: themeOptions,
-            selectedOption: Provider.of<ThemeProvider>(context).getStoredTheme,
+            selectedOption: Provider.of<ThemeProvider>(context).getTheme,
             onChanged: (value) {
               Provider.of<ThemeProvider>(context, listen: false)
                   .updateTheme(value);
