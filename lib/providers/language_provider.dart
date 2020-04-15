@@ -7,7 +7,7 @@ class LanguageProvider extends ChangeNotifier {
   // shared pref object
   SharedPreferenceHelper _sharedPrefsHelper;
 
-  String _currentLanguage = 'en';
+  String _currentLanguage = '';
 
   LanguageProvider() {
     _sharedPrefsHelper = SharedPreferenceHelper();
@@ -16,18 +16,20 @@ class LanguageProvider extends ChangeNotifier {
   setInitialLocalLanguage() async {
     //begin taken from devicelocale flutter plugin
     //gets language code (en-US)
-    if ((currentLanguage == "") || (currentLanguage == null)) {
-      const MethodChannel _channel =
-          const MethodChannel('uk.spiralarm.flutter/devicelocale');
-      final List deviceLanguages =
-          await _channel.invokeMethod('preferredLanguages');
-      //end taken from devicelocale flutter plugin
-      String deviceLanguage = deviceLanguages.first;
-      deviceLanguage =
-          deviceLanguage.substring(0, 2); //only get 1st 2 characters
-      print('deviceLanguage: ' + deviceLanguage);
-      updateLanguage(deviceLanguage);
-    }
+    _sharedPrefsHelper.appCurrentLanguage.then((currentLanguageCode) async {
+      if ((currentLanguageCode == '') || (currentLanguageCode == null)) {
+        const MethodChannel _channel =
+            const MethodChannel('uk.spiralarm.flutter/devicelocale');
+        final List deviceLanguages =
+            await _channel.invokeMethod('preferredLanguages');
+        //end taken from devicelocale flutter plugin
+        String deviceLanguage = deviceLanguages.first;
+        deviceLanguage =
+            deviceLanguage.substring(0, 2); //only get 1st 2 characters
+        print('deviceLanguage: ' + deviceLanguage);
+        updateLanguage(deviceLanguage);
+      }
+    });
   }
 
   String get currentLanguage {

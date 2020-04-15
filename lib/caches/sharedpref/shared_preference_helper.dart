@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
   Future<SharedPreferences> _sharedPreference;
-  static const String current_language = "en";
+  static const String current_language = "";
   static const String current_theme = "system";
 
   SharedPreferenceHelper() {
