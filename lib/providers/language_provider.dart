@@ -14,10 +14,10 @@ class LanguageProvider extends ChangeNotifier {
   }
 
   setInitialLocalLanguage() async {
-    //begin taken from devicelocale flutter plugin
-    //gets language code (en-US)
     _sharedPrefsHelper.appCurrentLanguage.then((currentLanguageCode) async {
       if ((currentLanguageCode == '') || (currentLanguageCode == null)) {
+        //begin taken from devicelocale flutter plugin
+        //gets language code (en-US)
         const MethodChannel _channel =
             const MethodChannel('uk.spiralarm.flutter/devicelocale');
         final List deviceLanguages =
