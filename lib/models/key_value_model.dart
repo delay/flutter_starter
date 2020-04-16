@@ -1,7 +1,7 @@
 //Create a Model class to hold key-value pair data
-class ThemeModel {
+class KeyValueModel {
   String key;
   String value;
 
-  ThemeModel({this.key, this.value});
+  KeyValueModel({this.key, this.value});
 }

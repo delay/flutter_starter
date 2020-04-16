@@ -21,10 +21,10 @@ class SettingScreen extends StatelessWidget {
 
   Widget _buildLayoutSection(BuildContext context) {
     final labels = AppLocalizations.of(context);
-    final List<ThemeModel> themeOptions = [
-      ThemeModel(key: labels.settings.system, value: "system"),
-      ThemeModel(key: labels.settings.light, value: "light"),
-      ThemeModel(key: labels.settings.dark, value: "dark")
+    final List<KeyValueModel> themeOptions = [
+      KeyValueModel(key: labels.settings.system, value: "system"),
+      KeyValueModel(key: labels.settings.light, value: "light"),
+      KeyValueModel(key: labels.settings.dark, value: "dark")
     ];
     return ListView(
       children: <Widget>[
