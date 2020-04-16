@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter/localizations.dart';
-import 'package:flutter_starter/caches/sharedpref/shared_preference_helper.dart';
+import 'package:flutter_starter/services/services.dart';
 
 class LanguageProvider extends ChangeNotifier {
   // shared pref object
