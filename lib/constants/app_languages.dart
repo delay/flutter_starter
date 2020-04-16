@@ -9,15 +9,15 @@ import 'package:flutter_starter/models/models.dart';
 class AppLanguages {
   AppLanguages._();
 
-  static final List<KeyValueModel> languageOptions = [
-    KeyValueModel(key: "中文", value: "zh"), //Chinese
-    KeyValueModel(key: "Deutsche", value: "de"), //German
-    KeyValueModel(key: "English", value: "en"), //English
-    KeyValueModel(key: "Español", value: "es"), //Spanish
-    KeyValueModel(key: "Français", value: "fr"), //French
-    KeyValueModel(key: "हिन्दी", value: "hi"), //Hindi
-    KeyValueModel(key: "日本語", value: "ja"), //Japanese
-    KeyValueModel(key: "Português", value: "pt"), //Portuguese
-    KeyValueModel(key: "русский", value: "ru"), //Russian
+  static final List<MenuOptionsModel> languageOptions = [
+    MenuOptionsModel(key: "中文", value: "zh"), //Chinese
+    MenuOptionsModel(key: "Deutsche", value: "de"), //German
+    MenuOptionsModel(key: "English", value: "en"), //English
+    MenuOptionsModel(key: "Español", value: "es"), //Spanish
+    MenuOptionsModel(key: "Français", value: "fr"), //French
+    MenuOptionsModel(key: "हिन्दी", value: "hi"), //Hindi
+    MenuOptionsModel(key: "日本語", value: "ja"), //Japanese
+    MenuOptionsModel(key: "Português", value: "pt"), //Portuguese
+    MenuOptionsModel(key: "русский", value: "ru"), //Russian
   ];
 }

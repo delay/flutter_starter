@@ -6,3 +6,4 @@ export 'primary_button.dart';
 export 'label_button.dart';
 export 'logo_graphic_header.dart';
 export 'dropdown_picker.dart';
+export 'dropdown_picker_with_icon.dart';

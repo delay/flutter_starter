@@ -21,16 +21,21 @@ class SettingScreen extends StatelessWidget {
 
   Widget _buildLayoutSection(BuildContext context) {
     final labels = AppLocalizations.of(context);
-    final List<KeyValueModel> themeOptions = [
-      KeyValueModel(key: labels.settings.system, value: "system"),
-      KeyValueModel(key: labels.settings.light, value: "light"),
-      KeyValueModel(key: labels.settings.dark, value: "dark")
+    final List<MenuOptionsModel> themeOptions = [
+      MenuOptionsModel(
+          key: labels.settings.system,
+          value: "system",
+          icon: Icons.blur_linear),
+      MenuOptionsModel(
+          key: labels.settings.light, value: "light", icon: Icons.colorize),
+      MenuOptionsModel(
+          key: labels.settings.dark, value: "dark", icon: Icons.book)
     ];
     return ListView(
       children: <Widget>[
         ListTile(
           title: Text(labels.settings.theme),
-          trailing: DropdownPicker(
+          trailing: DropdownPickerWithIcon(
             menuOptions: themeOptions,
             selectedOption: Provider.of<ThemeProvider>(context).getTheme,
             onChanged: (value) {
