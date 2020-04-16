@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/models/user_model.dart';
-import 'package:flutter_starter/providers/auth_provider.dart';
-import 'package:flutter_starter/services/firestore_database.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_starter/models/models.dart';
+import 'package:flutter_starter/providers/providers.dart';
+import 'package:flutter_starter/services/services.dart';
 
 /*
 * This class is mainly to help with creating user dependent object that
@@ -16,17 +16,19 @@ class AuthWidgetBuilder extends StatelessWidget {
   const AuthWidgetBuilder(
       {Key key, @required this.builder, @required this.databaseBuilder})
       : super(key: key);
-  final Widget Function(BuildContext, AsyncSnapshot<UserModel>) builder;
+  final Widget Function(BuildContext, AsyncSnapshot<FirebaseUserAuthModel>)
+      builder;
   final FirestoreDatabase Function(BuildContext context, String uid)
       databaseBuilder;
 
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthProvider>(context, listen: false);
-    return StreamBuilder<UserModel>(
+    return StreamBuilder<FirebaseUserAuthModel>(
       stream: authService.user,
-      builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
-        final UserModel user = snapshot.data;
+      builder: (BuildContext context,
+          AsyncSnapshot<FirebaseUserAuthModel> snapshot) {
+        final FirebaseUserAuthModel user = snapshot.data;
         if (user != null) {
           /*
           * For any other Provider services that rely on user data can be
@@ -35,7 +37,7 @@ class AuthWidgetBuilder extends StatelessWidget {
            */
           return MultiProvider(
             providers: [
-              Provider<UserModel>.value(value: user),
+              Provider<FirebaseUserAuthModel>.value(value: user),
               Provider<FirestoreDatabase>(
                 create: (context) => databaseBuilder(context, user.uid),
               ),

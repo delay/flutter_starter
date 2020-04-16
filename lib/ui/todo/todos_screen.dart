@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/models/todo_model.dart';
-import 'package:flutter_starter/models/user_model.dart';
+import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/providers/auth_provider.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/services/firestore_database.dart';
@@ -24,7 +24,7 @@ class TodosScreen extends StatelessWidget {
         title: StreamBuilder(
             stream: authProvider.user,
             builder: (context, snapshot) {
-              final UserModel user = snapshot.data;
+              final FirebaseUserAuthModel user = snapshot.data;
               return Text(user != null
                   ? user.email + " - " + AppStrings.homeAppBarTitle
                   : AppStrings.homeAppBarTitle);

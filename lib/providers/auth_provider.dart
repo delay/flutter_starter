@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_starter/models/user_model.dart';
+import 'package:flutter_starter/models/models.dart';
 
 enum Status {
   Uninitialized,
@@ -31,7 +31,8 @@ class AuthProvider extends ChangeNotifier {
 
   Status get status => _status;
 
-  Stream<UserModel> get user => _auth.onAuthStateChanged.map(_userFromFirebase);
+  Stream<FirebaseUserAuthModel> get user =>
+      _auth.onAuthStateChanged.map(_userFromFirebase);
 
   AuthProvider() {
     //initialise object
@@ -42,12 +43,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //Create user object based on the given FirebaseUser
-  UserModel _userFromFirebase(FirebaseUser user) {
+  FirebaseUserAuthModel _userFromFirebase(FirebaseUser user) {
     if (user == null) {
       return null;
     }
 
-    return UserModel(
+    return FirebaseUserAuthModel(
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
@@ -67,7 +68,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //Method for new user registration using email and password
-  Future<UserModel> registerWithEmailAndPassword(
+  Future<FirebaseUserAuthModel> registerWithEmailAndPassword(
       String email, String password) async {
     try {
       _status = Status.Registering;

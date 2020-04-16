@@ -5,9 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/constants/app_themes.dart';
-import 'package:flutter_starter/models/user_model.dart';
+import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/providers/providers.dart';
-
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/home/home.dart';
@@ -61,7 +60,7 @@ class MyApp extends StatelessWidget {
             return AuthWidgetBuilder(
               databaseBuilder: databaseBuilder,
               builder: (BuildContext context,
-                  AsyncSnapshot<UserModel> userSnapshot) {
+                  AsyncSnapshot<FirebaseUserAuthModel> userSnapshot) {
                 return MaterialApp(
                   //begin language translation stuff
                   //https://github.com/aloisdeniel/flutter_sheet_localization
