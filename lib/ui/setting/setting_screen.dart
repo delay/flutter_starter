@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_starter/ui/components/segmented_selector.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/providers/providers.dart';
@@ -23,17 +25,19 @@ class SettingScreen extends StatelessWidget {
     final labels = AppLocalizations.of(context);
     final List<MenuOptionsModel> themeOptions = [
       MenuOptionsModel(
-          key: labels.settings.system,
-          value: "system",
-          icon: Icons.blur_linear),
+          key: "system",
+          value: labels.settings.system,
+          icon: Icons.brightness_4),
       MenuOptionsModel(
-          key: labels.settings.light, value: "light", icon: Icons.colorize),
+          key: "light",
+          value: labels.settings.light,
+          icon: Icons.brightness_low),
       MenuOptionsModel(
-          key: labels.settings.dark, value: "dark", icon: Icons.book)
+          key: "dark", value: labels.settings.dark, icon: Icons.brightness_3)
     ];
     return ListView(
       children: <Widget>[
-        ListTile(
+        /*  ListTile(
           title: Text(labels.settings.theme),
           trailing: DropdownPickerWithIcon(
             menuOptions: themeOptions,
@@ -43,17 +47,7 @@ class SettingScreen extends StatelessWidget {
                   .updateTheme(value);
             },
           ),
-        ),
-        /*trailing: Switch.adaptive(
-            activeColor: Theme.of(context).appBarTheme.color,
-            activeTrackColor: Theme.of(context).textTheme.headline1.color,
-            value: Provider.of<ThemeProvider>(context).isDarkModeOn,
-            onChanged: (booleanValue) {
-              Provider.of<ThemeProvider>(context, listen: false)
-                  .updateTheme(booleanValue);
-            },
-          ),*/
-
+        ),*/
         ListTile(
             title: Text(labels.settings.language),
             //trailing: _languageDropdown(context),
@@ -66,6 +60,29 @@ class SettingScreen extends StatelessWidget {
                     .updateLanguage(value);
               },
             )),
+        ListTile(
+          title: Text(labels.settings.theme),
+          trailing: SegmentedSelector(
+            selectedOption: Provider.of<ThemeProvider>(context).getTheme,
+            menuOptions: themeOptions,
+            onValueChanged: (value) {
+              Provider.of<ThemeProvider>(context, listen: false)
+                  .updateTheme(value);
+            },
+          ),
+        ),
+        /*    
+        ListTile(
+          title: Text(labels.settings.theme),
+          trailing: CupertinoSlidingSegmentedControl(
+            groupValue: Provider.of<ThemeProvider>(context).getTheme,
+            children: myTabs,
+            onValueChanged: (value) {
+              Provider.of<ThemeProvider>(context, listen: false)
+                  .updateTheme(value);
+            },
+          ),
+        ),*/
         ListTile(
             title: Text(labels.settings.signOut),
             trailing: RaisedButton(

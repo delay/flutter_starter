@@ -1,16 +1,10 @@
-import 'package:meta/meta.dart';
-
 class TodoModel {
   final String id;
   final String task;
   final String extraNote;
   final bool complete;
 
-  TodoModel(
-      {@required this.id,
-      @required this.task,
-      this.extraNote,
-      @required this.complete});
+  TodoModel({this.id, this.task, this.extraNote, this.complete});
 
   factory TodoModel.fromMap(Map<String, dynamic> data, String documentId) {
     if (data == null) {

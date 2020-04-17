@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/cupertino.dart';
+//import 'dart:io';
 /*
 DropdownPicker(
                 menuOptions: list of dropdown options in key value pairs,
@@ -17,6 +19,7 @@ class DropdownPickerWithIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //if (Platform.isIOS) {}
     return DropdownButton<String>(
         items: menuOptions
             .map((data) => DropdownMenuItem<String>(
