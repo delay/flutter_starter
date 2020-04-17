@@ -10,14 +10,14 @@ class AppLanguages {
   AppLanguages._();
 
   static final List<MenuOptionsModel> languageOptions = [
-    MenuOptionsModel(key: "中文", value: "zh"), //Chinese
-    MenuOptionsModel(key: "Deutsche", value: "de"), //German
-    MenuOptionsModel(key: "English", value: "en"), //English
-    MenuOptionsModel(key: "Español", value: "es"), //Spanish
-    MenuOptionsModel(key: "Français", value: "fr"), //French
-    MenuOptionsModel(key: "हिन्दी", value: "hi"), //Hindi
-    MenuOptionsModel(key: "日本語", value: "ja"), //Japanese
-    MenuOptionsModel(key: "Português", value: "pt"), //Portuguese
-    MenuOptionsModel(key: "русский", value: "ru"), //Russian
+    MenuOptionsModel(key: "zh", value: "中文"), //Chinese
+    MenuOptionsModel(key: "de", value: "Deutsche"), //German
+    MenuOptionsModel(key: "en", value: "English"), //English
+    MenuOptionsModel(key: "es", value: "Español"), //Spanish
+    MenuOptionsModel(key: "fr", value: "Français"), //French
+    MenuOptionsModel(key: "hi", value: "हिन्दी"), //Hindi
+    MenuOptionsModel(key: "ja", value: "日本語"), //Japanese
+    MenuOptionsModel(key: "pt", value: "Português"), //Portuguese
+    MenuOptionsModel(key: "ru", value: "русский"), //Russian
   ];
 }

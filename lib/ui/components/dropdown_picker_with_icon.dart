@@ -29,11 +29,11 @@ class DropdownPickerWithIcon extends StatelessWidget {
                       Icon(data.icon),
                       SizedBox(width: 10),
                       Text(
-                        data.key,
+                        data.value,
                       ),
                     ],
                   ),
-                  value: data.value,
+                  value: data.key,
                 ))
             .toList(),
         value: selectedOption,

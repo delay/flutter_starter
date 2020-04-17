@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-//import 'dart:io';
+import 'package:flutter_starter/ui/components/sliding_segmented_control.dart';
 /*
 SegmentedSelector(
                 menuOptions: list of dropdown options in key value pairs,
@@ -22,6 +21,7 @@ class SegmentedSelector extends StatelessWidget {
     //if (Platform.isIOS) {}
 
     return CupertinoSlidingSegmentedControl(
+        //thumbColor: Theme.of(context).primaryColor,
         groupValue: selectedOption,
         children: Map.fromIterable(
           menuOptions,

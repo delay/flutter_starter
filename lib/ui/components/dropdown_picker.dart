@@ -20,9 +20,9 @@ class DropdownPicker extends StatelessWidget {
         items: menuOptions
             .map((data) => DropdownMenuItem<String>(
                   child: Text(
-                    data.key,
+                    data.value,
                   ),
-                  value: data.value,
+                  value: data.key,
                 ))
             .toList(),
         value: selectedOption,
