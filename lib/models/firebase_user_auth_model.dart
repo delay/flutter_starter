@@ -17,7 +17,7 @@ class FirebaseUserAuthModel {
     return FirebaseUserAuthModel(
       uid: data['uid'],
       email: data['email'] ?? '',
-      displayName: data['name'] ?? '',
+      displayName: data['displayName'] ?? '',
       phoneNumber: data['phoneNumber'] ?? '',
       photoUrl: data['photoUrl'] ?? '',
     );

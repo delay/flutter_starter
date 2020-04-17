@@ -24,10 +24,34 @@ class TodosScreen extends StatelessWidget {
         title: StreamBuilder(
             stream: authProvider.user,
             builder: (context, snapshot) {
-              final FirebaseUserAuthModel user = snapshot.data;
-              return Text(user != null
-                  ? user.email + " - " + AppStrings.homeAppBarTitle
-                  : AppStrings.homeAppBarTitle);
+              if (snapshot.data == null) {
+                return Container(width: 0.0, height: 0.0);
+              } else {
+                final FirebaseUserAuthModel user = snapshot.data;
+                Widget _photoImage = SizedBox(height: 1);
+                if ((user?.photoUrl != null) || (user?.photoUrl != '')) {
+                  _photoImage = Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(user?.photoUrl),
+                      ),
+                    ),
+                  );
+                }
+                return Row(
+                  children: <Widget>[
+                    _photoImage,
+                    SizedBox(width: 20),
+                    Text(user != null
+                        ? user.displayName + " - " + user.email
+                        : AppStrings.homeAppBarTitle),
+                  ],
+                );
+              }
             }),
         actions: <Widget>[
           StreamBuilder(

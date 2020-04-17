@@ -8,15 +8,14 @@ import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/helpers/helpers.dart';
 import 'package:flutter_starter/services/services.dart';
 
-class SignUpUI extends StatefulWidget {
-  _SignUpUIState createState() => _SignUpUIState();
+class EditUserScreen extends StatefulWidget {
+  _EditUserScreenState createState() => _EditUserScreenState();
 }
 
-class _SignUpUIState extends State<SignUpUI> {
+class _EditUserScreenState extends State<EditUserScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _name = new TextEditingController();
   final TextEditingController _email = new TextEditingController();
-  final TextEditingController _password = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -28,7 +27,6 @@ class _SignUpUIState extends State<SignUpUI> {
   void dispose() {
     _name.dispose();
     _email.dispose();
-    _password.dispose();
     super.dispose();
   }
 
@@ -39,6 +37,7 @@ class _SignUpUIState extends State<SignUpUI> {
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
     }
+
     return Scaffold(
       key: _scaffoldKey,
       body: LoadingScreen(
@@ -73,17 +72,6 @@ class _SignUpUIState extends State<SignUpUI> {
                         onSaved: (value) => _email.text = value,
                       ),
                       FormVerticalSpace(),
-                      FormInputFieldWithIcon(
-                        controller: _password,
-                        iconPrefix: CustomIcon.lock,
-                        labelText: labels.auth.passwordFormField,
-                        validator: Validator.password,
-                        obscureText: true,
-                        maxLines: 1,
-                        onChanged: (value) => null,
-                        onSaved: (value) => _password.text = value,
-                      ),
-                      FormVerticalSpace(),
                       PrimaryButton(
                           labelText: labels.auth.signUpButton,
                           onPressed: () async {
@@ -93,7 +81,7 @@ class _SignUpUIState extends State<SignUpUI> {
 
                               FirebaseUserAuthModel userModel =
                                   await authProvider
-                                      .registerWithEmailAndPassword(_name.text,
+                                      .registerWithEmailAndPassword(
                                           _email.text, _password.text);
 
                               if (userModel == null) {
@@ -105,7 +93,7 @@ class _SignUpUIState extends State<SignUpUI> {
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                          labelText: labels.auth.signInLabelButton,
+                          labelText: labels.auth.changePasswordLabelButton,
                           onPressed: () => Navigator.of(context)
                               .pushReplacementNamed(Routes.signin)),
                     ],

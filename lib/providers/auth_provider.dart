@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:flutter_starter/models/models.dart';
 
 enum Status {
@@ -69,13 +70,23 @@ class AuthProvider extends ChangeNotifier {
 
   //Method for new user registration using email and password
   Future<FirebaseUserAuthModel> registerWithEmailAndPassword(
-      String email, String password) async {
+      String name, String email, String password) async {
     try {
       _status = Status.Registering;
       notifyListeners();
       final AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
+      var gravatar = Gravatar(email);
+      var gravatarUrl = gravatar.imageUrl(
+        size: 200,
+        defaultImage: GravatarImage.retro,
+        rating: GravatarRating.pg,
+        fileExtension: true,
+      );
+      UserUpdateInfo updateUser = UserUpdateInfo();
+      updateUser.displayName = name;
+      updateUser.photoUrl = gravatarUrl;
+      result.user.updateProfile(updateUser);
       return _userFromFirebase(result.user);
     } catch (e) {
       _status = Status.Unauthenticated;
