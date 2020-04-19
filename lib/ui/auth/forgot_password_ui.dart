@@ -16,7 +16,7 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
   final TextEditingController _email = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _isButtonDisabled = false;
-
+  String email = '';
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,9 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     bool _loading = false;
-    final authProvider = Provider.of<AuthProvider>(context);
+    email = ModalRoute.of(context).settings.arguments;
+    _email.text = email;
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
     }
@@ -81,11 +83,7 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
                                   }
                                 }),
                       FormVerticalSpace(),
-                      LabelButton(
-                          labelText:
-                              labels.auth.signInonForgotPasswordLabelButton,
-                          onPressed: () => Navigator.of(context)
-                              .pushReplacementNamed(Routes.signin)),
+                      signInLink()
                     ],
                   ),
                 ),
@@ -94,5 +92,17 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
           ),
           inAsyncCall: _loading),
     );
+  }
+
+  signInLink() {
+    final labels = AppLocalizations.of(context);
+    if (email == '') {
+      return LabelButton(
+          labelText: labels.auth.signInonForgotPasswordLabelButton,
+          onPressed: () =>
+              Navigator.of(context).pushReplacementNamed(Routes.signin));
+    } else {
+      return Container(width: 0, height: 0);
+    }
   }
 }

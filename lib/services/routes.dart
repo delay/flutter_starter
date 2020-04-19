@@ -15,6 +15,7 @@ class Routes {
   static const String home = '/home';
   static const String setting = '/setting';
   static const String forgotPassword = '/forgot-password';
+  static const String updateProfile = '/update-profile';
   static const String create_edit_todo = '/create_edit_todo';
 
   static final routes = <String, WidgetBuilder>{
@@ -24,6 +25,7 @@ class Routes {
     home: (BuildContext context) => TodosScreen(),
     setting: (BuildContext context) => SettingScreen(),
     forgotPassword: (BuildContext context) => ForgotPasswordUI(),
+    updateProfile: (BuildContext context) => UpdateProfileUI(),
     create_edit_todo: (BuildContext context) => CreateEditTodoScreen(),
   };
 }

@@ -35,6 +35,8 @@ class AuthProvider extends ChangeNotifier {
   Stream<FirebaseUserAuthModel> get user =>
       _auth.onAuthStateChanged.map(_userFromFirebase);
 
+  Future<FirebaseUser> get getUser => _auth.currentUser();
+
   AuthProvider() {
     //initialise object
     _auth = FirebaseAuth.instance;
@@ -101,10 +103,31 @@ class AuthProvider extends ChangeNotifier {
       _status = Status.Authenticating;
       notifyListeners();
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;
       notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> updateUser(String displayName, String oldEmail, String email,
+      String password) async {
+    try {
+      //_status = Status.Authenticating;
+      //notifyListeners();
+      FirebaseUser _firebaseUser = (await _auth.signInWithEmailAndPassword(
+              email: oldEmail, password: password))
+          .user;
+      _firebaseUser.updateEmail(email);
+      UserUpdateInfo updateUser = UserUpdateInfo();
+      updateUser.displayName = displayName;
+      _firebaseUser.updateProfile(updateUser);
+      return true;
+    } catch (e) {
+      //_status = Status.Unauthenticated;
+      //notifyListeners();
       return false;
     }
   }

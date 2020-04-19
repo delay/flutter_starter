@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_starter/ui/components/segmented_selector.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_starter/localizations.dart';
@@ -83,6 +84,20 @@ class SettingScreen extends StatelessWidget {
             },
           ),
         ),*/
+        ListTile(
+            title: Text('Update Profile'),
+            trailing: RaisedButton(
+              onPressed: () async {
+                final AuthProvider _auth =
+                    Provider.of<AuthProvider>(context, listen: false);
+                final FirebaseUser _user = await _auth.getUser;
+                Navigator.pushNamed(context, Routes.updateProfile,
+                    arguments: _user);
+              },
+              child: Text(
+                'Update Profile',
+              ),
+            )),
         ListTile(
             title: Text(labels.settings.signOut),
             trailing: RaisedButton(
