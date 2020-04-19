@@ -26,7 +26,7 @@ class TodosScreen extends StatelessWidget {
               if (snapshot.data == null) {
                 return Container(width: 0.0, height: 0.0);
               } else {
-                final FirebaseUserAuthModel user = snapshot.data;
+                final UserModel user = snapshot.data;
                 Widget _photoImage = SizedBox(height: 1);
                 if ((user?.photoUrl != null) || (user?.photoUrl != '')) {
                   _photoImage = Container(
@@ -46,7 +46,7 @@ class TodosScreen extends StatelessWidget {
                     _photoImage,
                     SizedBox(width: 20),
                     Text(user != null
-                        ? user.displayName + " - " + user.email
+                        ? user.name + " - " + user.email
                         : AppStrings.homeAppBarTitle),
                   ],
                 );

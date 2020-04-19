@@ -19,6 +19,7 @@ dependencies:
   flutter_platform_widgets:
   flutter_sheet_localization: ^1.0.0
   simple_gravatar:
+  rxdart:
 
 dev_dependencies:
   flutter_test:

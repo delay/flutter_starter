@@ -90,10 +90,9 @@ class _SignUpUIState extends State<SignUpUI> {
                               SystemChannels.textInput.invokeMethod(
                                   'TextInput.hide'); //to hide the keyboard - if any
 
-                              FirebaseUserAuthModel userModel =
-                                  await authProvider
-                                      .registerWithEmailAndPassword(_name.text,
-                                          _email.text, _password.text);
+                              UserModel userModel = await authProvider
+                                  .registerWithEmailAndPassword(
+                                      _name.text, _email.text, _password.text);
 
                               if (userModel == null) {
                                 _scaffoldKey.currentState.showSnackBar(SnackBar(

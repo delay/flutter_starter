@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:flutter_starter/models/models.dart';
+import 'package:flutter_starter/services/services.dart';
+import 'package:flutter_starter/constants/constants.dart';
 
 enum Status {
   Uninitialized,
@@ -32,8 +34,7 @@ class AuthProvider extends ChangeNotifier {
 
   Status get status => _status;
 
-  Stream<FirebaseUserAuthModel> get user =>
-      _auth.onAuthStateChanged.map(_userFromFirebase);
+  Stream<UserModel> get user => _auth.onAuthStateChanged.map(_userFromFirebase);
 
   Future<FirebaseUser> get getUser => _auth.currentUser();
 
@@ -46,16 +47,15 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //Create user object based on the given FirebaseUser
-  FirebaseUserAuthModel _userFromFirebase(FirebaseUser user) {
+  UserModel _userFromFirebase(FirebaseUser user) {
     if (user == null) {
       return null;
     }
-
-    return FirebaseUserAuthModel(
+    //TODO:get database info for user
+    return UserModel(
         uid: user.uid,
         email: user.email,
-        displayName: user.displayName,
-        phoneNumber: user.phoneNumber,
+        name: user.displayName,
         photoUrl: user.photoUrl);
   }
 
@@ -71,7 +71,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   //Method for new user registration using email and password
-  Future<FirebaseUserAuthModel> registerWithEmailAndPassword(
+  Future<UserModel> registerWithEmailAndPassword(
       String name, String email, String password) async {
     try {
       _status = Status.Registering;
@@ -126,9 +126,9 @@ class AuthProvider extends ChangeNotifier {
       _firebaseUser.updateProfile(updateUser);
       await _firebaseUser
           .reload(); //https://github.com/flutter/flutter/issues/20390 bullshit bug that flutter needs to fix
-      await _auth.signOut();
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      await _firebaseUser.reload();
+      //await _auth.signOut();
+      //await _auth.signInWithEmailAndPassword(email: email, password: password);
+      //await _firebaseUser.reload();
       FirebaseUser usernew = await _auth.currentUser();
       print(usernew.displayName);
       return true;

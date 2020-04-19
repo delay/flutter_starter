@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
             return AuthWidgetBuilder(
               databaseBuilder: databaseBuilder,
               builder: (BuildContext context,
-                  AsyncSnapshot<FirebaseUserAuthModel> userSnapshot) {
+                  AsyncSnapshot<UserModel> userSnapshot) {
                 return MaterialApp(
                   //begin language translation stuff
                   //https://github.com/aloisdeniel/flutter_sheet_localization

@@ -32,9 +32,15 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   }
 
   Widget build(BuildContext context) {
-    final AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    //_loading = true;
+    //  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
+        key: _scaffoldKey,
+        body: LoadingScreen(
+            child: updateProfileForm(context), inAsyncCall: _loading));
+  }
+  //_loading = true;
+  /* return Scaffold(
         key: _scaffoldKey,
         body: LoadingScreen(
             child: StreamBuilder(
@@ -47,9 +53,12 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                   return updateProfileForm(context, user.email);
                 }),
             inAsyncCall: _loading));
-  }
+  }*/
 
-  updateProfileForm(BuildContext context, String oldEmail) {
+  updateProfileForm(BuildContext context) {
+    final UserModel user = Provider.of<UserModel>(context);
+    _name.text = user.name;
+    _email.text = user.email;
     final labels = AppLocalizations.of(context);
     return Form(
       key: _formKey,
@@ -96,7 +105,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                           _updateUserConfirm(context, _name.text, _email.text)
                               .then((value) {
                             if (isSuccess) {
-                              Navigator.pushNamed(context, Routes.setting);
+                              //  Navigator.pushNamed(context, Routes.setting);
                               _scaffoldKey.currentState.showSnackBar(
                                 SnackBar(
                                   content:
@@ -133,7 +142,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                     labelText: labels.auth.changePasswordLabelButton,
                     onPressed: () => Navigator.pushNamed(
                         context, Routes.forgotPassword,
-                        arguments: oldEmail)),
+                        arguments: user.email)),
               ],
             ),
           ),
@@ -174,6 +183,9 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 child: new Text(labels.auth.cancel.toUpperCase()),
                 onPressed: () {
                   Navigator.of(context).pop();
+                  setState(() {
+                    isSuccess = false;
+                  });
                 },
               ),
               new FlatButton(
