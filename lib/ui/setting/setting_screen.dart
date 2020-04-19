@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_starter/ui/components/segmented_selector.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_starter/localizations.dart';
-import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/models/models.dart';

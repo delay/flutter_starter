@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/models/todo_model.dart';
 import 'package:flutter_starter/models/models.dart';
-import 'package:flutter_starter/providers/auth_provider.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/services/firestore_database.dart';
 import 'package:flutter_starter/ui/todo/empty_content.dart';

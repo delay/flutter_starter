@@ -124,6 +124,13 @@ class AuthProvider extends ChangeNotifier {
       UserUpdateInfo updateUser = UserUpdateInfo();
       updateUser.displayName = displayName;
       _firebaseUser.updateProfile(updateUser);
+      await _firebaseUser
+          .reload(); //https://github.com/flutter/flutter/issues/20390 bullshit bug that flutter needs to fix
+      await _auth.signOut();
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _firebaseUser.reload();
+      FirebaseUser usernew = await _auth.currentUser();
+      print(usernew.displayName);
       return true;
     } catch (e) {
       //_status = Status.Unauthenticated;

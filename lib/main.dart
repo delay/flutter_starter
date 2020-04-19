@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/constants/app_themes.dart';
 import 'package:flutter_starter/models/models.dart';
-import 'package:flutter_starter/providers/providers.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/home/home.dart';
