@@ -19,11 +19,11 @@ setAllTodoComplete is require to change all todos item to have the complete stat
 changed to true.
 
  */
-class FirestoreDatabase {
+class TodoDB {
   static String todoPath(String uid, String todoId) =>
       'users/$uid/todos/$todoId';
   static String todosPath(String uid) => 'users/$uid/todos';
-  FirestoreDatabase({@required this.uid}) : assert(uid != null);
+  TodoDB({@required this.uid}) : assert(uid != null);
   final String uid;
 
   final _firestoreService = FirestoreService.instance;

@@ -14,8 +14,7 @@ class TodosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
-    final firestoreDatabase =
-        Provider.of<FirestoreDatabase>(context, listen: false);
+    final todoDB = Provider.of<TodoDB>(context, listen: false);
 
     return Scaffold(
       key: _scaffoldKey,
@@ -54,7 +53,7 @@ class TodosScreen extends StatelessWidget {
             }),
         actions: <Widget>[
           StreamBuilder(
-              stream: firestoreDatabase.todosStream(),
+              stream: todoDB.todosStream(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<TodoModel> todos = snapshot.data;
@@ -89,11 +88,10 @@ class TodosScreen extends StatelessWidget {
   }
 
   Widget _buildBodySection(BuildContext context) {
-    final firestoreDatabase =
-        Provider.of<FirestoreDatabase>(context, listen: false);
+    final todoDB = Provider.of<TodoDB>(context, listen: false);
 
     return StreamBuilder(
-        stream: firestoreDatabase.todosStream(),
+        stream: todoDB.todosStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<TodoModel> todos = snapshot.data;
@@ -112,7 +110,7 @@ class TodosScreen extends StatelessWidget {
                     ),
                     key: Key(todos[index].id),
                     onDismissed: (direction) {
-                      firestoreDatabase.deleteTodo(todos[index]);
+                      todoDB.deleteTodo(todos[index]);
 
                       _scaffoldKey.currentState.showSnackBar(SnackBar(
                         backgroundColor: Theme.of(context).appBarTheme.color,
@@ -126,7 +124,7 @@ class TodosScreen extends StatelessWidget {
                           label: AppStrings.todosSnackBarActionLbl,
                           textColor: Theme.of(context).canvasColor,
                           onPressed: () {
-                            firestoreDatabase.setTodo(todos[index]);
+                            todoDB.setTodo(todos[index]);
                           },
                         ),
                       ));
@@ -140,7 +138,7 @@ class TodosScreen extends StatelessWidget {
                                 task: todos[index].task,
                                 extraNote: todos[index].extraNote,
                                 complete: value);
-                            firestoreDatabase.setTodo(todo);
+                            todoDB.setTodo(todo);
                           }),
                       title: Text(todos[index].task),
                       onTap: () {

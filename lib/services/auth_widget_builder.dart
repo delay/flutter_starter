@@ -16,8 +16,7 @@ class AuthWidgetBuilder extends StatelessWidget {
       {Key key, @required this.builder, @required this.databaseBuilder})
       : super(key: key);
   final Widget Function(BuildContext, AsyncSnapshot<UserModel>) builder;
-  final FirestoreDatabase Function(BuildContext context, String uid)
-      databaseBuilder;
+  final TodoDB Function(BuildContext context, String uid) databaseBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class AuthWidgetBuilder extends StatelessWidget {
           return MultiProvider(
             providers: [
               Provider<UserModel>.value(value: user),
-              Provider<FirestoreDatabase>(
+              Provider<TodoDB>(
                 create: (context) => databaseBuilder(context, user.uid),
               ),
             ],

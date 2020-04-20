@@ -8,17 +8,17 @@ enum TodosActions { toggleAllComplete, clearCompleted }
 class TodosExtraActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    FirestoreDatabase firestoreDatabase = Provider.of(context);
+    TodoDB todoDB = Provider.of(context);
 
     return PopupMenuButton<TodosActions>(
       icon: Icon(Icons.more_horiz),
       onSelected: (TodosActions result) {
         switch (result) {
           case TodosActions.toggleAllComplete:
-            firestoreDatabase.setAllTodoComplete();
+            todoDB.setAllTodoComplete();
             break;
           case TodosActions.clearCompleted:
-            firestoreDatabase.deleteAllTodoWithComplete();
+            todoDB.deleteAllTodoWithComplete();
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<TodosActions>>[

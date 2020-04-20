@@ -36,6 +36,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
 
     return Scaffold(
         key: _scaffoldKey,
+        appBar: AppBar(title: Text('Update Profile')),
         body: LoadingScreen(
             child: updateProfileForm(context), inAsyncCall: _loading));
   }

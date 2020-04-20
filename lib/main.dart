@@ -33,7 +33,7 @@ void main() {
           ),
         ],
         child: MyApp(
-          databaseBuilder: (_, uid) => FirestoreDatabase(uid: uid),
+          databaseBuilder: (_, uid) => TodoDB(uid: uid),
         ),
       ),
     );
@@ -45,8 +45,7 @@ class MyApp extends StatelessWidget {
 
   // Expose builders for 3rd party services at the root of the widget tree
   // This is useful when mocking services while testing
-  final FirestoreDatabase Function(BuildContext context, String uid)
-      databaseBuilder;
+  final TodoDB Function(BuildContext context, String uid) databaseBuilder;
 
   // This widget is the root of your application.
   @override

@@ -38,6 +38,7 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
     }
     return Scaffold(
       key: _scaffoldKey,
+      appBar: appBar(),
       body: LoadingScreen(
           child: Form(
             key: _formKey,
@@ -93,15 +94,21 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
     );
   }
 
+  appBar() {
+    if ((email == '') || (email == null)) {
+      return null;
+    }
+    return AppBar(title: Text('Reset Password'));
+  }
+
   signInLink() {
     final labels = AppLocalizations.of(context);
-    if (email == '') {
+    if ((email == '') || (email == null)) {
       return LabelButton(
           labelText: labels.auth.signInonForgotPasswordLabelButton,
           onPressed: () =>
               Navigator.of(context).pushReplacementNamed(Routes.signin));
-    } else {
-      return Container(width: 0, height: 0);
     }
+    return Container(width: 0, height: 0);
   }
 }

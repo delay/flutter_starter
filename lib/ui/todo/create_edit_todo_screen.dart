@@ -58,10 +58,9 @@ class _CreateEditTodoScreenState extends State<CreateEditTodoScreen> {
                 if (_formKey.currentState.validate()) {
                   FocusScope.of(context).unfocus();
 
-                  final firestoreDatabase =
-                      Provider.of<FirestoreDatabase>(context, listen: false);
+                  final todoDB = Provider.of<TodoDB>(context, listen: false);
 
-                  firestoreDatabase.setTodo(TodoModel(
+                  todoDB.setTodo(TodoModel(
                       id: _todo != null
                           ? _todo.id
                           : documentIdFromCurrentDate(),
