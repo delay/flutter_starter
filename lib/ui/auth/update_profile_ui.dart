@@ -33,10 +33,10 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
 
   Widget build(BuildContext context) {
     //  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
-
+    final labels = AppLocalizations.of(context);
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(title: Text('Update Profile')),
+        appBar: AppBar(title: Text(labels.auth.updateProfileTitle)),
         body: LoadingScreen(
             child: updateProfileForm(context), inAsyncCall: _loading));
   }
@@ -142,7 +142,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 LabelButton(
                     labelText: labels.auth.changePasswordLabelButton,
                     onPressed: () => Navigator.pushNamed(
-                        context, Routes.forgotPassword,
+                        context, Routes.resetPassword,
                         arguments: user.email)),
               ],
             ),

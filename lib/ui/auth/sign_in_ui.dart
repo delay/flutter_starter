@@ -89,9 +89,9 @@ class _SignInUIState extends State<SignInUI> {
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                          labelText: labels.auth.forgotPasswordLabelButton,
+                          labelText: labels.auth.resetPasswordLabelButton,
                           onPressed: () => Navigator.of(context)
-                              .pushReplacementNamed(Routes.forgotPassword)),
+                              .pushReplacementNamed(Routes.resetPassword)),
                       LabelButton(
                           labelText: labels.auth.signUpLabelButton,
                           onPressed: () => Navigator.of(context)

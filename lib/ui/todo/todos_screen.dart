@@ -78,7 +78,7 @@ class TodosScreen extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).pushNamed(
-            Routes.create_edit_todo,
+            Routes.createEditTodo,
           );
         },
       ),
@@ -142,7 +142,7 @@ class TodosScreen extends StatelessWidget {
                           }),
                       title: Text(todos[index].task),
                       onTap: () {
-                        Navigator.of(context).pushNamed(Routes.create_edit_todo,
+                        Navigator.of(context).pushNamed(Routes.createEditTodo,
                             arguments: todos[index]);
                       },
                     ),

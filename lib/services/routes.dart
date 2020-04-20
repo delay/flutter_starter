@@ -14,9 +14,9 @@ class Routes {
   static const String signup = '/signup';
   static const String home = '/home';
   static const String setting = '/setting';
-  static const String forgotPassword = '/forgot-password';
-  static const String updateProfile = '/update-profile';
-  static const String create_edit_todo = '/create_edit_todo';
+  static const String resetPassword = '/reset_password';
+  static const String updateProfile = '/update_profile';
+  static const String createEditTodo = '/create_edit_todo';
 
   static final routes = <String, WidgetBuilder>{
     splash: (BuildContext context) => SplashScreen(),
@@ -24,8 +24,8 @@ class Routes {
     signup: (BuildContext context) => SignUpUI(),
     home: (BuildContext context) => TodosScreen(),
     setting: (BuildContext context) => SettingScreen(),
-    forgotPassword: (BuildContext context) => ForgotPasswordUI(),
+    resetPassword: (BuildContext context) => ResetPasswordUI(),
     updateProfile: (BuildContext context) => UpdateProfileUI(),
-    create_edit_todo: (BuildContext context) => CreateEditTodoScreen(),
+    createEditTodo: (BuildContext context) => CreateEditTodoScreen(),
   };
 }

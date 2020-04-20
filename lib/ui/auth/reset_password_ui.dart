@@ -6,11 +6,11 @@ import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/helpers/helpers.dart';
 import 'package:flutter_starter/services/services.dart';
 
-class ForgotPasswordUI extends StatefulWidget {
-  _ForgotPasswordUIState createState() => _ForgotPasswordUIState();
+class ResetPasswordUI extends StatefulWidget {
+  _ResetPasswordUIState createState() => _ResetPasswordUIState();
 }
 
-class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
+class _ResetPasswordUIState extends State<ResetPasswordUI> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -64,7 +64,7 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
                       ),
                       FormVerticalSpace(),
                       PrimaryButton(
-                          labelText: labels.auth.forgotPasswordButton,
+                          labelText: labels.auth.resetPasswordButton,
                           onPressed: _isButtonDisabled
                               ? null
                               : () async {
@@ -77,8 +77,8 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
 
                                     _scaffoldKey.currentState
                                         .showSnackBar(SnackBar(
-                                      content: Text(
-                                          labels.auth.forgotPasswordNotice),
+                                      content:
+                                          Text(labels.auth.resetPasswordNotice),
                                     ));
                                   }
                                 }),
@@ -95,17 +95,18 @@ class _ForgotPasswordUIState extends State<ForgotPasswordUI> {
   }
 
   appBar() {
+    final labels = AppLocalizations.of(context);
     if ((email == '') || (email == null)) {
       return null;
     }
-    return AppBar(title: Text('Reset Password'));
+    return AppBar(title: Text(labels.auth.resetPasswordTitle));
   }
 
   signInLink() {
     final labels = AppLocalizations.of(context);
     if ((email == '') || (email == null)) {
       return LabelButton(
-          labelText: labels.auth.signInonForgotPasswordLabelButton,
+          labelText: labels.auth.signInonResetPasswordLabelButton,
           onPressed: () =>
               Navigator.of(context).pushReplacementNamed(Routes.signin));
     }
