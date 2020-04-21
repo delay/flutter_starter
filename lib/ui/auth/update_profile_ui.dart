@@ -103,7 +103,9 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                           setState(() {
                             _loading = true;
                           });
-                          _updateUserConfirm(context, _name.text, _email.text)
+                          UserModel _updatedUser =
+                              UserModel(name: _name.text, email: _email.text);
+                          _updateUserConfirm(context, _updatedUser)
                               .then((value) {
                             if (isSuccess) {
                               //  Navigator.pushNamed(context, Routes.setting);
@@ -153,7 +155,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   }
 
   Future<bool> _updateUserConfirm(
-      BuildContext context, String displayName, String email) async {
+      BuildContext context, UserModel updatedUser) async {
     final labels = AppLocalizations.of(context);
     final AuthProvider _auth =
         Provider.of<AuthProvider>(context, listen: false);
@@ -193,8 +195,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 child: new Text(labels.auth.submit.toUpperCase()),
                 onPressed: () async {
                   await _auth
-                      .updateUser(
-                          displayName, _user.email, email, _password.text)
+                      .updateUser(updatedUser, _user.email, _password.text)
                       .then((value) {
                     Navigator.of(context).pop();
                     setState(() {

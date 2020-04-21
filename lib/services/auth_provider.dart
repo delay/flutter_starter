@@ -10,7 +10,8 @@ enum Status {
   Authenticated,
   Authenticating,
   Unauthenticated,
-  Registering
+  Registering,
+  ActionComplete,
 }
 /*
 The UI will depends on the Status to decide which screen/action to be done.
@@ -26,6 +27,9 @@ status for your UI or widgets to listen.
  */
 
 class AuthProvider extends ChangeNotifier {
+  static String userPath(String uid) => 'users/$uid';
+
+  //final _firestoreService = FirestoreService.instance;
   //Firebase Auth object
   FirebaseAuth _auth;
 
@@ -34,9 +38,10 @@ class AuthProvider extends ChangeNotifier {
 
   Status get status => _status;
 
-  Stream<UserModel> get user => _auth.onAuthStateChanged.map(_userFromFirebase);
+  Stream<UserModel> get userFirebaseAuthStream =>
+      _auth.onAuthStateChanged.map(_userFromFirebaseAuth);
 
-  Future<FirebaseUser> get getUser => _auth.currentUser();
+  Future<FirebaseUser> get userFirebaseAuth => _auth.currentUser();
 
   AuthProvider() {
     //initialise object
@@ -46,25 +51,34 @@ class AuthProvider extends ChangeNotifier {
     _auth.onAuthStateChanged.listen(onAuthStateChanged);
   }
 
-  //Create user object based on the given FirebaseUser
-  UserModel _userFromFirebase(FirebaseUser user) {
+  //Create user from DB based on the given FirebaseUser
+  Future<UserModel> userFirestore(FirebaseUser user) {
     if (user == null) {
       return null;
     }
-    //TODO:get database info for user
-    return UserModel(
-        uid: user.uid,
-        email: user.email,
-        name: user.displayName,
-        photoUrl: user.photoUrl);
+    return userFirestoreStream(uid: user.uid).single;
   }
+
+  //Create user object based on the given FirebaseUser
+  UserModel _userFromFirebaseAuth(FirebaseUser user) {
+    if (user == null) {
+      return null;
+    }
+    return UserModel(uid: user.uid, email: user.email);
+  }
+
+  Stream<UserModel> userFirestoreStream({@required String uid}) =>
+      _firestoreService.documentStream(
+        path: userPath(uid),
+        builder: (data, documentId) => UserModel.fromMap(data),
+      );
 
   //Method to detect live auth changes such as user sign in and sign out
   Future<void> onAuthStateChanged(FirebaseUser firebaseUser) async {
     if (firebaseUser == null) {
       _status = Status.Unauthenticated;
     } else {
-      _userFromFirebase(firebaseUser);
+      _userFromFirebaseAuth(firebaseUser);
       _status = Status.Authenticated;
     }
     notifyListeners();
@@ -76,25 +90,45 @@ class AuthProvider extends ChangeNotifier {
     try {
       _status = Status.Registering;
       notifyListeners();
-      final AuthResult result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      var gravatar = Gravatar(email);
-      var gravatarUrl = gravatar.imageUrl(
-        size: 200,
-        defaultImage: GravatarImage.retro,
-        rating: GravatarRating.pg,
-        fileExtension: true,
-      );
-      UserUpdateInfo updateUser = UserUpdateInfo();
-      updateUser.displayName = name;
-      updateUser.photoUrl = gravatarUrl;
-      result.user.updateProfile(updateUser);
-      return _userFromFirebase(result.user);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((result) {
+        print('uID: ' + result.user.uid);
+        print('email: ' + result.user.email);
+        //get photo url from gravatar if user has one
+        Gravatar gravatar = Gravatar(email);
+        String gravatarUrl = gravatar.imageUrl(
+          size: 200,
+          defaultImage: GravatarImage.retro,
+          rating: GravatarRating.pg,
+          fileExtension: true,
+        );
+        UserModel _newUser = UserModel(
+            uid: result.user.uid,
+            email: result.user.email,
+            name: name,
+            photoUrl: gravatarUrl);
+        _auth.signInWithEmailAndPassword(email: email, password: password);
+        updateUserDB(_newUser);
+        return userFirestore(result.user);
+      });
+      _status = Status.Unauthenticated;
+      notifyListeners();
+      return null;
     } catch (e) {
       _status = Status.Unauthenticated;
       notifyListeners();
       return null;
     }
+  }
+
+  //updates the user in firestore user db
+  Future<void> updateUserDB(UserModel user) async {
+    FirebaseUser _currentUser = await userFirebaseAuth;
+    await _firestoreService.setData(
+      path: userPath(_currentUser.uid),
+      data: user.toJson(),
+    );
   }
 
   //Method to handle user sign in using email and password
@@ -112,29 +146,27 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> updateUser(String displayName, String oldEmail, String email,
-      String password) async {
+  //handles updating the user when updating profile
+  Future<bool> updateUser(
+      UserModel user, String oldEmail, String password) async {
     try {
-      //_status = Status.Authenticating;
-      //notifyListeners();
-      FirebaseUser _firebaseUser = (await _auth.signInWithEmailAndPassword(
-              email: oldEmail, password: password))
-          .user;
-      _firebaseUser.updateEmail(email);
-      UserUpdateInfo updateUser = UserUpdateInfo();
-      updateUser.displayName = displayName;
-      _firebaseUser.updateProfile(updateUser);
-      await _firebaseUser
-          .reload(); //https://github.com/flutter/flutter/issues/20390 bullshit bug that flutter needs to fix
-      //await _auth.signOut();
-      //await _auth.signInWithEmailAndPassword(email: email, password: password);
-      //await _firebaseUser.reload();
-      FirebaseUser usernew = await _auth.currentUser();
-      print(usernew.displayName);
-      return true;
+      _status = Status.Authenticating;
+      notifyListeners();
+      _auth
+          .signInWithEmailAndPassword(email: oldEmail, password: password)
+          .then((_firebaseUser) {
+        _firebaseUser.user.updateEmail(user.email);
+        updateUserDB(user);
+        _status = Status.ActionComplete;
+        notifyListeners();
+        return true;
+      });
+      _status = Status.ActionComplete;
+      notifyListeners();
+      return false;
     } catch (e) {
-      //_status = Status.Unauthenticated;
-      //notifyListeners();
+      _status = Status.ActionComplete;
+      notifyListeners();
       return false;
     }
   }

@@ -22,7 +22,7 @@ class AuthWidgetBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthProvider>(context, listen: false);
     return StreamBuilder<UserModel>(
-      stream: authService.user,
+      stream: authService.userFirebaseAuthStream,
       builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
         final UserModel user = snapshot.data;
         if (user != null) {

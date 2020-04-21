@@ -1,5 +1,5 @@
-import 'package:meta/meta.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 /*
 This class represent all possible CRUD operation for Firestore.
@@ -12,8 +12,8 @@ class FirestoreService {
   static final instance = FirestoreService._();
 
   Future<void> setData({
-    @required String path,
-    @required Map<String, dynamic> data,
+    String path,
+    Map<String, dynamic> data,
     bool merge = false,
   }) async {
     final reference = Firestore.instance.document(path);
@@ -21,29 +21,15 @@ class FirestoreService {
     await reference.setData(data, merge: merge);
   }
 
-  Future<void> bulkSet({
-    @required String path,
-    @required List<Map<String, dynamic>> datas,
-    bool merge = false,
-  }) async {
-    //final reference = Firestore.instance.document(path);
-    //final batchSet = Firestore.instance.batch();
-
-//    for()
-//    batchSet.
-
-    print('$path: $datas');
-  }
-
-  Future<void> deleteData({@required String path}) async {
+  Future<void> deleteData({String path}) async {
     final reference = Firestore.instance.document(path);
     print('delete: $path');
     await reference.delete();
   }
 
   Stream<List<T>> collectionStream<T>({
-    @required String path,
-    @required T builder(Map<String, dynamic> data, String documentID),
+    String path,
+    T builder(Map<String, dynamic> data, String documentID),
     Query queryBuilder(Query query),
     int sort(T lhs, T rhs),
   }) {
@@ -65,12 +51,32 @@ class FirestoreService {
   }
 
   Stream<T> documentStream<T>({
-    @required String path,
-    @required T builder(Map<String, dynamic> data, String documentID),
+    String path,
+    T builder(Map<String, dynamic> data, String documentID),
   }) {
     final DocumentReference reference = Firestore.instance.document(path);
     final Stream<DocumentSnapshot> snapshots = reference.snapshots();
     return snapshots
         .map((snapshot) => builder(snapshot.data, snapshot.documentID));
   }
+
+  /* Future<dynamic> getDocument({
+    String path,
+  }) async {
+    final reference = Firestore.instance.document(path);
+    print('$path: $data');
+    DocumentSnapshot doc = await reference.get();
+    return doc.data;
+  }
+
+  Future getDocument() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+
+    if (user != null) {
+      Document doc = Document<T>(path: '$path/${user.uid}');
+      return doc.getData();
+    } else {
+      return null;
+    }
+  }*/
 }

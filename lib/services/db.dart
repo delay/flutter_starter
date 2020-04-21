@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
+//import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/constants/constants.dart';
 
 class Document<T> {
@@ -48,12 +49,9 @@ class Collection<T> {
   }
 }
 
-class UserData<T> {
-  //final Firestore _db = Firestore.instance;
+class User<T> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final String collection;
-
-  UserData({this.collection});
+  final String collection = 'users';
 
   Stream<T> get documentStream {
     return _auth.onAuthStateChanged.switchMap((user) {

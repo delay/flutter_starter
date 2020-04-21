@@ -20,7 +20,7 @@ class TodosScreen extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         title: StreamBuilder(
-            stream: authProvider.user,
+            stream: authProvider.userFirebaseAuth,
             builder: (context, snapshot) {
               if (snapshot.data == null) {
                 return Container(width: 0.0, height: 0.0);
