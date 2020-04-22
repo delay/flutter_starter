@@ -87,11 +87,7 @@ class SettingScreen extends StatelessWidget {
             title: Text('Update Profile'),
             trailing: RaisedButton(
               onPressed: () async {
-                final AuthProvider _auth =
-                    Provider.of<AuthProvider>(context, listen: false);
-                final FirebaseUser _user = await _auth.getUser;
-                Navigator.pushNamed(context, Routes.updateProfile,
-                    arguments: _user);
+                Navigator.of(context).pushNamed(Routes.updateProfile);
               },
               child: Text(
                 'Update Profile',

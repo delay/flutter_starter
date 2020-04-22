@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
 import 'package:flutter_starter/models/todo_model.dart';
 import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/services/services.dart';
-import 'package:flutter_starter/services/firestore_database.dart';
 import 'package:flutter_starter/ui/todo/empty_content.dart';
 import 'package:flutter_starter/ui/todo/todos_extra_actions.dart';
 import 'package:provider/provider.dart';
@@ -15,17 +15,20 @@ class TodosScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     final todoDB = Provider.of<TodoDB>(context, listen: false);
-
+    final UserModel firebaseUser = Provider.of<UserModel>(context);
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: StreamBuilder(
-            stream: authProvider.userFirebaseAuth,
+            stream: authProvider.userFirebaseAuthStream,
             builder: (context, snapshot) {
               if (snapshot.data == null) {
+                print('fail to load user snapshot');
                 return Container(width: 0.0, height: 0.0);
               } else {
                 final UserModel user = snapshot.data;
+
+                print('user: ' + user.toJson().toString());
                 Widget _photoImage = SizedBox(height: 1);
                 if ((user?.photoUrl != null) || (user?.photoUrl != '')) {
                   _photoImage = Container(
@@ -45,7 +48,7 @@ class TodosScreen extends StatelessWidget {
                     _photoImage,
                     SizedBox(width: 20),
                     Text(user != null
-                        ? user.name + " - " + user.email
+                        ? user?.name + " - " + user?.email
                         : AppStrings.homeAppBarTitle),
                   ],
                 );
@@ -95,6 +98,7 @@ class TodosScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<TodoModel> todos = snapshot.data;
+            print(todos.length.toString());
             if (todos.isNotEmpty) {
               return ListView.separated(
                 itemCount: todos.length,

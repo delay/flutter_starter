@@ -12,14 +12,22 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons:
+
+  firebase_core:
+  firebase_analytics:
   cloud_firestore:
+
   firebase_auth:
+  google_sign_in:
+  apple_sign_in:
+
   provider:
+  rxdart:
   shared_preferences:
+
   flutter_platform_widgets:
   flutter_sheet_localization: ^1.0.0
   simple_gravatar:
-  rxdart:
 
 dev_dependencies:
   flutter_test:

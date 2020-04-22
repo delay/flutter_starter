@@ -21,13 +21,14 @@ The UI will depends on the Status to decide which screen/action to be done.
 - Authenticating - Sign In button just been pressed, progress bar will be shown
 - Unauthenticated - User is not authenticated, login page will be shown
 - Registering - User just pressed registering, progress bar will be shown
+- ActionComplete - User has finished Action (turn off spinner)
 
 Take note, this is just an idea. You can remove or further add more different
 status for your UI or widgets to listen.
  */
 
 class AuthProvider extends ChangeNotifier {
-  static String userPath(String uid) => 'users/$uid';
+  //static String userPath(String uid) => 'users/$uid';
 
   //final _firestoreService = FirestoreService.instance;
   //Firebase Auth object
@@ -68,10 +69,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Stream<UserModel> userFirestoreStream({@required String uid}) =>
-      _firestoreService.documentStream(
-        path: userPath(uid),
-        builder: (data, documentId) => UserModel.fromMap(data),
-      );
+      User().documentStream;
 
   //Method to detect live auth changes such as user sign in and sign out
   Future<void> onAuthStateChanged(FirebaseUser firebaseUser) async {
@@ -109,7 +107,7 @@ class AuthProvider extends ChangeNotifier {
             name: name,
             photoUrl: gravatarUrl);
         _auth.signInWithEmailAndPassword(email: email, password: password);
-        updateUserDB(_newUser);
+        User().upsert(_newUser.toJson());
         return userFirestore(result.user);
       });
       _status = Status.Unauthenticated;
@@ -120,15 +118,6 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     }
-  }
-
-  //updates the user in firestore user db
-  Future<void> updateUserDB(UserModel user) async {
-    FirebaseUser _currentUser = await userFirebaseAuth;
-    await _firestoreService.setData(
-      path: userPath(_currentUser.uid),
-      data: user.toJson(),
-    );
   }
 
   //Method to handle user sign in using email and password
@@ -156,7 +145,7 @@ class AuthProvider extends ChangeNotifier {
           .signInWithEmailAndPassword(email: oldEmail, password: password)
           .then((_firebaseUser) {
         _firebaseUser.user.updateEmail(user.email);
-        updateUserDB(user);
+        User().upsert(user.toJson());
         _status = Status.ActionComplete;
         notifyListeners();
         return true;

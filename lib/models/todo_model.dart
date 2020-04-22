@@ -19,7 +19,7 @@ class TodoModel {
         id: documentId, task: task, extraNote: extraNote, complete: complete);
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'task': task,
       'extraNote': extraNote,

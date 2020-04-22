@@ -26,31 +26,29 @@ class TodoDB {
   TodoDB({@required this.uid}) : assert(uid != null);
   final String uid;
 
-  final _firestoreService = FirestoreService.instance;
+  //final _firestoreService = FirestoreService.instance;
 
   //Method to create/update todoModel
-  Future<void> setTodo(TodoModel todo) async => await _firestoreService.setData(
+  Future<void> setTodo(TodoModel todo) async =>
+      await Document(path: todoPath(uid, todo.id)).upsert(todo.toJson());
+
+  /*Future<void> setTodo(TodoModel todo) async => await _firestoreService.setData(
         path: todoPath(uid, todo.id),
         data: todo.toMap(),
-      );
+      );*/
 
   //Method to delete todoModel entry
   Future<void> deleteTodo(TodoModel todo) async {
-    await _firestoreService.deleteData(path: todoPath(uid, todo.id));
+    await Document(path: todoPath(uid, todo.id)).delete();
   }
 
   //Method to retrieve todoModel object based on the given todoId
   Stream<TodoModel> todoStream({@required String todoId}) =>
-      _firestoreService.documentStream(
-        path: todoPath(uid, todoId),
-        builder: (data, documentId) => TodoModel.fromMap(data, documentId),
-      );
+      Document(path: todoPath(uid, todoId)).streamData();
 
   //Method to retrieve all todos item from the same user based on uid
-  Stream<List<TodoModel>> todosStream() => _firestoreService.collectionStream(
-        path: todosPath(uid),
-        builder: (data, documentId) => TodoModel.fromMap(data, documentId),
-      );
+  Stream<List<dynamic>> todosStream() =>
+      Collection(path: todosPath(uid)).streamData();
 
   //Method to mark all todoModel to be complete
   Future<void> setAllTodoComplete() async {

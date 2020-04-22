@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter/constants/app_strings.dart';
-import 'package:flutter_starter/services/firestore_database.dart';
+import 'package:flutter_starter/services/services.dart';
 import 'package:provider/provider.dart';
 
 enum TodosActions { toggleAllComplete, clearCompleted }

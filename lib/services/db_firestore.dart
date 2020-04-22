@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
-//import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/constants/constants.dart';
 
 class Document<T> {
@@ -24,6 +23,11 @@ class Document<T> {
 
   Future<void> upsert(Map data) {
     return ref.setData(Map<String, dynamic>.from(data), merge: true);
+  }
+
+  Future<void> delete() async {
+    print('delete: $path');
+    await ref.delete();
   }
 }
 
@@ -49,9 +53,12 @@ class Collection<T> {
   }
 }
 
-class User<T> {
+class UserData<T> {
+  //final Firestore _db = Firestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final String collection = 'users';
+  final String collection;
+
+  UserData({this.collection});
 
   Stream<T> get documentStream {
     return _auth.onAuthStateChanged.switchMap((user) {

@@ -159,7 +159,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
     final labels = AppLocalizations.of(context);
     final AuthProvider _auth =
         Provider.of<AuthProvider>(context, listen: false);
-    final FirebaseUser _user = await _auth.getUser;
+    final FirebaseUser _user = await _auth.userFirebaseAuth;
 
     final TextEditingController _password = new TextEditingController();
     return showDialog(
