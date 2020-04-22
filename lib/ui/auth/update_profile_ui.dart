@@ -34,6 +34,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   Widget build(BuildContext context) {
     //  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
     final labels = AppLocalizations.of(context);
+    //final AppStateModel appState = Provider.of<AppStateModel>(context);
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(title: Text(labels.auth.updateProfileTitle)),
@@ -144,7 +145,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 LabelButton(
                     labelText: labels.auth.changePasswordLabelButton,
                     onPressed: () => Navigator.pushNamed(
-                        context, Routes.resetPassword,
+                        context, '/reset-password',
                         arguments: user.email)),
               ],
             ),
@@ -157,9 +158,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   Future<bool> _updateUserConfirm(
       BuildContext context, UserModel updatedUser) async {
     final labels = AppLocalizations.of(context);
-    final AuthProvider _auth =
-        Provider.of<AuthProvider>(context, listen: false);
-    final FirebaseUser _user = await _auth.userFirebaseAuth;
+    UserModel _user = Provider.of<UserModel>(context);
 
     final TextEditingController _password = new TextEditingController();
     return showDialog(

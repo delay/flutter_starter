@@ -9,7 +9,7 @@ import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/constants/constants.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingsUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -37,17 +37,6 @@ class SettingScreen extends StatelessWidget {
     ];
     return ListView(
       children: <Widget>[
-        /*  ListTile(
-          title: Text(labels.settings.theme),
-          trailing: DropdownPickerWithIcon(
-            menuOptions: themeOptions,
-            selectedOption: Provider.of<ThemeProvider>(context).getTheme,
-            onChanged: (value) {
-              Provider.of<ThemeProvider>(context, listen: false)
-                  .updateTheme(value);
-            },
-          ),
-        ),*/
         ListTile(
             title: Text(labels.settings.language),
             //trailing: _languageDropdown(context),
@@ -71,6 +60,18 @@ class SettingScreen extends StatelessWidget {
             },
           ),
         ),
+
+        /*  ListTile(
+          title: Text(labels.settings.theme),
+          trailing: DropdownPickerWithIcon(
+            menuOptions: themeOptions,
+            selectedOption: Provider.of<ThemeProvider>(context).getTheme,
+            onChanged: (value) {
+              Provider.of<ThemeProvider>(context, listen: false)
+                  .updateTheme(value);
+            },
+          ),
+        ),*/
         /*    
         ListTile(
           title: Text(labels.settings.theme),
@@ -87,7 +88,7 @@ class SettingScreen extends StatelessWidget {
             title: Text('Update Profile'),
             trailing: RaisedButton(
               onPressed: () async {
-                Navigator.of(context).pushNamed(Routes.updateProfile);
+                Navigator.of(context).pushNamed('/update-profile');
               },
               child: Text(
                 'Update Profile',
@@ -100,8 +101,7 @@ class SettingScreen extends StatelessWidget {
                 final authProvider =
                     Provider.of<AuthProvider>(context, listen: false);
                 authProvider.signOut();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    Routes.signin, ModalRoute.withName(Routes.signin));
+                Navigator.pushReplacementNamed(context, '/signin');
               },
               child: Text(
                 labels.settings.signOut,

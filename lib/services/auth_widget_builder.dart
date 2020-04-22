@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_starter/models/models.dart';
@@ -12,17 +13,15 @@ import 'package:flutter_starter/services/services.dart';
 * the user logged data uid.
  */
 class AuthWidgetBuilder extends StatelessWidget {
-  const AuthWidgetBuilder(
-      {Key key, @required this.builder, @required this.databaseBuilder})
-      : super(key: key);
+  const AuthWidgetBuilder({Key key, @required this.builder}) : super(key: key);
   final Widget Function(BuildContext, AsyncSnapshot<UserModel>) builder;
-  final TodoDB Function(BuildContext context, String uid) databaseBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthProvider>(context, listen: false);
+    //final authService = Provider.of<AuthProvider>(context, listen: false);
+    final user = Provider.of<FirebaseUser>(context, listen: false);
     return StreamBuilder<UserModel>(
-      stream: authService.userFirebaseAuthStream,
+      stream: null, //user.,
       builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
         final UserModel user = snapshot.data;
         if (user != null) {
@@ -34,9 +33,6 @@ class AuthWidgetBuilder extends StatelessWidget {
           return MultiProvider(
             providers: [
               Provider<UserModel>.value(value: user),
-              Provider<TodoDB>(
-                create: (context) => databaseBuilder(context, user.uid),
-              ),
             ],
             child: builder(context, snapshot),
           );

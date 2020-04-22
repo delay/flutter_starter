@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/ui/splash/splash_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

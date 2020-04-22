@@ -10,8 +10,7 @@ import 'package:flutter_starter/constants/constants.dart';
 import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
-import 'package:flutter_starter/ui/setting/setting_screen.dart';
-import 'package:flutter_starter/ui/home/home.dart';
+import 'package:flutter_starter/ui/ui.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +61,7 @@ class MyApp extends StatelessWidget {
           '/signup': (context) => SignUpUI(),
           '/reset-password': (context) => ResetPasswordUI(),
           '/update-profile': (context) => UpdateProfileUI(),
-          '/settings': (context) => SettingScreen(),
+          '/settings': (context) => SettingsUI(),
         },
       ),
     );

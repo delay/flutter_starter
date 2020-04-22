@@ -69,7 +69,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Stream<UserModel> userFirestoreStream({@required String uid}) =>
-      User().documentStream;
+      UserData().documentStream;
 
   //Method to detect live auth changes such as user sign in and sign out
   Future<void> onAuthStateChanged(FirebaseUser firebaseUser) async {
@@ -107,7 +107,7 @@ class AuthProvider extends ChangeNotifier {
             name: name,
             photoUrl: gravatarUrl);
         _auth.signInWithEmailAndPassword(email: email, password: password);
-        User().upsert(_newUser.toJson());
+        UserData().upsert(_newUser.toJson());
         return userFirestore(result.user);
       });
       _status = Status.Unauthenticated;
@@ -145,7 +145,7 @@ class AuthProvider extends ChangeNotifier {
           .signInWithEmailAndPassword(email: oldEmail, password: password)
           .then((_firebaseUser) {
         _firebaseUser.user.updateEmail(user.email);
-        User().upsert(user.toJson());
+        UserData().upsert(user.toJson());
         _status = Status.ActionComplete;
         notifyListeners();
         return true;

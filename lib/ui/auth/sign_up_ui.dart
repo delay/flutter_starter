@@ -34,10 +34,10 @@ class _SignUpUIState extends State<SignUpUI> {
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     bool _loading = false;
-    final authProvider = Provider.of<AuthProvider>(context);
+    /*final authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
-    }
+    }*/
     return Scaffold(
       key: _scaffoldKey,
       body: LoadingScreen(
@@ -103,9 +103,10 @@ class _SignUpUIState extends State<SignUpUI> {
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                          labelText: labels.auth.signInLabelButton,
-                          onPressed: () => Navigator.of(context)
-                              .pushReplacementNamed(Routes.signin)),
+                        labelText: labels.auth.signInLabelButton,
+                        onPressed: () =>
+                            Navigator.pushReplacementNamed(context, '/signin'),
+                      ),
                     ],
                   ),
                 ),

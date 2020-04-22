@@ -31,10 +31,10 @@ class _SignInUIState extends State<SignInUI> {
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     bool _loading = false;
-    final authProvider = Provider.of<AuthProvider>(context);
+    /*final authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
-    }
+    }*/
 
     return Scaffold(
       key: _scaffoldKey,
@@ -89,13 +89,15 @@ class _SignInUIState extends State<SignInUI> {
                           }),
                       FormVerticalSpace(),
                       LabelButton(
-                          labelText: labels.auth.resetPasswordLabelButton,
-                          onPressed: () => Navigator.of(context)
-                              .pushReplacementNamed(Routes.resetPassword)),
+                        labelText: labels.auth.resetPasswordLabelButton,
+                        onPressed: () => Navigator.pushReplacementNamed(
+                            context, '/reset-password'),
+                      ),
                       LabelButton(
-                          labelText: labels.auth.signUpLabelButton,
-                          onPressed: () => Navigator.of(context)
-                              .pushReplacementNamed(Routes.signup)),
+                        labelText: labels.auth.signUpLabelButton,
+                        onPressed: () =>
+                            Navigator.pushReplacementNamed(context, '/signup'),
+                      ),
                     ],
                   ),
                 ),
