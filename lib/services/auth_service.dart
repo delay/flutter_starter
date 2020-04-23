@@ -138,18 +138,16 @@ class AuthService extends ChangeNotifier {
   //handles updating the user when updating profile
   Future<bool> updateUser(
       UserModel user, String oldEmail, String password) async {
-    try {
-      _auth
-          .signInWithEmailAndPassword(email: oldEmail, password: password)
-          .then((_firebaseUser) {
-        _firebaseUser.user.updateEmail(user.email);
-        UserData(collection: 'users').upsert(user.toJson());
-        return true;
-      });
-      return false;
-    } catch (e) {
-      return false;
-    }
+    bool _result = false;
+
+    await _auth
+        .signInWithEmailAndPassword(email: oldEmail, password: password)
+        .then((_firebaseUser) {
+      _firebaseUser.user.updateEmail(user.email);
+      UserData(collection: 'users').upsert(user.toJson());
+      _result = true;
+    });
+    return _result;
   }
 
   /// Updates the User's data in Firestore on each new login

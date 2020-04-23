@@ -14,7 +14,7 @@ class _HomeUIState extends State<HomeUI> {
     final labels = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('labels.settings.title'),
+        title: Text(labels.home.title),
         actions: [
           IconButton(
               icon: Icon(Icons.settings),
@@ -23,7 +23,7 @@ class _HomeUIState extends State<HomeUI> {
               }),
         ],
       ),
-      body: Text('HOME'),
+      body: Text(labels.home.title),
     );
   }
 }

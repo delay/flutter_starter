@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //final labels = AppLocalizations.of(context);
     return Consumer<LanguageProvider>(
       builder: (_, languageProviderRef, __) {
         return Consumer<ThemeProvider>(
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
 
                   //end language translation stuff
                   debugShowCheckedModeBanner: false,
-                  //title: AppStrings.appName,
+                  //title: labels.app.title,
                   routes: Routes.routes,
                   theme: AppThemes.lightTheme,
                   darkTheme: AppThemes.darkTheme,

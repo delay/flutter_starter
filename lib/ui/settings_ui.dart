@@ -60,13 +60,13 @@ class SettingsUI extends StatelessWidget {
           ),
         ),
         ListTile(
-            title: Text('Update Profile'),
+            title: Text(labels.settings.updateProfile),
             trailing: RaisedButton(
               onPressed: () async {
                 Navigator.of(context).pushNamed('/update-profile');
               },
               child: Text(
-                'Update Profile',
+                labels.settings.updateProfile,
               ),
             )),
         ListTile(

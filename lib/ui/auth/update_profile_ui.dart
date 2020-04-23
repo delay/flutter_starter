@@ -16,7 +16,6 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   final TextEditingController _name = new TextEditingController();
   final TextEditingController _email = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isSuccess = false;
   bool _loading = false;
   @override
   void initState() {
@@ -96,46 +95,10 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                     labelText: labels.auth.updateUser,
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        try {
-                          SystemChannels.textInput
-                              .invokeMethod('TextInput.hide');
-                          // dawait _toggleLoadingVisible();
-
-                          UserModel _updatedUser =
-                              UserModel(name: _name.text, email: _email.text);
-                          _updateUserConfirm(context, _updatedUser)
-                              .then((value) {
-                            if (isSuccess) {
-                              //  Navigator.pushNamed(context, Routes.setting);
-                              _scaffoldKey.currentState.showSnackBar(
-                                SnackBar(
-                                  content:
-                                      Text(labels.auth.updateUserSuccessNotice),
-                                ),
-                              );
-                              setState(() {
-                                _loading = false;
-                              });
-                            } else {
-                              _scaffoldKey.currentState.showSnackBar(
-                                SnackBar(
-                                  content:
-                                      Text(labels.auth.updateUserFailNotice),
-                                ),
-                              );
-                              setState(() {
-                                _loading = false;
-                              });
-                            }
-                          });
-                        } catch (e) {
-                          _scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: Text(labels.auth.updateUserFailNotice),
-                          ));
-                          setState(() {
-                            _loading = false;
-                          });
-                        }
+                        SystemChannels.textInput.invokeMethod('TextInput.hide');
+                        UserModel _updatedUser =
+                            UserModel(name: _name.text, email: _email.text);
+                        _updateUserConfirm(context, _updatedUser, user?.email);
                       }
                     }),
                 FormVerticalSpace(),
@@ -153,9 +116,9 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   }
 
   Future<bool> _updateUserConfirm(
-      BuildContext context, UserModel updatedUser) async {
+      BuildContext context, UserModel updatedUser, String oldEmail) async {
     final labels = AppLocalizations.of(context);
-    UserModel _user = Provider.of<UserModel>(context);
+    //UserModel _user = Provider.of<UserModel>(context);
     AuthService _auth = AuthService();
     final TextEditingController _password = new TextEditingController();
     return showDialog(
@@ -183,7 +146,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 onPressed: () {
                   Navigator.of(context).pop();
                   setState(() {
-                    isSuccess = false;
+                    _loading = false;
                   });
                 },
               ),
@@ -193,16 +156,43 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                   setState(() {
                     _loading = true;
                   });
-                  await _auth
-                      .updateUser(updatedUser, _user.email, _password.text)
-                      .then((value) {
-                    Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  try {
+                    await _auth
+                        .updateUser(updatedUser, oldEmail, _password.text)
+                        .then((result) {
+                      setState(() {
+                        _loading = false;
+                      });
+
+                      if (result == true) {
+                        _scaffoldKey.currentState.showSnackBar(
+                          SnackBar(
+                            content: Text(labels.auth.updateUserSuccessNotice),
+                          ),
+                        );
+                      }
+                    });
+                  } on PlatformException catch (error) {
+                    //List<String> errors = error.toString().split(',');
+                    // print("Error: " + errors[1]);
+                    print(error.code);
+                    String authError;
+                    switch (error.code) {
+                      case 'ERROR_WRONG_PASSWORD':
+                        authError = labels.auth.wrongPasswordNotice;
+                        break;
+                      default:
+                        authError = 'Unknown Error';
+                        break;
+                    }
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(authError),
+                    ));
                     setState(() {
-                      isSuccess = value;
                       _loading = false;
                     });
-                    //return isSuccess;
-                  });
+                  }
                 },
               )
             ],

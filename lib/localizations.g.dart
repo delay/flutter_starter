@@ -37,6 +37,7 @@ class AppLocalizations {
         changePasswordLabelButton: "Change Password",
         resetPasswordTitle: "Reset Password",
         updateProfileTitle: "Update Profile",
+        wrongPasswordNotice: "Password is incorrect.",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Settings",
@@ -46,6 +47,13 @@ class AppLocalizations {
         dark: "Dark",
         light: "Light",
         system: "System",
+        updateProfile: "Update Profile",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "Home",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "Flutter Starter Project",
       ),
     ),
     Locale.fromSubtags(languageCode: "fr"): AppLocalizations_Labels(
@@ -73,6 +81,7 @@ class AppLocalizations {
         changePasswordLabelButton: "Changer le mot de passe",
         resetPasswordTitle: "réinitialiser le mot de passe",
         updateProfileTitle: "Mettre à jour le profil",
+        wrongPasswordNotice: "Le mot de passe est incorrect.",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Réglages",
@@ -82,6 +91,13 @@ class AppLocalizations {
         dark: "Foncé",
         light: "Lumière",
         system: "Système",
+        updateProfile: "Mettre à jour le profil",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "Accueil",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "Flutter projet de démarrage",
       ),
     ),
     Locale.fromSubtags(languageCode: "es"): AppLocalizations_Labels(
@@ -110,6 +126,7 @@ class AppLocalizations {
         changePasswordLabelButton: "Cambia la contraseña",
         resetPasswordTitle: "Restablecer la contraseña",
         updateProfileTitle: "Actualización del perfil",
+        wrongPasswordNotice: "La contraseña es incorrecta.",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "ajustes",
@@ -119,6 +136,13 @@ class AppLocalizations {
         dark: "Oscuro",
         light: "Ligero",
         system: "Sistema",
+        updateProfile: "Actualización del perfil",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "Casa",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "Proyecto de arranque aleteo",
       ),
     ),
     Locale.fromSubtags(languageCode: "de"): AppLocalizations_Labels(
@@ -146,6 +170,7 @@ class AppLocalizations {
         changePasswordLabelButton: "Ändere das Passwort",
         resetPasswordTitle: "Passwort zurücksetzen",
         updateProfileTitle: "Profil aktualisieren",
+        wrongPasswordNotice: "Das Passwort ist inkorrekt.",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "die Einstellungen",
@@ -155,6 +180,13 @@ class AppLocalizations {
         dark: "Dunkel",
         light: "Licht",
         system: "System",
+        updateProfile: "Profil aktualisieren",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "Zuhause",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "Flutter Starter-Projekt",
       ),
     ),
     Locale.fromSubtags(languageCode: "hi"): AppLocalizations_Labels(
@@ -182,6 +214,7 @@ class AppLocalizations {
         changePasswordLabelButton: "पासवर्ड बदलें",
         resetPasswordTitle: "पासवर्ड रीसेट",
         updateProfileTitle: "प्रोफ़ाइल अपडेट करें",
+        wrongPasswordNotice: "पासवर्ड गलत है।",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "समायोजन",
@@ -191,6 +224,13 @@ class AppLocalizations {
         dark: "अंधेरा",
         light: "रोशनी",
         system: "प्रणाली",
+        updateProfile: "प्रोफ़ाइल अपडेट करें",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "घर",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "स्पंदन स्टार्टर परियोजना",
       ),
     ),
     Locale.fromSubtags(languageCode: "pt"): AppLocalizations_Labels(
@@ -218,15 +258,23 @@ class AppLocalizations {
         changePasswordLabelButton: "Mudar senha",
         resetPasswordTitle: "Password Reset",
         updateProfileTitle: "Atualizar perfil",
+        wrongPasswordNotice: "Senha é incorreta.",
       ),
       settings: AppLocalizations_Labels_Settings(
-        title: "Configurações",
+        title: "Definições",
         language: "Língua",
         theme: "Tema",
         signOut: "Sair",
         dark: "Sombrio",
         light: "Leve",
         system: "Sistema",
+        updateProfile: "Atualizar perfil",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "Casa",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "Projeto de arranque Flutter",
       ),
     ),
     Locale.fromSubtags(languageCode: "zh"): AppLocalizations_Labels(
@@ -244,7 +292,7 @@ class AppLocalizations {
         signInLabelButton: "有一个账户？登入。",
         resetPasswordNotice: "检查你的电子邮件，并按照重置密码的说明。",
         signInonResetPasswordLabelButton: "登入",
-        updateUser: "更新配置文件",
+        updateUser: "更新个人信息",
         updateUserSuccessNotice: "用户成功更新",
         updateUserFailNotice: "无法更新用户",
         enterPassword: "输入您的密码",
@@ -252,7 +300,8 @@ class AppLocalizations {
         submit: "提交",
         changePasswordLabelButton: "更改密码",
         resetPasswordTitle: "重设密码",
-        updateProfileTitle: "更新配置文件",
+        updateProfileTitle: "更新个人信息",
+        wrongPasswordNotice: "密码不正确。",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "设置",
@@ -262,6 +311,13 @@ class AppLocalizations {
         dark: "暗",
         light: "光",
         system: "系统",
+        updateProfile: "更新个人信息",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "家",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "扑启动项目",
       ),
     ),
     Locale.fromSubtags(languageCode: "ja"): AppLocalizations_Labels(
@@ -288,6 +344,7 @@ class AppLocalizations {
         changePasswordLabelButton: "パスワードを変更する",
         resetPasswordTitle: "パスワードを再設定する",
         updateProfileTitle: "プロフィールを更新",
+        wrongPasswordNotice: "パスワードが正しくありません。",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "設定",
@@ -297,6 +354,13 @@ class AppLocalizations {
         dark: "闇",
         light: "光",
         system: "システム",
+        updateProfile: "プロフィールを更新",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "家",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "フラッタースタータープロジェクト",
       ),
     ),
     Locale.fromSubtags(languageCode: "ru"): AppLocalizations_Labels(
@@ -325,15 +389,23 @@ class AppLocalizations {
         changePasswordLabelButton: "Сменить пароль",
         resetPasswordTitle: "Сброс пароля",
         updateProfileTitle: "Обновить профиль",
+        wrongPasswordNotice: "Неверный пароль.",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "настройки",
         language: "язык",
         theme: "тема",
         signOut: "Выход",
-        dark: "Темно",
+        dark: "Тьма",
         light: "Светлый",
         system: "система",
+        updateProfile: "Обновить профиль",
+      ),
+      home: AppLocalizations_Labels_Home(
+        title: "Домой",
+      ),
+      app: AppLocalizations_Labels_App(
+        title: "Проект флаттер Starter",
       ),
     ),
   };
@@ -367,7 +439,8 @@ class AppLocalizations_Labels_Auth {
       this.submit,
       this.changePasswordLabelButton,
       this.resetPasswordTitle,
-      this.updateProfileTitle});
+      this.updateProfileTitle,
+      this.wrongPasswordNotice});
 
   final String signInButton;
 
@@ -412,6 +485,8 @@ class AppLocalizations_Labels_Auth {
   final String resetPasswordTitle;
 
   final String updateProfileTitle;
+
+  final String wrongPasswordNotice;
 }
 
 class AppLocalizations_Labels_Settings {
@@ -422,7 +497,8 @@ class AppLocalizations_Labels_Settings {
       this.signOut,
       this.dark,
       this.light,
-      this.system});
+      this.system,
+      this.updateProfile});
 
   final String title;
 
@@ -437,12 +513,31 @@ class AppLocalizations_Labels_Settings {
   final String light;
 
   final String system;
+
+  final String updateProfile;
+}
+
+class AppLocalizations_Labels_Home {
+  const AppLocalizations_Labels_Home({this.title});
+
+  final String title;
+}
+
+class AppLocalizations_Labels_App {
+  const AppLocalizations_Labels_App({this.title});
+
+  final String title;
 }
 
 class AppLocalizations_Labels {
-  const AppLocalizations_Labels({this.auth, this.settings});
+  const AppLocalizations_Labels(
+      {this.auth, this.settings, this.home, this.app});
 
   final AppLocalizations_Labels_Auth auth;
 
   final AppLocalizations_Labels_Settings settings;
+
+  final AppLocalizations_Labels_Home home;
+
+  final AppLocalizations_Labels_App app;
 }
