@@ -59,8 +59,8 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
 
   updateProfileForm(BuildContext context) {
     final UserModel user = Provider.of<UserModel>(context);
-    _name.text = user.name;
-    _email.text = user.email;
+    _name.text = user?.name;
+    _email.text = user?.email;
     final labels = AppLocalizations.of(context);
     return Form(
       key: _formKey,

@@ -37,19 +37,20 @@ class SettingsUI extends StatelessWidget {
     ];
     return ListView(
       children: <Widget>[
-        /*  ListTile(
-            title: Text(labels.settings.language),
-            //trailing: _languageDropdown(context),
-            trailing: DropdownPicker(
-              menuOptions: AppLanguages.languageOptions,
-              selectedOption:
-                  Provider.of<LanguageProvider>(context).currentLanguage,
-              onChanged: (value) {
-                Provider.of<LanguageProvider>(context, listen: false)
-                    .updateLanguage(value);
-              },
-            )),
-         ListTile(
+        ListTile(
+          title: Text(labels.settings.language),
+          //trailing: _languageDropdown(context),
+          trailing: DropdownPicker(
+            menuOptions: AppLanguages.languageOptions,
+            selectedOption:
+                Provider.of<LanguageProvider>(context).currentLanguage,
+            onChanged: (value) {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .updateLanguage(value);
+            },
+          ),
+        ),
+        ListTile(
           title: Text(labels.settings.theme),
           trailing: SegmentedSelector(
             selectedOption: Provider.of<ThemeProvider>(context).getTheme,
@@ -59,7 +60,7 @@ class SettingsUI extends StatelessWidget {
                   .updateTheme(value);
             },
           ),
-        ),*/
+        ),
         ListTile(
             title: Text('Update Profile'),
             trailing: RaisedButton(
