@@ -1,13 +1,18 @@
-import 'package:flutter_starter/models/models.dart';
+import 'package:flutter_starter/services/models/models.dart';
+import 'package:flutter_starter/services/services.dart';
+
+class Global {
+  static final UserData<UserModel> userRef =
+      UserData<UserModel>(collection: 'users');
+  static final Map models = {
+    UserModel: (data) => UserModel.fromMap(data),
+  };
 
 //List of languages that are supported.  Used in selector.
 //Follow this plugin for translating a google sheet to languages
 //https://github.com/aloisdeniel/flutter_sheet_localization
 //Flutter App translations google sheet
 //https://docs.google.com/spreadsheets/d/1oS7iJ6ocrZBA53SxRfKF0CG9HAaXeKtzvsTBhgG4Zzk/edit?usp=sharing
-
-class AppLanguages {
-  AppLanguages._();
 
   static final List<MenuOptionsModel> languageOptions = [
     MenuOptionsModel(key: "zh", value: "中文"), //Chinese

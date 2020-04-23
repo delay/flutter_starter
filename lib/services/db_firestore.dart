@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter_starter/constants/constants.dart';
+import 'package:flutter_starter/services/services.dart';
 
 class Document<T> {
   final Firestore _db = Firestore.instance;

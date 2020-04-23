@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
-import 'package:flutter_starter/models/models.dart';
+import 'package:flutter_starter/services/models/models.dart';
 import 'package:flutter_starter/services/services.dart';
 
 class AuthService extends ChangeNotifier {

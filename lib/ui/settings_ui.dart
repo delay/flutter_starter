@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_starter/ui/components/segmented_selector.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/components/components.dart';
-import 'package:flutter_starter/models/models.dart';
-import 'package:flutter_starter/constants/constants.dart';
+import 'package:flutter_starter/services/models/models.dart';
 
 class SettingsUI extends StatelessWidget {
   @override
@@ -41,7 +39,7 @@ class SettingsUI extends StatelessWidget {
           title: Text(labels.settings.language),
           //trailing: _languageDropdown(context),
           trailing: DropdownPicker(
-            menuOptions: AppLanguages.languageOptions,
+            menuOptions: Global.languageOptions,
             selectedOption:
                 Provider.of<LanguageProvider>(context).currentLanguage,
             onChanged: (value) {
