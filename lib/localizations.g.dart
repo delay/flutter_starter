@@ -51,6 +51,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "Home",
+        nameLabel: "Name",
+        uidLabel: "UID",
+        emailLabel: "Email",
+        adminUserLabel: "Admin User",
       ),
       app: AppLocalizations_Labels_App(
         title: "Flutter Starter Project",
@@ -104,6 +108,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "Accueil",
+        nameLabel: "Nom",
+        uidLabel: "UID",
+        emailLabel: "Email",
+        adminUserLabel: "utilisateur admin",
       ),
       app: AppLocalizations_Labels_App(
         title: "Flutter projet de démarrage",
@@ -158,6 +166,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "Casa",
+        nameLabel: "Nombre",
+        uidLabel: "UID",
+        emailLabel: "Correo electrónico",
+        adminUserLabel: "admin User",
       ),
       app: AppLocalizations_Labels_App(
         title: "Proyecto de arranque aleteo",
@@ -212,6 +224,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "Zuhause",
+        nameLabel: "Name",
+        uidLabel: "UID",
+        emailLabel: "Email",
+        adminUserLabel: "Admin Benutzer",
       ),
       app: AppLocalizations_Labels_App(
         title: "Flutter Starter-Projekt",
@@ -265,6 +281,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "घर",
+        nameLabel: "नाम",
+        uidLabel: "यूआईडी",
+        emailLabel: "ईमेल",
+        adminUserLabel: "व्यवस्थापक उपयोगकर्ता",
       ),
       app: AppLocalizations_Labels_App(
         title: "स्पंदन स्टार्टर परियोजना",
@@ -317,6 +337,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "Casa",
+        nameLabel: "Nome",
+        uidLabel: "UID",
+        emailLabel: "O email",
+        adminUserLabel: "admin User",
       ),
       app: AppLocalizations_Labels_App(
         title: "Projeto de arranque Flutter",
@@ -369,6 +393,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "家",
+        nameLabel: "名称",
+        uidLabel: "UID",
+        emailLabel: "电子邮件",
+        adminUserLabel: "管理员用户",
       ),
       app: AppLocalizations_Labels_App(
         title: "扑启动项目",
@@ -420,6 +448,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "家",
+        nameLabel: "名前",
+        uidLabel: "UID",
+        emailLabel: "Eメール",
+        adminUserLabel: "管理者ユーザー",
       ),
       app: AppLocalizations_Labels_App(
         title: "フラッタースタータープロジェクト",
@@ -473,6 +505,10 @@ class AppLocalizations {
       ),
       home: AppLocalizations_Labels_Home(
         title: "Домой",
+        nameLabel: "имя",
+        uidLabel: "UID",
+        emailLabel: "Электронное письмо",
+        adminUserLabel: "Пользователь Admin",
       ),
       app: AppLocalizations_Labels_App(
         title: "Проект флаттер Starter",
@@ -597,9 +633,22 @@ class AppLocalizations_Labels_Settings {
 }
 
 class AppLocalizations_Labels_Home {
-  const AppLocalizations_Labels_Home({this.title});
+  const AppLocalizations_Labels_Home(
+      {this.title,
+      this.nameLabel,
+      this.uidLabel,
+      this.emailLabel,
+      this.adminUserLabel});
 
   final String title;
+
+  final String nameLabel;
+
+  final String uidLabel;
+
+  final String emailLabel;
+
+  final String adminUserLabel;
 }
 
 class AppLocalizations_Labels_App {
