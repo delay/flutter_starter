@@ -23,7 +23,7 @@ void main() {
       MultiProvider(
         providers: [
           StreamProvider<UserModel>.value(value: Global.userRef.documentStream),
-          StreamProvider<FirebaseUser>.value(value: AuthService().user),
+          //StreamProvider<FirebaseUser>.value(value: AuthService().user),
           ChangeNotifierProvider<ThemeProvider>(
             create: (context) => ThemeProvider(),
           ),
