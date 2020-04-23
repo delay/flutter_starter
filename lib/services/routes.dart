@@ -3,7 +3,7 @@ import 'package:flutter_starter/ui/ui.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 
 class Routes {
-  Routes._(); //this is to prevent anyone from instantiate this object
+  Routes._(); //this is to prevent anyone from instantiating this object
   static const String signin = '/signin';
   static const String signup = '/signup';
   static const String home = '/home';

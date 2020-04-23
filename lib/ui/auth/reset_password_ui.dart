@@ -55,7 +55,7 @@ class _ResetPasswordUIState extends State<ResetPasswordUI> {
                         controller: _email,
                         iconPrefix: CustomIcon.mail,
                         labelText: labels.auth.emailFormField,
-                        validator: Validator.email,
+                        validator: Validator(labels).email,
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (value) =>
                             setState(() => _isButtonDisabled = false),

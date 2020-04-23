@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter/localizations.dart';
-import 'package:flutter_starter/ui/ui.dart';
 
 class HomeUI extends StatefulWidget {
   @override
   _HomeUIState createState() => _HomeUIState();
 }
-
-final _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _HomeUIState extends State<HomeUI> {
   Widget build(BuildContext context) {

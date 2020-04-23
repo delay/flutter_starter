@@ -55,6 +55,15 @@ class AppLocalizations {
       app: AppLocalizations_Labels_App(
         title: "Flutter Starter Project",
       ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "Please enter a valid email address.",
+        password: "Password must be at least 6 characters.",
+        name: "Please enter a name.",
+        number: "Please enter a number.",
+        notEmpty: "This is a required field.",
+        amount:
+            "Please enter a number i.e. 250 - no dollar symbol and no cents",
+      ),
     ),
     Locale.fromSubtags(languageCode: "fr"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
@@ -98,6 +107,15 @@ class AppLocalizations {
       ),
       app: AppLocalizations_Labels_App(
         title: "Flutter projet de démarrage",
+      ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "S'il vous plaît, mettez une adresse email valide.",
+        password: "Le mot de passe doit être au moins de 6 caractères.",
+        name: "S'il vous plaît entrer un nom.",
+        number: "S'il vous plaît entrer un numéro.",
+        notEmpty: "Ceci est un champ obligatoire.",
+        amount:
+            "S'il vous plaît entrer un numéro à savoir 250 - aucun symbole du dollar et pas cents",
       ),
     ),
     Locale.fromSubtags(languageCode: "es"): AppLocalizations_Labels(
@@ -144,6 +162,16 @@ class AppLocalizations {
       app: AppLocalizations_Labels_App(
         title: "Proyecto de arranque aleteo",
       ),
+      validator: AppLocalizations_Labels_Validator(
+        email:
+            "Por favor, introduce una dirección de correo electrónico válida.",
+        password: "La contraseña debe tener al menos 6 caracteres.",
+        name: "Por favor, introduzca un nombre.",
+        number: "Por favor, introduzca un número.",
+        notEmpty: "Este es un campo obligatorio.",
+        amount:
+            "Por favor, introduzca un número, es decir 250 - ningún símbolo del dólar y sin centavos",
+      ),
     ),
     Locale.fromSubtags(languageCode: "de"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
@@ -187,6 +215,15 @@ class AppLocalizations {
       ),
       app: AppLocalizations_Labels_App(
         title: "Flutter Starter-Projekt",
+      ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+        password: "Passwort muss mindestens 6 Zeichen lang sein.",
+        name: "Bitte geben Sie einen Namen.",
+        number: "Bitte gebe eine Nummer ein.",
+        notEmpty: "Dies ist ein Pflichtfeld.",
+        amount:
+            "Bitte geben Sie eine Zahl das heißt 250 - kein Dollar-Symbol und keinen Cent",
       ),
     ),
     Locale.fromSubtags(languageCode: "hi"): AppLocalizations_Labels(
@@ -232,6 +269,14 @@ class AppLocalizations {
       app: AppLocalizations_Labels_App(
         title: "स्पंदन स्टार्टर परियोजना",
       ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "कृपया एक वैध ई - मेल एड्रेस डालें।",
+        password: "पासवर्ड कम से कम 6 अंकों का होना चाहिए।",
+        name: "एक नाम दर्ज करें।",
+        number: "एक संख्या दर्ज करें।",
+        notEmpty: "यह एक ज़रूरी जगह हैं।",
+        amount: "कोई डॉलर प्रतीक और कोई सेंट - एक नंबर अर्थात 250 दर्ज करें",
+      ),
     ),
     Locale.fromSubtags(languageCode: "pt"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
@@ -276,6 +321,15 @@ class AppLocalizations {
       app: AppLocalizations_Labels_App(
         title: "Projeto de arranque Flutter",
       ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "Por favor insira um endereço de e-mail válido.",
+        password: "A senha deve ter pelo menos 6 caracteres.",
+        name: "Por favor, indique um nome.",
+        number: "Por favor, coloque um numero.",
+        notEmpty: "Este é um campo obrigatório.",
+        amount:
+            "Por favor insira um número ou seja 250 - nenhum símbolo dólar e há centavos",
+      ),
     ),
     Locale.fromSubtags(languageCode: "zh"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
@@ -319,6 +373,14 @@ class AppLocalizations {
       app: AppLocalizations_Labels_App(
         title: "扑启动项目",
       ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "请输入有效的电子邮件地址。",
+        password: "密码必须至少6个字符。",
+        name: "请输入姓名。",
+        number: "请输入一个数字。",
+        notEmpty: "这是一个必填字段。",
+        amount: "请输入一个数，即250  - 没有美元符号和无分",
+      ),
     ),
     Locale.fromSubtags(languageCode: "ja"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
@@ -361,6 +423,14 @@ class AppLocalizations {
       ),
       app: AppLocalizations_Labels_App(
         title: "フラッタースタータープロジェクト",
+      ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "有効なメールアドレスを入力してください。",
+        password: "パスワードは少なくとも6文字でなければなりません。",
+        name: "名前を入力してください。",
+        number: "番号を入力してください。",
+        notEmpty: "これは必要項目です。",
+        amount: "ノードル記号なしセント - すなわち、250番号を入力してください。",
       ),
     ),
     Locale.fromSubtags(languageCode: "ru"): AppLocalizations_Labels(
@@ -406,6 +476,15 @@ class AppLocalizations {
       ),
       app: AppLocalizations_Labels_App(
         title: "Проект флаттер Starter",
+      ),
+      validator: AppLocalizations_Labels_Validator(
+        email: "Пожалуйста, введите действительный адрес электронной почты.",
+        password: "Пароль должен быть не менее 6 символов.",
+        name: "Пожалуйста, введите имя.",
+        number: "Пожалуйста, введите номер.",
+        notEmpty: "Это обязательное поле.",
+        amount:
+            "Пожалуйста, введите номер 250 - т.е. без символа доллара и ни цента",
       ),
     ),
   };
@@ -529,9 +608,31 @@ class AppLocalizations_Labels_App {
   final String title;
 }
 
+class AppLocalizations_Labels_Validator {
+  const AppLocalizations_Labels_Validator(
+      {this.email,
+      this.password,
+      this.name,
+      this.number,
+      this.notEmpty,
+      this.amount});
+
+  final String email;
+
+  final String password;
+
+  final String name;
+
+  final String number;
+
+  final String notEmpty;
+
+  final String amount;
+}
+
 class AppLocalizations_Labels {
   const AppLocalizations_Labels(
-      {this.auth, this.settings, this.home, this.app});
+      {this.auth, this.settings, this.home, this.app, this.validator});
 
   final AppLocalizations_Labels_Auth auth;
 
@@ -540,4 +641,6 @@ class AppLocalizations_Labels {
   final AppLocalizations_Labels_Home home;
 
   final AppLocalizations_Labels_App app;
+
+  final AppLocalizations_Labels_Validator validator;
 }
