@@ -22,14 +22,9 @@ class AuthService extends ChangeNotifier {
   //Method to handle user sign in using email and password
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
     try {
-      //_status = Status.Authenticating;
-      //notifyListeners();
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-
       return true;
     } catch (e) {
-      //_status = Status.Unauthenticated;
-      // notifyListeners();
       return false;
     }
   }
@@ -161,6 +156,18 @@ class AuthService extends ChangeNotifier {
   //password reset email
   Future<void> sendPasswordResetEmail(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<bool> isAdmin() async {
+    bool _isAdmin = false;
+    await _auth.currentUser().then((user) async {
+      DocumentSnapshot adminRef =
+          await _db.collection('admin').document(user.uid).get();
+      if (adminRef.exists) {
+        _isAdmin = true;
+      }
+    });
+    return _isAdmin;
   }
 
   // Sign out
