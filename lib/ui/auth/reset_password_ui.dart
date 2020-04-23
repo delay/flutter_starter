@@ -71,8 +71,8 @@ class _ResetPasswordUIState extends State<ResetPasswordUI> {
                                   if (_formKey.currentState.validate()) {
                                     setState(() =>
                                         _isButtonDisabled = !_isButtonDisabled);
-
-                                    await authProvider
+                                    AuthService _auth = AuthService();
+                                    await _auth
                                         .sendPasswordResetEmail(_email.text);
 
                                     _scaffoldKey.currentState
@@ -107,7 +107,7 @@ class _ResetPasswordUIState extends State<ResetPasswordUI> {
     if ((email == '') || (email == null)) {
       return LabelButton(
         labelText: labels.auth.signInonResetPasswordLabelButton,
-        onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+        onPressed: () => Navigator.pushReplacementNamed(context, '/'),
       );
     }
     return Container(width: 0, height: 0);

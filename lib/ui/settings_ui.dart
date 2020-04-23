@@ -37,7 +37,7 @@ class SettingsUI extends StatelessWidget {
     ];
     return ListView(
       children: <Widget>[
-        ListTile(
+        /*  ListTile(
             title: Text(labels.settings.language),
             //trailing: _languageDropdown(context),
             trailing: DropdownPicker(
@@ -49,7 +49,7 @@ class SettingsUI extends StatelessWidget {
                     .updateLanguage(value);
               },
             )),
-        ListTile(
+         ListTile(
           title: Text(labels.settings.theme),
           trailing: SegmentedSelector(
             selectedOption: Provider.of<ThemeProvider>(context).getTheme,
@@ -59,7 +59,29 @@ class SettingsUI extends StatelessWidget {
                   .updateTheme(value);
             },
           ),
-        ),
+        ),*/
+        ListTile(
+            title: Text('Update Profile'),
+            trailing: RaisedButton(
+              onPressed: () async {
+                Navigator.of(context).pushNamed('/update-profile');
+              },
+              child: Text(
+                'Update Profile',
+              ),
+            )),
+        ListTile(
+            title: Text(labels.settings.signOut),
+            trailing: RaisedButton(
+              onPressed: () {
+                AuthService _auth = AuthService();
+                _auth.signOut();
+                //Navigator.pushReplacementNamed(context, '/signin');
+              },
+              child: Text(
+                labels.settings.signOut,
+              ),
+            ))
 
         /*  ListTile(
           title: Text(labels.settings.theme),
@@ -84,29 +106,6 @@ class SettingsUI extends StatelessWidget {
             },
           ),
         ),*/
-        ListTile(
-            title: Text('Update Profile'),
-            trailing: RaisedButton(
-              onPressed: () async {
-                Navigator.of(context).pushNamed('/update-profile');
-              },
-              child: Text(
-                'Update Profile',
-              ),
-            )),
-        ListTile(
-            title: Text(labels.settings.signOut),
-            trailing: RaisedButton(
-              onPressed: () {
-                final authProvider =
-                    Provider.of<AuthProvider>(context, listen: false);
-                authProvider.signOut();
-                Navigator.pushReplacementNamed(context, '/signin');
-              },
-              child: Text(
-                labels.settings.signOut,
-              ),
-            ))
       ],
     );
   }

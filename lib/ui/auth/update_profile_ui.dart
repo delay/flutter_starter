@@ -101,9 +101,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                           SystemChannels.textInput
                               .invokeMethod('TextInput.hide');
                           // dawait _toggleLoadingVisible();
-                          setState(() {
-                            _loading = true;
-                          });
+
                           UserModel _updatedUser =
                               UserModel(name: _name.text, email: _email.text);
                           _updateUserConfirm(context, _updatedUser)
@@ -159,7 +157,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
       BuildContext context, UserModel updatedUser) async {
     final labels = AppLocalizations.of(context);
     UserModel _user = Provider.of<UserModel>(context);
-
+    AuthService _auth = AuthService();
     final TextEditingController _password = new TextEditingController();
     return showDialog(
         context: context,
@@ -193,12 +191,16 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
               new FlatButton(
                 child: new Text(labels.auth.submit.toUpperCase()),
                 onPressed: () async {
+                  setState(() {
+                    _loading = true;
+                  });
                   await _auth
                       .updateUser(updatedUser, _user.email, _password.text)
                       .then((value) {
                     Navigator.of(context).pop();
                     setState(() {
                       isSuccess = value;
+                      _loading = false;
                     });
                     //return isSuccess;
                   });

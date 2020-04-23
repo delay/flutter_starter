@@ -57,13 +57,39 @@ class MyApp extends StatelessWidget {
 
         // Routes
         routes: {
-          '/': (context) => SignInUI(),
+          '/home': (context) => HomeUI(),
+          '/signin': (context) => SignInUI(),
           '/signup': (context) => SignUpUI(),
           '/reset-password': (context) => ResetPasswordUI(),
           '/update-profile': (context) => UpdateProfileUI(),
           '/settings': (context) => SettingsUI(),
         },
+        home: AuthCheck(),
       ),
+    );
+  }
+}
+
+class AuthCheck extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<FirebaseUser>(
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          FirebaseUser user = snapshot.data;
+          if (user == null) {
+            return SignInUI();
+          }
+          return HomeUI();
+        } else {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }

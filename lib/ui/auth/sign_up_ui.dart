@@ -89,12 +89,12 @@ class _SignUpUIState extends State<SignUpUI> {
                             if (_formKey.currentState.validate()) {
                               SystemChannels.textInput.invokeMethod(
                                   'TextInput.hide'); //to hide the keyboard - if any
-
-                              UserModel userModel = await authProvider
-                                  .registerWithEmailAndPassword(
+                              AuthService _auth = AuthService();
+                              bool _isRegisterSucccess =
+                                  await _auth.registerWithEmailAndPassword(
                                       _name.text, _email.text, _password.text);
 
-                              if (userModel == null) {
+                              if (_isRegisterSucccess == false) {
                                 _scaffoldKey.currentState.showSnackBar(SnackBar(
                                   content: Text(labels.auth.signUpError),
                                 ));
@@ -105,7 +105,7 @@ class _SignUpUIState extends State<SignUpUI> {
                       LabelButton(
                         labelText: labels.auth.signInLabelButton,
                         onPressed: () =>
-                            Navigator.pushReplacementNamed(context, '/signin'),
+                            Navigator.pushReplacementNamed(context, '/'),
                       ),
                     ],
                   ),

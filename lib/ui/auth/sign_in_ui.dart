@@ -15,6 +15,7 @@ class _SignInUIState extends State<SignInUI> {
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _password = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _loading = false;
 
   @override
   void initState() {
@@ -30,7 +31,7 @@ class _SignInUIState extends State<SignInUI> {
 
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
-    bool _loading = false;
+
     /*final authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.status == Status.Authenticating) {
       _loading = true;
@@ -76,10 +77,19 @@ class _SignInUIState extends State<SignInUI> {
                           labelText: labels.auth.signInButton,
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              bool status =
-                                  await authProvider.signInWithEmailAndPassword(
-                                      _email.text, _password.text);
-
+                              setState(() {
+                                _loading = true;
+                              });
+                              AuthService _auth = AuthService();
+                              bool status = await _auth
+                                  .signInWithEmailAndPassword(
+                                      _email.text, _password.text)
+                                  .then((status) {
+                                setState(() {
+                                  _loading = false;
+                                });
+                                return status;
+                              });
                               if (!status) {
                                 _scaffoldKey.currentState.showSnackBar(SnackBar(
                                   content: Text(labels.auth.signInError),
