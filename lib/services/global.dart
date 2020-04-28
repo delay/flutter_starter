@@ -1,9 +1,6 @@
 import 'package:flutter_starter/services/models/models.dart';
-import 'package:flutter_starter/services/services.dart';
 
 class Global {
-  static final UserData<UserModel> userRef =
-      UserData<UserModel>(collection: 'users');
   static final Map models = {
     UserModel: (data) => UserModel.fromMap(data),
   };
