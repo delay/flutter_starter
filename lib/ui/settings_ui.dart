@@ -6,6 +6,7 @@ import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/services/services.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/services/models/models.dart';
+import 'package:flutter_starter/services/constants/constants.dart';
 
 class SettingsUI extends StatelessWidget {
   @override

@@ -24,6 +24,7 @@ dependencies:
   provider:
   rxdart:
   shared_preferences:
+  upstate:
 
   flutter_platform_widgets:
   flutter_sheet_localization: ^1.0.0

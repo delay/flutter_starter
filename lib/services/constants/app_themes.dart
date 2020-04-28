@@ -197,8 +197,9 @@ class AppThemes {
 
       // secondary: _darkSecondaryColor,
     ),
-    snackBarTheme:
-        SnackBarThemeData(backgroundColor: _darkBackgroundAlertColor),
+    snackBarTheme: SnackBarThemeData(
+        contentTextStyle: TextStyle(color: Colors.white),
+        backgroundColor: _darkBackgroundAlertColor),
     iconTheme: IconThemeData(
       color: Colors.white, //_darkIconColor,
     ),

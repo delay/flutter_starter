@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/services/services.dart';
+import 'package:flutter_starter/services/store/store.dart';
 
 class ThemeProvider extends ChangeNotifier {
   // shared pref object

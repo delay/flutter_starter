@@ -621,6 +621,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  upstate:
+    dependency: "direct main"
+    description:
+      name: upstate
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.1"
   vector_math:
     dependency: transitive
     description:

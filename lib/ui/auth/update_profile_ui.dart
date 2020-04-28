@@ -96,8 +96,11 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         SystemChannels.textInput.invokeMethod('TextInput.hide');
-                        UserModel _updatedUser =
-                            UserModel(name: _name.text, email: _email.text);
+                        UserModel _updatedUser = UserModel(
+                            uid: user?.uid,
+                            name: _name.text,
+                            email: _email.text,
+                            photoUrl: user?.photoUrl);
                         _updateUserConfirm(context, _updatedUser, user?.email);
                       }
                     }),
