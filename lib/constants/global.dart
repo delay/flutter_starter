@@ -1,4 +1,4 @@
-import 'package:flutter_starter/services/models/models.dart';
+import 'package:flutter_starter/models/models.dart';
 
 class Global {
   static final Map models = {

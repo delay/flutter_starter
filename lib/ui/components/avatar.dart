@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/services/models/models.dart';
+import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 
 class Avatar extends StatelessWidget {

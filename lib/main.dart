@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
-import 'package:flutter_starter/services/models/models.dart';
+import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/services/services.dart';
-import 'package:flutter_starter/services/store/store.dart';
-import 'package:flutter_starter/services/constants/constants.dart';
+import 'package:flutter_starter/store/store.dart';
+import 'package:flutter_starter/constants/constants.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/ui.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/ui/components/components.dart';
-import 'package:flutter_starter/services/helpers/helpers.dart';
+import 'package:flutter_starter/helpers/helpers.dart';
 import 'package:flutter_starter/services/services.dart';
 
 class ResetPasswordUI extends StatefulWidget {
