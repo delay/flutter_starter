@@ -74,7 +74,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 SizedBox(height: 48.0),
                 FormInputFieldWithIcon(
                   controller: _name,
-                  iconPrefix: CustomIcon.user,
+                  iconPrefix: Icons.person,
                   labelText: labels.auth.nameFormField,
                   validator: Validator(labels).name,
                   onChanged: (value) => null,
@@ -83,7 +83,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                 FormVerticalSpace(),
                 FormInputFieldWithIcon(
                   controller: _email,
-                  iconPrefix: CustomIcon.mail,
+                  iconPrefix: Icons.email,
                   labelText: labels.auth.emailFormField,
                   validator: Validator(labels).email,
                   keyboardType: TextInputType.emailAddress,
@@ -132,7 +132,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
             ),
             content: FormInputFieldWithIcon(
               controller: _password,
-              iconPrefix: CustomIcon.lock,
+              iconPrefix: Icons.lock,
               labelText: labels.auth.passwordFormField,
               validator: Validator(labels).password,
               obscureText: true,

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:apple_sign_in/apple_sign_in.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:flutter_starter/services/models/models.dart';
 import 'package:flutter_starter/services/services.dart';
 
 class AuthService extends ChangeNotifier {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
 
@@ -61,7 +60,51 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  // Determine if Apple Signin is available on device
+  //handles updating the user when updating profile
+  Future<bool> updateUser(
+      UserModel user, String oldEmail, String password) async {
+    bool _result = false;
+
+    await _auth
+        .signInWithEmailAndPassword(email: oldEmail, password: password)
+        .then((_firebaseUser) {
+      _firebaseUser.user.updateEmail(user.email);
+      UserData(collection: 'users').upsert(user.toJson());
+      _result = true;
+    });
+    return _result;
+  }
+
+  //password reset email
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<bool> isAdmin() async {
+    bool _isAdmin = false;
+    await _auth.currentUser().then((user) async {
+      DocumentSnapshot adminRef =
+          await _db.collection('admin').document(user.uid).get();
+      if (adminRef.exists) {
+        _isAdmin = true;
+      }
+    });
+    return _isAdmin;
+  }
+
+  // Sign out
+  Future<void> signOut() {
+    return _auth.signOut();
+  }
+}
+
+/* Not currently used functions for managing 
+google, apple and anonymous signin 
+https://github.com/fireship-io/flutter-firebase-quizapp-course
+
+
+final GoogleSignIn _googleSignIn = GoogleSignIn();
+// Determine if Apple Signin is available on device
   Future<bool> get appleSignInAvailable => AppleSignIn.isAvailable();
 
   /// Sign in with Apple
@@ -111,6 +154,21 @@ class AuthService extends ChangeNotifier {
       AuthResult result = await _auth.signInWithCredential(credential);
       FirebaseUser user = result.user;
 
+      Gravatar gravatar = Gravatar(user.email);
+      String gravatarUrl = gravatar.imageUrl(
+        size: 200,
+        defaultImage: GravatarImage.retro,
+        rating: GravatarRating.pg,
+        fileExtension: true,
+      );
+      UserModel _newUser = UserModel(
+          uid: user.uid,
+          email: user.email,
+          name: user.displayName,
+          photoUrl: gravatarUrl);
+      // _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserData(collection: 'users').upsert(_newUser.toJson());
+
       // Update user data
       updateUserData(user);
 
@@ -130,48 +188,10 @@ class AuthService extends ChangeNotifier {
     return user;
   }
 
-  //handles updating the user when updating profile
-  Future<bool> updateUser(
-      UserModel user, String oldEmail, String password) async {
-    bool _result = false;
-
-    await _auth
-        .signInWithEmailAndPassword(email: oldEmail, password: password)
-        .then((_firebaseUser) {
-      _firebaseUser.user.updateEmail(user.email);
-      UserData(collection: 'users').upsert(user.toJson());
-      _result = true;
-    });
-    return _result;
-  }
-
-  /// Updates the User's data in Firestore on each new login
+    /// Updates the User's data in Firestore on each new login
   Future<void> updateUserData(FirebaseUser user) {
     DocumentReference reportRef = _db.collection('reports').document(user.uid);
-
     return reportRef.setData({'uid': user.uid, 'lastActivity': DateTime.now()},
         merge: true);
   }
-
-  //password reset email
-  Future<void> sendPasswordResetEmail(String email) async {
-    await _auth.sendPasswordResetEmail(email: email);
-  }
-
-  Future<bool> isAdmin() async {
-    bool _isAdmin = false;
-    await _auth.currentUser().then((user) async {
-      DocumentSnapshot adminRef =
-          await _db.collection('admin').document(user.uid).get();
-      if (adminRef.exists) {
-        _isAdmin = true;
-      }
-    });
-    return _isAdmin;
-  }
-
-  // Sign out
-  Future<void> signOut() {
-    return _auth.signOut();
-  }
-}
+  */

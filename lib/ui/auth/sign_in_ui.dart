@@ -53,7 +53,7 @@ class _SignInUIState extends State<SignInUI> {
                       SizedBox(height: 48.0),
                       FormInputFieldWithIcon(
                         controller: _email,
-                        iconPrefix: CustomIcon.mail,
+                        iconPrefix: Icons.email,
                         labelText: labels.auth.emailFormField,
                         validator: Validator(labels).email,
                         keyboardType: TextInputType.emailAddress,
@@ -63,7 +63,7 @@ class _SignInUIState extends State<SignInUI> {
                       FormVerticalSpace(),
                       FormInputFieldWithIcon(
                         controller: _password,
-                        iconPrefix: CustomIcon.lock,
+                        iconPrefix: Icons.lock,
                         labelText: labels.auth.passwordFormField,
                         validator: Validator(labels).password,
                         obscureText: true,

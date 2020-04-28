@@ -21,6 +21,11 @@ class _HomeUIState extends State<HomeUI> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
     final UserModel user = Provider.of<UserModel>(context);
@@ -79,8 +84,11 @@ class _HomeUIState extends State<HomeUI> {
 
   _isUserAdmin() async {
     bool _isAdmin = await AuthService().isAdmin();
-    setState(() {
-      _admin = _isAdmin.toString();
-    });
+    //handle setState bug  //https://stackoverflow.com/questions/49340116/setstate-called-after-dispose
+    if (mounted) {
+      setState(() {
+        _admin = _isAdmin.toString();
+      });
+    }
   }
 }

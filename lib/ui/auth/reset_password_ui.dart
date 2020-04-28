@@ -53,7 +53,7 @@ class _ResetPasswordUIState extends State<ResetPasswordUI> {
                       SizedBox(height: 48.0),
                       FormInputFieldWithIcon(
                         controller: _email,
-                        iconPrefix: CustomIcon.mail,
+                        iconPrefix: Icons.email,
                         labelText: labels.auth.emailFormField,
                         validator: Validator(labels).email,
                         keyboardType: TextInputType.emailAddress,
