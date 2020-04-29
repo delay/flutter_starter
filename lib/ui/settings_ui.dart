@@ -40,7 +40,7 @@ class SettingsUI extends StatelessWidget {
           title: Text(labels.settings.language),
           //trailing: _languageDropdown(context),
           trailing: DropdownPicker(
-            menuOptions: Global.languageOptions,
+            menuOptions: Globals.languageOptions,
             selectedOption:
                 Provider.of<LanguageProvider>(context).currentLanguage,
             onChanged: (value) {

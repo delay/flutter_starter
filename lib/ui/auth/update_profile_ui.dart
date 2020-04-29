@@ -37,7 +37,10 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
         key: _scaffoldKey,
         appBar: AppBar(title: Text(labels.auth.updateProfileTitle)),
         body: LoadingScreen(
-            child: updateProfileForm(context), inAsyncCall: _loading));
+          child: updateProfileForm(context),
+          inAsyncCall: _loading,
+          color: Theme.of(context).scaffoldBackgroundColor,
+        ));
   }
   //_loading = true;
   /* return Scaffold(
@@ -52,7 +55,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                   _email.text = user.email;
                   return updateProfileForm(context, user.email);
                 }),
-            inAsyncCall: _loading));
+            inAsyncCall: _loading, color: Theme.of(context).scaffoldBackgroundColor,));
   }*/
 
   updateProfileForm(BuildContext context) {

@@ -18,6 +18,34 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyACMlPc6xOmj7OElinCuAcUhoZmB85ZSvw",
+    authDomain: "flutter-starter-delay.firebaseapp.com",
+    databaseURL: "https://flutter-starter-delay.firebaseio.com",
+    projectId: "flutter-starter-delay",
+    storageBucket: "flutter-starter-delay.appspot.com",
+    messagingSenderId: "524197078337",
+    appId: "1:524197078337:web:3a6248c544731127fa2dc0",
+    measurementId: "G-3J0YKBCKQH"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
+</script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

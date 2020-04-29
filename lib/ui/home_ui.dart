@@ -52,33 +52,35 @@ class _HomeUIState extends State<HomeUI> {
         ],
       ),
       body: LoadingScreen(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 120),
-                Avatar(user),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    FormVerticalSpace(),
-                    Text(labels.home.uidLabel + ': ' + _uid,
-                        style: TextStyle(fontSize: 16)),
-                    FormVerticalSpace(),
-                    Text(labels.home.nameLabel + ': ' + _name,
-                        style: TextStyle(fontSize: 16)),
-                    FormVerticalSpace(),
-                    Text(labels.home.emailLabel + ': ' + _email,
-                        style: TextStyle(fontSize: 16)),
-                    FormVerticalSpace(),
-                    Text(labels.home.adminUserLabel + ': ' + _admin,
-                        style: TextStyle(fontSize: 16)),
-                  ],
-                ),
-              ],
-            ),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 120),
+              Avatar(user),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  FormVerticalSpace(),
+                  Text(labels.home.uidLabel + ': ' + _uid,
+                      style: TextStyle(fontSize: 16)),
+                  FormVerticalSpace(),
+                  Text(labels.home.nameLabel + ': ' + _name,
+                      style: TextStyle(fontSize: 16)),
+                  FormVerticalSpace(),
+                  Text(labels.home.emailLabel + ': ' + _email,
+                      style: TextStyle(fontSize: 16)),
+                  FormVerticalSpace(),
+                  Text(labels.home.adminUserLabel + ': ' + _admin,
+                      style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            ],
           ),
-          inAsyncCall: _loading),
+        ),
+        inAsyncCall: _loading,
+        color: Theme.of(context).scaffoldBackgroundColor,
+      ),
     );
   }
 

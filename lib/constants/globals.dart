@@ -1,6 +1,6 @@
 import 'package:flutter_starter/models/models.dart';
 
-class Global {
+class Globals {
   static final Map models = {
     UserModel: (data) => UserModel.fromMap(data),
   };

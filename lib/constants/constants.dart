@@ -1,3 +1,3 @@
 export 'routes.dart';
-export 'global.dart';
+export 'globals.dart';
 export 'app_themes.dart';

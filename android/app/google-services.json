@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "524197078337",
+    "firebase_url": "https://flutter-starter-delay.firebaseio.com",
+    "project_id": "flutter-starter-delay",
+    "storage_bucket": "flutter-starter-delay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524197078337:android:dee32de1a467249cfa2dc0",
+        "android_client_info": {
+          "package_name": "com.tapmode.flutterstarter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524197078337-5gq7dldnk4tt8q4cvtenbn08q5fn4vkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHe-BxbY8-_CWhZZRC5jqVY4c0ydUGw08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524197078337-5gq7dldnk4tt8q4cvtenbn08q5fn4vkj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "524197078337-96irqf3smo96s6f48mc1neh2vh7jber5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tapmode.flutter-starter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

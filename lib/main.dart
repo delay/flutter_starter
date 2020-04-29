@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,48 +12,42 @@ import 'package:flutter_starter/store/store.dart';
 import 'package:flutter_starter/constants/constants.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/ui.dart';
+//import 'dart:js' as js;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LanguageProvider().setInitialLocalLanguage();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) async {
-    runApp(
-      /*
-      * MultiProvider for top services that do not depends on any runtime values
-      * such as user uid/email.
-       */
-      MultiProvider(
-        providers: [
-          StreamProvider<UserModel>.value(
-              value: UserData<UserModel>(collection: 'users').documentStream),
-          //StreamProvider<FirebaseUser>.value(value: AuthService().user),
-          ChangeNotifierProvider<ThemeProvider>(
-            create: (context) => ThemeProvider(),
-          ),
-          ChangeNotifierProvider<LanguageProvider>(
-            create: (context) => LanguageProvider(),
-          ),
-          ChangeNotifierProvider<AuthService>(
-            create: (context) => AuthService(),
-          ),
-        ],
-        child: MyApp(),
-      ),
-    );
-  });
+  //found bug https://github.com/flutter/flutter/issues/55892
+  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) async {
+  runApp(
+    MultiProvider(
+      providers: [
+        StreamProvider<UserModel>.value(
+            value: UserData<UserModel>(collection: 'users').documentStream),
+        //StreamProvider<FirebaseUser>.value(value: AuthService().user),
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider<LanguageProvider>(
+          create: (context) => LanguageProvider(),
+        ),
+        ChangeNotifierProvider<AuthService>(
+          create: (context) => AuthService(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
+  /* });*/
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
 
-  // Expose builders for 3rd party services at the root of the widget tree
-  // This is useful when mocking services while testing
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     //final labels = AppLocalizations.of(context);
+    // js.context.callMethod("alert", <String>["Your debug message"]);
     return Consumer<LanguageProvider>(
       builder: (_, languageProviderRef, __) {
         return Consumer<ThemeProvider>(
@@ -74,6 +70,10 @@ class MyApp extends StatelessWidget {
                       .toList(), // <- Supported locales
 
                   //end language translation stuff
+                  // Firebase Analytics - not working with web
+                  /*navigatorObservers: [
+                    FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+                  ],*/
                   debugShowCheckedModeBanner: false,
                   //title: labels.app.title,
                   routes: Routes.routes,
