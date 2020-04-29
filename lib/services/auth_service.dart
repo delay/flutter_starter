@@ -84,7 +84,7 @@ class AuthService extends ChangeNotifier {
     bool _isAdmin = false;
     await _auth.currentUser().then((user) async {
       DocumentSnapshot adminRef =
-          await _db.collection('admin').document(user.uid).get();
+          await _db.collection('admin').document(user?.uid).get();
       if (adminRef.exists) {
         _isAdmin = true;
       }
