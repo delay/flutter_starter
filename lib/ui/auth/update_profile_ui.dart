@@ -107,7 +107,6 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   Future<bool> _updateUserConfirm(
       BuildContext context, UserModel updatedUser, String oldEmail) async {
     final labels = AppLocalizations.of(context);
-    //UserModel _user = Provider.of<UserModel>(context);
     AuthService _auth = AuthService();
     final TextEditingController _password = new TextEditingController();
     return showDialog(

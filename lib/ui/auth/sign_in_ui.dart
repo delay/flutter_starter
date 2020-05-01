@@ -31,11 +31,6 @@ class _SignInUIState extends State<SignInUI> {
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
 
-    /*final authProvider = Provider.of<AuthProvider>(context);
-    if (authProvider.status == Status.Authenticating) {
-      _loading = true;
-    }*/
-
     return Scaffold(
       key: _scaffoldKey,
       body: LoadingScreen(

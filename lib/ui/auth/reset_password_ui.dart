@@ -31,10 +31,7 @@ class _ResetPasswordUIState extends State<ResetPasswordUI> {
     bool _loading = false;
     email = ModalRoute.of(context).settings.arguments;
     _email.text = email;
-    /*final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    if (authProvider.status == Status.Authenticating) {
-      _loading = true;
-    }*/
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: appBar(),
