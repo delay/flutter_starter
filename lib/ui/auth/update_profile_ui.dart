@@ -30,9 +30,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
   }
 
   Widget build(BuildContext context) {
-    //  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
     final labels = AppLocalizations.of(context);
-    //final AppStateModel appState = Provider.of<AppStateModel>(context);
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(title: Text(labels.auth.updateProfileTitle)),
@@ -42,21 +40,6 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
           color: Theme.of(context).scaffoldBackgroundColor,
         ));
   }
-  //_loading = true;
-  /* return Scaffold(
-        key: _scaffoldKey,
-        body: LoadingScreen(
-            child: StreamBuilder(
-                stream: authProvider.user,
-                builder: (context, snapshot) {
-                  if ((snapshot.data != null)) {}
-                  FirebaseUserAuthModel user = snapshot.data;
-                  _name.text = user.displayName;
-                  _email.text = user.email;
-                  return updateProfileForm(context, user.email);
-                }),
-            inAsyncCall: _loading, color: Theme.of(context).scaffoldBackgroundColor,));
-  }*/
 
   updateProfileForm(BuildContext context) {
     final UserModel user = Provider.of<UserModel>(context);
@@ -189,7 +172,7 @@ class _UpdateProfileUIState extends State<UpdateProfileUI> {
                         authError = labels.auth.wrongPasswordNotice;
                         break;
                       default:
-                        authError = 'Unknown Error';
+                        authError = labels.auth.unknownError;
                         break;
                     }
                     _scaffoldKey.currentState.showSnackBar(SnackBar(

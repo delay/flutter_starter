@@ -28,7 +28,7 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  //Method for new user registration using email and password
+  // User registration using email and password
   Future<bool> registerWithEmailAndPassword(
       String name, String email, String password) async {
     try {

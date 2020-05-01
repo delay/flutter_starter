@@ -3,21 +3,14 @@ import 'package:flutter/material.dart';
 class AppThemes {
   AppThemes._();
 
-  static const Color mayaBlue = Color.fromRGBO(117, 190, 255, 1);
   static const Color dodgerBlue = Color.fromRGBO(29, 161, 242, 1);
-  static const Color dullLavender = Color.fromRGBO(171, 157, 242, 1);
-  static const Color turquoiseBlue = Color.fromRGBO(120, 220, 232, 1);
+  static const Color whiteLilac = Color.fromRGBO(248, 250, 252, 1);
+  static const Color blackPearl = Color.fromRGBO(30, 31, 43, 1);
   static const Color brinkPink = Color.fromRGBO(255, 97, 136, 1);
   static const Color juneBud = Color.fromRGBO(186, 215, 97, 1);
-  static const Color ebonyClay = Color.fromRGBO(40, 42, 58, 1);
-  static const Color vulcan = Color.fromRGBO(22, 24, 33, 1);
-  static const Color nevada = Color.fromRGBO(105, 109, 119, 1);
-  static const Color orchid = Color.fromRGBO(218, 112, 214, 1);
-  static const Color goldenrod = Color.fromRGBO(255, 216, 102, 1);
-  static const Color blackPearl = Color.fromRGBO(30, 31, 43, 1);
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
-  static const Color mystic = Color.fromRGBO(225, 234, 246, 1);
-  static const Color whiteLilac = Color.fromRGBO(248, 250, 252, 1);
+  static const Color nevada = Color.fromRGBO(105, 109, 119, 1);
+  static const Color ebonyClay = Color.fromRGBO(40, 42, 58, 1);
 
   static String font1 = "ProductSans";
   static String font2 = "Roboto";

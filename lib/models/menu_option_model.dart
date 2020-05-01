@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//Create a Model class to hold menu option data
+// Model class to hold menu option data (language and theme)
 class MenuOptionsModel {
   String key;
   String value;

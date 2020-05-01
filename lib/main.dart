@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
-import 'package:firebase_analytics/observer.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -46,6 +43,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserModel _user = Provider.of<UserModel>(context);
     //final labels = AppLocalizations.of(context);
     // js.context.callMethod("alert", <String>["Your debug message"]);
     return Consumer<LanguageProvider>(
@@ -68,7 +66,6 @@ class MyApp extends StatelessWidget {
                   ],
                   supportedLocales: AppLocalizations.languages.keys
                       .toList(), // <- Supported locales
-
                   //end language translation stuff
                   // Firebase Analytics - not working with web
                   /*navigatorObservers: [
@@ -82,18 +79,7 @@ class MyApp extends StatelessWidget {
                   themeMode: themeProviderRef.isDarkModeOn
                       ? ThemeMode.dark
                       : ThemeMode.light,
-                  home: Consumer<AuthService>(
-                    builder: (_, authProviderRef, __) {
-                      if (userSnapshot.connectionState ==
-                          ConnectionState.active) {
-                        return userSnapshot.hasData ? HomeUI() : SignInUI();
-                      }
-
-                      return Material(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  ),
+                  home: (_user != null) ? HomeUI() : SignInUI(),
                 );
               },
             );

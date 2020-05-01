@@ -1,6 +1,6 @@
-//library modal_progress_hud;
-
 import 'package:flutter/material.dart';
+
+//modification of library modal_progress_hud;
 
 ///
 /// Wrap around any widget that makes an async call to show a modal progress

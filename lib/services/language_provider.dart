@@ -13,6 +13,7 @@ class LanguageProvider extends ChangeNotifier {
     _sharedPrefsHelper = SharedPreferenceHelper();
   }
 
+  // Retrieves and Sets language based on device settings
   setInitialLocalLanguage() async {
     _sharedPrefsHelper.appCurrentLanguage.then((currentLanguageCode) async {
       if ((currentLanguageCode == '') || (currentLanguageCode == null)) {
@@ -32,6 +33,7 @@ class LanguageProvider extends ChangeNotifier {
     });
   }
 
+  // Gets current language from shared preferences
   String get currentLanguage {
     _sharedPrefsHelper.appCurrentLanguage.then((value) {
       _currentLanguage = value;
@@ -40,8 +42,11 @@ class LanguageProvider extends ChangeNotifier {
     return _currentLanguage;
   }
 
+  // gets the language app is set to
   Locale get getLocale {
+    // gets the default language key (from the translation language system)
     Locale _updatedLocal = AppLocalizations.languages.keys.first;
+    // looks for matching language key stored in shared preferences and sets to it
     AppLocalizations.languages.keys.forEach((locale) {
       if (locale.languageCode == currentLanguage) {
         _updatedLocal = locale;
@@ -50,6 +55,7 @@ class LanguageProvider extends ChangeNotifier {
     return _updatedLocal;
   }
 
+  // updates the language stored in sharepreferences
   void updateLanguage(String selectedLanguage) {
     _sharedPrefsHelper.changeLanguage(selectedLanguage);
     _sharedPrefsHelper.appCurrentLanguage.then((languageSelected) {

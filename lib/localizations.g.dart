@@ -38,6 +38,7 @@ class AppLocalizations {
         resetPasswordTitle: "Reset Password",
         updateProfileTitle: "Update Profile",
         wrongPasswordNotice: "Password is incorrect.",
+        unknownError: "Unknown Error",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Settings",
@@ -78,7 +79,7 @@ class AppLocalizations {
         passwordFormField: "Mot de passe",
         nameFormField: "Nom",
         signInError: "Échec de la connexion: e-mail ou mot de passe incorrect.",
-        resetPasswordLabelButton: "Mot de passe oublié?",
+        resetPasswordLabelButton: "mot de passe oublié?",
         signUpLabelButton: "Créer un compte",
         signUpError: "Inscrivez-vous échoué.",
         signInLabelButton: "Avoir un compte? Se connecter.",
@@ -95,13 +96,14 @@ class AppLocalizations {
         resetPasswordTitle: "réinitialiser le mot de passe",
         updateProfileTitle: "Mettre à jour le profil",
         wrongPasswordNotice: "Le mot de passe est incorrect.",
+        unknownError: "Erreur inconnue",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Réglages",
         language: "Langue",
         theme: "Thème",
         signOut: "Déconnexion",
-        dark: "Foncé",
+        dark: "Sombre",
         light: "Lumière",
         system: "Système",
         updateProfile: "Mettre à jour le profil",
@@ -153,6 +155,7 @@ class AppLocalizations {
         resetPasswordTitle: "Restablecer la contraseña",
         updateProfileTitle: "Actualización del perfil",
         wrongPasswordNotice: "La contraseña es incorrecta.",
+        unknownError: "Error desconocido",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "ajustes",
@@ -187,7 +190,7 @@ class AppLocalizations {
     ),
     Locale.fromSubtags(languageCode: "de"): AppLocalizations_Labels(
       auth: AppLocalizations_Labels_Auth(
-        signInButton: "Einloggen",
+        signInButton: "Anmelden",
         signUpButton: "Anmelden",
         resetPasswordButton: "Senden Passwort zurücksetzen",
         emailFormField: "Email",
@@ -197,20 +200,21 @@ class AppLocalizations {
         resetPasswordLabelButton: "Passwort vergessen?",
         signUpLabelButton: "Ein Konto erstellen",
         signUpError: "Anmeldung gescheitert.",
-        signInLabelButton: "Ein Konto haben? Einloggen.",
+        signInLabelButton: "Ein Konto haben? Anmelden.",
         resetPasswordNotice:
             "Überprüfen Sie Ihre E-Mail und folgen Sie den Anweisungen, um Ihr Passwort zurücksetzen können.",
-        signInonResetPasswordLabelButton: "Einloggen",
+        signInonResetPasswordLabelButton: "Anmelden",
         updateUser: "Profil aktualisieren",
         updateUserSuccessNotice: "Benutzer erfolgreich aktualisiert",
         updateUserFailNotice: "Fehler beim Update Benutzer",
         enterPassword: "Geben Sie Ihr Passwort",
         cancel: "Stornieren",
         submit: "einreichen",
-        changePasswordLabelButton: "Ändere das Passwort",
+        changePasswordLabelButton: "Passwort ändern",
         resetPasswordTitle: "Passwort zurücksetzen",
         updateProfileTitle: "Profil aktualisieren",
         wrongPasswordNotice: "Das Passwort ist inkorrekt.",
+        unknownError: "Unbekannter Fehler",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "die Einstellungen",
@@ -234,7 +238,7 @@ class AppLocalizations {
       ),
       validator: AppLocalizations_Labels_Validator(
         email: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-        password: "Passwort muss mindestens 6 Zeichen lang sein.",
+        password: "Das Passwort muss mindestens aus 6 Zeichen bestehen.",
         name: "Bitte geben Sie einen Namen.",
         number: "Bitte gebe eine Nummer ein.",
         notEmpty: "Dies ist ein Pflichtfeld.",
@@ -268,6 +272,7 @@ class AppLocalizations {
         resetPasswordTitle: "पासवर्ड रीसेट",
         updateProfileTitle: "प्रोफ़ाइल अपडेट करें",
         wrongPasswordNotice: "पासवर्ड गलत है।",
+        unknownError: "अज्ञात त्रुटि",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "समायोजन",
@@ -324,6 +329,7 @@ class AppLocalizations {
         resetPasswordTitle: "Password Reset",
         updateProfileTitle: "Atualizar perfil",
         wrongPasswordNotice: "Senha é incorreta.",
+        unknownError: "Erro desconhecido",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "Definições",
@@ -380,6 +386,7 @@ class AppLocalizations {
         resetPasswordTitle: "重设密码",
         updateProfileTitle: "更新个人信息",
         wrongPasswordNotice: "密码不正确。",
+        unknownError: "未知错误",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "设置",
@@ -435,6 +442,7 @@ class AppLocalizations {
         resetPasswordTitle: "パスワードを再設定する",
         updateProfileTitle: "プロフィールを更新",
         wrongPasswordNotice: "パスワードが正しくありません。",
+        unknownError: "不明なエラー",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "設定",
@@ -475,7 +483,7 @@ class AppLocalizations {
         nameFormField: "имя",
         signInError:
             "Войти не удалось: адрес электронной почты или пароль неверен.",
-        resetPasswordLabelButton: "Забыли пароль?",
+        resetPasswordLabelButton: "забыл пароль?",
         signUpLabelButton: "Завести аккаунт",
         signUpError: "Регистрация прошла неудачно.",
         signInLabelButton: "Иметь аккаунт? Войти в систему.",
@@ -487,11 +495,12 @@ class AppLocalizations {
         updateUserFailNotice: "Не удался пользователь обновления",
         enterPassword: "Введите ваш пароль",
         cancel: "Отмена",
-        submit: "Отправить",
-        changePasswordLabelButton: "Сменить пароль",
+        submit: "Разместить",
+        changePasswordLabelButton: "Изменить пароль",
         resetPasswordTitle: "Сброс пароля",
         updateProfileTitle: "Обновить профиль",
         wrongPasswordNotice: "Неверный пароль.",
+        unknownError: "Неизвестная ошибка",
       ),
       settings: AppLocalizations_Labels_Settings(
         title: "настройки",
@@ -504,7 +513,7 @@ class AppLocalizations {
         updateProfile: "Обновить профиль",
       ),
       home: AppLocalizations_Labels_Home(
-        title: "Домой",
+        title: "Дом",
         nameLabel: "имя",
         uidLabel: "UID",
         emailLabel: "Электронное письмо",
@@ -555,7 +564,8 @@ class AppLocalizations_Labels_Auth {
       this.changePasswordLabelButton,
       this.resetPasswordTitle,
       this.updateProfileTitle,
-      this.wrongPasswordNotice});
+      this.wrongPasswordNotice,
+      this.unknownError});
 
   final String signInButton;
 
@@ -602,6 +612,8 @@ class AppLocalizations_Labels_Auth {
   final String updateProfileTitle;
 
   final String wrongPasswordNotice;
+
+  final String unknownError;
 }
 
 class AppLocalizations_Labels_Settings {
