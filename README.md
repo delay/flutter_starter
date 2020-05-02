@@ -98,7 +98,7 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **label_button.dart** — one type of button in ui.
 
-**logo_graphic_header.dart **— a graphic displayed in our ui.
+**logo_graphic_header.dart**— a graphic displayed in our ui.
 
 **primary_button.dart** — another button in the ui.
 
