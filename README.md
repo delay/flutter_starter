@@ -26,27 +26,27 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 ## **Overview of project**
 
-**main.dart **— contains provider info for maintaining the state of the app for the theme, language and user. It initializes language and theme settings. Sets up routing and monitors the user for changes.
+**main.dart**— contains provider info for maintaining the state of the app for the theme, language and user. It initializes language and theme settings. Sets up routing and monitors the user for changes.
 
-**localizations.dart **— controls the language for the app.
+**localizations.dart**— controls the language for the app.
 
-**localizations.g.dar**t — this file is generated from our google sheet by the [flutter_sheet_localization](https://github.com/aloisdeniel/flutter_sheet_localization) package (do not manually edit this file).
+**localizations.g.dart** — this file is generated from our google sheet by the [flutter_sheet_localization](https://github.com/aloisdeniel/flutter_sheet_localization) package (do not manually edit this file).
 
 ## **/constants/**
 
-**app_themes.dart **— contains info related to our light and dark themes.
+**app_themes.dart**— contains info related to our light and dark themes.
 
 **globals.dart** — contains some global app settings
 
-**routes.dart **— contains the app routes.
+**routes.dart**— contains the app routes.
 
 ## /helpers/
 
-**validator.dart **— contains some validation functions for our form fields.
+**validator.dart**— contains some validation functions for our form fields.
 
 ## /models/
 
-**user_model.dart **— contains the model for our user saved in firestore.
+**user_model.dart**— contains the model for our user saved in firestore.
 
 **menu_option_model.dart** — contains our model for our language options and theme options in settings.
 
@@ -56,13 +56,13 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **language_provider.dart** — saves and loads our language.
 
-**theme_provider.dart **— saves and loads our theme.
+**theme_provider.dart**— saves and loads our theme.
 
 ## /store/
 
 **db_firestore.dart** — generic functions for working with firestore.
 
-**shared_preferences_helper.dart **— saves our theme and language locally.
+**shared_preferences_helper.dart**— saves our theme and language locally.
 
 ## /ui/
 
@@ -72,15 +72,15 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 ## /ui/auth/
 
-**reset_password_ui.dart **— sends a password reset email to the user.
+**reset_password_ui.dart**— sends a password reset email to the user.
 
 **sign_in_options_ui.dart** — (not currently in use) but provides other login options.
 
-**sign_in_ui.dart **— allows user to login with email and password.
+**sign_in_ui.dart**— allows user to login with email and password.
 
-**sign_up_ui.dart **— allows user to create a new account.
+**sign_up_ui.dart**— allows user to create a new account.
 
-**update_profile_ui.dart **— allows user to change his email or name.
+**update_profile_ui.dart**— allows user to change his email or name.
 
 ## /ui/components/
 
