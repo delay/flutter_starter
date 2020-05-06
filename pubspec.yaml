@@ -22,7 +22,6 @@ dependencies:
   # apple_sign_in:
 
   provider:
-  rxdart:
   shared_preferences:
   # upstate:
 
