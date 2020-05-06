@@ -1,10 +1,6 @@
 import 'package:flutter_starter/models/models.dart';
 
 class Globals {
-  static final Map models = {
-    UserModel: (data) => UserModel.fromMap(data),
-  };
-
 //List of languages that are supported.  Used in selector.
 //Follow this plugin for translating a google sheet to languages
 //https://github.com/aloisdeniel/flutter_sheet_localization

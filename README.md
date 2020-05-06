@@ -52,6 +52,8 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 ## /services/
 
+**auth_widget_builder.dart** - holds our provider user data and initializes the user in the app.
+
 **auth_service.dart** — our user and authentication functions for creating, logging in and out our user and saving our user data.
 
 **language_provider.dart** — saves and loads our language.
@@ -59,8 +61,6 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 **theme_provider.dart**— saves and loads our theme.
 
 ## /store/
-
-**db_firestore.dart** — generic functions for working with firestore.
 
 **shared_preferences_helper.dart**— saves our theme and language locally.
 
@@ -105,3 +105,5 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 **segmented_selector.dart** — a control used to select the theme.
 
 **sliding_segmented_control.dart** — some modifications of the Cupertino control which is used by segmented_selector.dart.
+
+Anyway hopefully this project will help someone. Feel free to use any of it, I didn't create all of this code as parts of it came from watching the tutorials and reviewing the projects mentioned above. Make sure you [setup firebase](https://firebase.google.com/docs/flutter/setup?platform=android) with your project.

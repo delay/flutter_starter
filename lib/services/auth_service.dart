@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:flutter_starter/models/models.dart';
-import 'package:flutter_starter/store/store.dart';
 
 class AuthService extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -17,6 +16,17 @@ class AuthService extends ChangeNotifier {
 
   // Firebase user a realtime stream
   Stream<FirebaseUser> get user => _auth.onAuthStateChanged;
+
+  //Streams the firestore user from the firestore collection
+  Stream<UserModel> streamFirestoreUser(FirebaseUser firebaseUser) {
+    if (firebaseUser?.uid != null) {
+      return _db
+          .document('/users/${firebaseUser.uid}')
+          .snapshots()
+          .map((snapshot) => UserModel.fromMap(snapshot.data));
+    }
+    return null;
+  }
 
   //Method to handle user sign in using email and password
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
@@ -34,7 +44,7 @@ class AuthService extends ChangeNotifier {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((result) {
+          .then((result) async {
         print('uID: ' + result.user.uid);
         print('email: ' + result.user.email);
         //get photo url from gravatar if user has one
@@ -45,16 +55,19 @@ class AuthService extends ChangeNotifier {
           rating: GravatarRating.pg,
           fileExtension: true,
         );
+        //create the new user object
         UserModel _newUser = UserModel(
             uid: result.user.uid,
             email: result.user.email,
             name: name,
             photoUrl: gravatarUrl);
-        _auth.signInWithEmailAndPassword(email: email, password: password);
-        UserData(collection: 'users').upsert(_newUser.toJson());
-        return true;
+        //update the user in firestore
+        _updateUserFirestore(_newUser, result.user);
+        //sign in the user
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
       });
-      return false;
+      return true;
     } catch (e) {
       return false;
     }
@@ -64,15 +77,21 @@ class AuthService extends ChangeNotifier {
   Future<bool> updateUser(
       UserModel user, String oldEmail, String password) async {
     bool _result = false;
-
     await _auth
         .signInWithEmailAndPassword(email: oldEmail, password: password)
         .then((_firebaseUser) {
       _firebaseUser.user.updateEmail(user.email);
-      UserData(collection: 'users').upsert(user.toJson());
+      _updateUserFirestore(user, _firebaseUser.user);
       _result = true;
     });
     return _result;
+  }
+
+  //updates the firestore users collection
+  void _updateUserFirestore(UserModel user, FirebaseUser firebaseUser) {
+    _db
+        .document('/users/${firebaseUser.uid}')
+        .setData(user.toJson(), merge: true);
   }
 
   //password reset email

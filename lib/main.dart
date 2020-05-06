@@ -3,9 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
-import 'package:flutter_starter/models/models.dart';
 import 'package:flutter_starter/services/services.dart';
-import 'package:flutter_starter/store/store.dart';
 import 'package:flutter_starter/constants/constants.dart';
 import 'package:flutter_starter/ui/auth/auth.dart';
 import 'package:flutter_starter/ui/ui.dart';
@@ -19,9 +17,6 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        StreamProvider<UserModel>.value(
-            value: UserData<UserModel>(collection: 'users').documentStream),
-        //StreamProvider<FirebaseUser>.value(value: AuthService().user),
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
         ),
@@ -43,7 +38,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserModel _user = Provider.of<UserModel>(context);
     //final labels = AppLocalizations.of(context);
     // js.context.callMethod("alert", <String>["Your debug message"]);
     return Consumer<LanguageProvider>(
@@ -79,42 +73,13 @@ class MyApp extends StatelessWidget {
                   themeMode: themeProviderRef.isDarkModeOn
                       ? ThemeMode.dark
                       : ThemeMode.light,
-                  home: (_user != null) ? HomeUI() : SignInUI(),
+                  home:
+                      (userSnapshot?.data?.uid != null) ? HomeUI() : SignInUI(),
                 );
               },
             );
           },
         );
-      },
-    );
-  }
-}
-
-class AuthWidgetBuilder extends StatelessWidget {
-  const AuthWidgetBuilder({Key key, @required this.builder}) : super(key: key);
-  final Widget Function(BuildContext, AsyncSnapshot<FirebaseUser>) builder;
-
-  @override
-  Widget build(BuildContext context) {
-    //final authService = Provider.of<AuthService>(context, listen: false);
-    return StreamBuilder<FirebaseUser>(
-      stream: AuthService().user,
-      builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
-        final FirebaseUser user = snapshot.data;
-        if (user != null) {
-          /*
-          * For any other Provider services that rely on user data can be
-          * added to the following MultiProvider list.
-          * Once a user has been detected, a re-build will be initiated.
-           */
-          return MultiProvider(
-            providers: [
-              Provider<FirebaseUser>.value(value: user),
-            ],
-            child: builder(context, snapshot),
-          );
-        }
-        return builder(context, snapshot);
       },
     );
   }
