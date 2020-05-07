@@ -25,7 +25,7 @@
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
 <script defer src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
@@ -44,7 +44,8 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  //firebase.analytics();
+  //https://github.com/flutter/flutter/issues/42880
+  firebase.analytics();
 </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
