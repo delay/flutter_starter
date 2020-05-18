@@ -63,9 +63,6 @@ class AuthService extends ChangeNotifier {
             photoUrl: gravatarUrl);
         //update the user in firestore
         _updateUserFirestore(_newUser, result.user);
-        //sign in the user
-        await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
       });
       return true;
     } catch (e) {
