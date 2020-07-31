@@ -13,6 +13,7 @@ import 'package:flutter_starter/ui/components/components.dart';
 
 class AuthController extends GetxController {
   static AuthController to = Get.find();
+  AppLocalizations_Labels labels;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -84,8 +85,7 @@ class AuthController extends GetxController {
   }
 
   //Method to handle user sign in using email and password
-  signInWithEmailAndPassword(BuildContext context) async {
-    final labels = AppLocalizations.of(context);
+  signInWithEmailAndPassword() async {
     showLoadingIndicator();
     try {
       await _auth.signInWithEmailAndPassword(
@@ -105,8 +105,7 @@ class AuthController extends GetxController {
   }
 
   // User registration using email and password
-  registerWithEmailAndPassword(BuildContext context) async {
-    final labels = AppLocalizations.of(context);
+  registerWithEmailAndPassword() async {
     showLoadingIndicator();
     try {
       await _auth
@@ -146,9 +145,8 @@ class AuthController extends GetxController {
   }
 
   //handles updating the user when updating profile
-  Future<void> updateUser(BuildContext context, UserModel user, String oldEmail,
-      String password) async {
-    final labels = AppLocalizations.of(context);
+  Future<void> updateUser(
+      UserModel user, String oldEmail, String password) async {
     try {
       showLoadingIndicator();
       await _auth

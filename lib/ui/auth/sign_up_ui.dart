@@ -66,7 +66,7 @@ class SignUpUI extends StatelessWidget {
                         if (_formKey.currentState.validate()) {
                           SystemChannels.textInput.invokeMethod(
                               'TextInput.hide'); //to hide the keyboard - if any
-                          authController.registerWithEmailAndPassword(context);
+                          authController.registerWithEmailAndPassword();
                         }
                       }),
                   FormVerticalSpace(),

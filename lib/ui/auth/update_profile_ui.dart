@@ -90,42 +90,38 @@ class UpdateProfileUI extends StatelessWidget {
     final labels = AppLocalizations.of(context);
     final AuthController authController = AuthController.to;
     final TextEditingController _password = new TextEditingController();
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0))),
-            title: Text(
-              labels.auth.enterPassword,
-            ),
-            content: FormInputFieldWithIcon(
-              controller: _password,
-              iconPrefix: Icons.lock,
-              labelText: labels.auth.passwordFormField,
-              validator: Validator(labels).password,
-              obscureText: true,
-              onChanged: (value) => null,
-              onSaved: (value) => _password.text = value,
-              maxLines: 1,
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text(labels.auth.cancel.toUpperCase()),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
-              new FlatButton(
-                child: new Text(labels.auth.submit.toUpperCase()),
-                onPressed: () async {
-                  Get.back();
-                  await authController.updateUser(
-                      context, updatedUser, oldEmail, _password.text);
-                },
-              )
-            ],
-          );
-        });
+    return Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      title: Text(
+        labels.auth.enterPassword,
+      ),
+      content: FormInputFieldWithIcon(
+        controller: _password,
+        iconPrefix: Icons.lock,
+        labelText: labels.auth.passwordFormField,
+        validator: Validator(labels).password,
+        obscureText: true,
+        onChanged: (value) => null,
+        onSaved: (value) => _password.text = value,
+        maxLines: 1,
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text(labels.auth.cancel.toUpperCase()),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        new FlatButton(
+          child: new Text(labels.auth.submit.toUpperCase()),
+          onPressed: () async {
+            Get.back();
+            await authController.updateUser(
+                updatedUser, oldEmail, _password.text);
+          },
+        )
+      ],
+    ));
   }
 }
