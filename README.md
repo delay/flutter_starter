@@ -1,4 +1,4 @@
-## Flutter GetX Firebase Auth Starter Project
+## GetX Flutter Firebase Auth Starter Project
 
 ![Screenshots](https://cdn-images-1.medium.com/max/4776/1*wOmpyN5Poy2Y7u4NMmpj9g.png)
 
