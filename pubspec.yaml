@@ -20,7 +20,8 @@ dependencies:
   firebase_auth:
   # google_sign_in:
   # apple_sign_in:
-
+  get: ^3.4.1
+  get_storage: ^1.2.1
   provider:
   shared_preferences:
   # upstate:

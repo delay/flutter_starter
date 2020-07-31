@@ -1,4 +1,4 @@
-## Flutter Firebase Auth Starter Project
+## Flutter Firebase GetX Auth Starter Project
 
 ![Screenshots](https://cdn-images-1.medium.com/max/4776/1*wOmpyN5Poy2Y7u4NMmpj9g.png)
 
@@ -38,7 +38,15 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **globals.dart** — contains some global app settings
 
-**routes.dart**— contains the app routes.
+**app_routes.dart**— contains the app routes.
+
+## /controllers/
+
+**auth_controller.dart** — our user and authentication functions for creating, logging in and out our user and saving our user data.
+
+**language_controller.dart** — saves and loads our selected language.
+
+**theme_controller.dart**— saves and loads our selected theme.
 
 ## /helpers/
 
@@ -50,31 +58,17 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **menu_option_model.dart** — contains our model for our language options and theme options in settings.
 
-## /services/
-
-**auth_widget_builder.dart** - holds our provider user data and initializes the user in the app.
-
-**auth_service.dart** — our user and authentication functions for creating, logging in and out our user and saving our user data.
-
-**language_provider.dart** — saves and loads our language.
-
-**theme_provider.dart**— saves and loads our theme.
-
-## /store/
-
-**shared_preferences_helper.dart**— saves our theme and language locally.
-
 ## /ui/
 
 **home_ui.dart** — contains the ui for the home which shows info about the user.
 
 **settings_ui.dart** — contains the settings screen for setting the theme and language and some user settings.
 
+**splash_ui.dart** — contains the initial loading screen, currently just a circular progress indicator.
+
 ## /ui/auth/
 
 **reset_password_ui.dart**— sends a password reset email to the user.
-
-**sign_in_options_ui.dart** — (not currently in use) but provides other login options.
 
 **sign_in_ui.dart**— allows user to login with email and password.
 
@@ -97,6 +91,8 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 **form_vertical_spacing.dart** — just a space in the ui.
 
 **label_button.dart** — one type of button in ui.
+
+**loading.dart** — circular loading indicator overlay.
 
 **logo_graphic_header.dart**— a graphic displayed in our ui.
 

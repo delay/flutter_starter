@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
+import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/models/models.dart';
+import 'package:flutter_starter/ui/auth/auth.dart';
+import 'package:flutter_starter/ui/ui.dart';
+import 'package:flutter_starter/ui/components/components.dart';
 
-class AuthService extends ChangeNotifier {
+class AuthController extends GetxController {
+  static AuthController to = Get.find();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
+  Rx<FirebaseUser> firebaseUser = Rx<FirebaseUser>();
+  Rx<UserModel> fireStoreUser = Rx<UserModel>();
+  final RxBool admin = false.obs;
+
+  @override
+  void onReady() async {
+    //run every time auth state changes
+    ever(firebaseUser, handleAuthChanged);
+    firebaseUser.value = await getUser;
+    firebaseUser.bindStream(user);
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    nameController?.dispose();
+    emailController?.dispose();
+    passwordController?.dispose();
+    super.onClose();
+  }
+
+  handleAuthChanged(_firebaseUser) async {
+    //get user data from firestore
+    if (_firebaseUser?.uid != null) {
+      fireStoreUser.bindStream(streamFirestoreUser());
+      await isAdmin();
+    }
+
+    if (_firebaseUser == null) {
+      Get.offAll(SignInUI());
+    } else {
+      Get.offAll(HomeUI());
+    }
+  }
 
   // Firebase user one-time fetch
   Future<FirebaseUser> get getUser => _auth.currentUser();
@@ -18,37 +61,61 @@ class AuthService extends ChangeNotifier {
   Stream<FirebaseUser> get user => _auth.onAuthStateChanged;
 
   //Streams the firestore user from the firestore collection
-  Stream<UserModel> streamFirestoreUser(FirebaseUser firebaseUser) {
-    if (firebaseUser?.uid != null) {
+  Stream<UserModel> streamFirestoreUser() {
+    print('streamFirestoreUser()');
+    if (firebaseUser?.value?.uid != null) {
       return _db
-          .document('/users/${firebaseUser.uid}')
+          .document('/users/${firebaseUser.value.uid}')
           .snapshots()
           .map((snapshot) => UserModel.fromMap(snapshot.data));
     }
+
+    return null;
+  }
+
+  //get the firestore user from the firestore collection
+  Future<UserModel> getFirestoreUser() {
+    if (firebaseUser?.value?.uid != null) {
+      return _db
+          .document('/users/${firebaseUser.value.uid}')
+          .get()
+          .then((documentSnapshot) => UserModel.fromMap(documentSnapshot.data));
+    }
+
     return null;
   }
 
   //Method to handle user sign in using email and password
-  Future<bool> signInWithEmailAndPassword(String email, String password) async {
+  signInWithEmailAndPassword(BuildContext context) async {
+    final labels = AppLocalizations.of(context);
+    showLoadingIndicator();
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return true;
-    } catch (e) {
-      return false;
+      await _auth.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+      emailController.clear();
+      passwordController.clear();
+      hideLoadingIndicator();
+    } catch (error) {
+      hideLoadingIndicator();
+      Get.snackbar('labels.auth.signInErrorTitle', labels.auth.signInError,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 15),
+          backgroundColor: Colors.black);
     }
   }
 
   // User registration using email and password
-  Future<bool> registerWithEmailAndPassword(
-      String name, String email, String password) async {
+  registerWithEmailAndPassword() async {
     try {
       await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text)
           .then((result) async {
         print('uID: ' + result.user.uid);
         print('email: ' + result.user.email);
         //get photo url from gravatar if user has one
-        Gravatar gravatar = Gravatar(email);
+        Gravatar gravatar = Gravatar(emailController.text);
         String gravatarUrl = gravatar.imageUrl(
           size: 200,
           defaultImage: GravatarImage.retro,
@@ -59,14 +126,14 @@ class AuthService extends ChangeNotifier {
         UserModel _newUser = UserModel(
             uid: result.user.uid,
             email: result.user.email,
-            name: name,
+            name: nameController.text,
             photoUrl: gravatarUrl);
         //update the user in firestore
         _updateUserFirestore(_newUser, result.user);
       });
-      return true;
-    } catch (e) {
-      return false;
+    } catch (error) {
+      Get.snackbar("Error Creating User", error.message,
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 15));
     }
   }
 
@@ -92,20 +159,30 @@ class AuthService extends ChangeNotifier {
   }
 
   //password reset email
-  Future<void> sendPasswordResetEmail(String email) async {
-    await _auth.sendPasswordResetEmail(email: email);
+  Future<void> sendPasswordResetEmail(BuildContext context) async {
+    final labels = AppLocalizations.of(context);
+    try {
+      await _auth.sendPasswordResetEmail(email: emailController.text);
+      Get.snackbar("Password Reset Email Sent", labels.auth.resetPasswordNotice,
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 5));
+    } catch (e) {
+      Get.snackbar("Password Reset Email Failed", e.message,
+          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 15));
+    }
   }
 
-  Future<bool> isAdmin() async {
-    bool _isAdmin = false;
-    await _auth.currentUser().then((user) async {
+  //check if user is an admin user
+  isAdmin() async {
+    await getUser.then((user) async {
       DocumentSnapshot adminRef =
           await _db.collection('admin').document(user?.uid).get();
       if (adminRef.exists) {
-        _isAdmin = true;
+        admin.value = true;
+      } else {
+        admin.value = false;
       }
+      update();
     });
-    return _isAdmin;
   }
 
   // Sign out

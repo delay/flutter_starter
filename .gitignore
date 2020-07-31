@@ -44,3 +44,4 @@ app.*.map.json
 
 # added by delay
 /ios/Flutter/
+/ios/build/
