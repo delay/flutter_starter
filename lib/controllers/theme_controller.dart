@@ -37,4 +37,18 @@ class ThemeController extends GetxController {
     String _themeString = await store.read('theme') ?? 'system';
     setThemeMode(_themeString);
   }
+
+  // checks whether darkmode is set via system or previously by user
+  bool get isDarkModeOn {
+    if (currentTheme == 'system') {
+      if (WidgetsBinding.instance.window.platformBrightness ==
+          Brightness.dark) {
+        return true;
+      }
+    }
+    if (currentTheme == 'dark') {
+      return true;
+    }
+    return false;
+  }
 }

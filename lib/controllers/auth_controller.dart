@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -95,15 +96,18 @@ class AuthController extends GetxController {
       hideLoadingIndicator();
     } catch (error) {
       hideLoadingIndicator();
-      Get.snackbar('labels.auth.signInErrorTitle', labels.auth.signInError,
+      Get.snackbar(labels.auth.signInErrorTitle, labels.auth.signInError,
           snackPosition: SnackPosition.BOTTOM,
-          duration: Duration(seconds: 15),
-          backgroundColor: Colors.black);
+          duration: Duration(seconds: 7),
+          backgroundColor: Colors.black,
+          colorText: Colors.white);
     }
   }
 
   // User registration using email and password
-  registerWithEmailAndPassword() async {
+  registerWithEmailAndPassword(BuildContext context) async {
+    final labels = AppLocalizations.of(context);
+    showLoadingIndicator();
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -127,25 +131,60 @@ class AuthController extends GetxController {
             photoUrl: gravatarUrl);
         //update the user in firestore
         _updateUserFirestore(_newUser, result.user);
+        emailController.clear();
+        passwordController.clear();
+        hideLoadingIndicator();
       });
     } catch (error) {
-      Get.snackbar("Error Creating User", error.message,
-          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 15));
+      hideLoadingIndicator();
+      Get.snackbar(labels.auth.signUpErrorTitle, error.message,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 10),
+          backgroundColor: Colors.black,
+          colorText: Colors.white);
     }
   }
 
   //handles updating the user when updating profile
-  Future<bool> updateUser(
-      UserModel user, String oldEmail, String password) async {
-    bool _result = false;
-    await _auth
-        .signInWithEmailAndPassword(email: oldEmail, password: password)
-        .then((_firebaseUser) {
-      _firebaseUser.user.updateEmail(user.email);
-      _updateUserFirestore(user, _firebaseUser.user);
-      _result = true;
-    });
-    return _result;
+  Future<void> updateUser(BuildContext context, UserModel user, String oldEmail,
+      String password) async {
+    final labels = AppLocalizations.of(context);
+    try {
+      showLoadingIndicator();
+      await _auth
+          .signInWithEmailAndPassword(email: oldEmail, password: password)
+          .then((_firebaseUser) {
+        _firebaseUser.user
+            .updateEmail(user.email)
+            .then((value) => _updateUserFirestore(user, _firebaseUser.user));
+      });
+      hideLoadingIndicator();
+      Get.snackbar(labels.auth.updateUserSuccessNoticeTitle,
+          labels.auth.updateUserSuccessNotice,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 5),
+          backgroundColor: Colors.black,
+          colorText: Colors.white);
+    } on PlatformException catch (error) {
+      //List<String> errors = error.toString().split(',');
+      // print("Error: " + errors[1]);
+      hideLoadingIndicator();
+      print(error.code);
+      String authError;
+      switch (error.code) {
+        case 'ERROR_WRONG_PASSWORD':
+          authError = labels.auth.wrongPasswordNotice;
+          break;
+        default:
+          authError = labels.auth.unknownError;
+          break;
+      }
+      Get.snackbar(labels.auth.wrongPasswordNoticeTitle, authError,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 10),
+          backgroundColor: Colors.black,
+          colorText: Colors.white);
+    }
   }
 
   //updates the firestore users collection
@@ -158,13 +197,23 @@ class AuthController extends GetxController {
   //password reset email
   Future<void> sendPasswordResetEmail(BuildContext context) async {
     final labels = AppLocalizations.of(context);
+    showLoadingIndicator();
     try {
       await _auth.sendPasswordResetEmail(email: emailController.text);
-      Get.snackbar("Password Reset Email Sent", labels.auth.resetPasswordNotice,
-          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 5));
-    } catch (e) {
-      Get.snackbar("Password Reset Email Failed", e.message,
-          snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 15));
+      hideLoadingIndicator();
+      Get.snackbar(
+          labels.auth.resetPasswordNoticeTitle, labels.auth.resetPasswordNotice,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 5),
+          backgroundColor: Colors.black,
+          colorText: Colors.white);
+    } catch (error) {
+      hideLoadingIndicator();
+      Get.snackbar(labels.auth.resetPasswordFailed, error.message,
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 10),
+          backgroundColor: Colors.black,
+          colorText: Colors.white);
     }
   }
 
@@ -184,6 +233,9 @@ class AuthController extends GetxController {
 
   // Sign out
   Future<void> signOut() {
+    nameController.clear();
+    emailController.clear();
+    passwordController.clear();
     return _auth.signOut();
   }
 }

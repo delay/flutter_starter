@@ -11,7 +11,6 @@ import 'package:flutter_starter/ui/auth/auth.dart';
 class UpdateProfileUI extends StatelessWidget {
   final AuthController authController = AuthController.to;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final Rx<UserModel> user = UserModel().obs;
 
   Widget build(BuildContext context) {
     final labels = AppLocalizations.of(context);
@@ -22,6 +21,7 @@ class UpdateProfileUI extends StatelessWidget {
     authController.emailController.text =
         authController?.fireStoreUser?.value?.email;
     return Scaffold(
+      appBar: AppBar(title: Text(labels.auth.updateProfileTitle)),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -59,16 +59,16 @@ class UpdateProfileUI extends StatelessWidget {
                       labelText: labels?.auth?.updateUser,
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          authController.signInWithEmailAndPassword(context);
                           SystemChannels.textInput
                               .invokeMethod('TextInput.hide');
                           UserModel _updatedUser = UserModel(
-                              uid: user?.value?.uid,
+                              uid: authController?.fireStoreUser?.value?.uid,
                               name: authController.nameController.text,
                               email: authController.emailController.text,
-                              photoUrl: user?.value?.photoUrl);
-                          _updateUserConfirm(
-                              context, _updatedUser, user?.value?.email);
+                              photoUrl: authController
+                                  ?.fireStoreUser?.value?.photoUrl);
+                          _updateUserConfirm(context, _updatedUser,
+                              authController?.fireStoreUser?.value?.email);
                         }
                       }),
                   FormVerticalSpace(),
@@ -89,8 +89,7 @@ class UpdateProfileUI extends StatelessWidget {
       BuildContext context, UserModel updatedUser, String oldEmail) async {
     final labels = AppLocalizations.of(context);
     final AuthController authController = AuthController.to;
-    //AuthService _auth = AuthService();
-    //final TextEditingController _password = new TextEditingController();
+    final TextEditingController _password = new TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
@@ -101,70 +100,28 @@ class UpdateProfileUI extends StatelessWidget {
               labels.auth.enterPassword,
             ),
             content: FormInputFieldWithIcon(
-              controller: authController.passwordController,
+              controller: _password,
               iconPrefix: Icons.lock,
               labelText: labels.auth.passwordFormField,
               validator: Validator(labels).password,
               obscureText: true,
               onChanged: (value) => null,
-              onSaved: (value) =>
-                  authController.passwordController.text = value,
+              onSaved: (value) => _password.text = value,
               maxLines: 1,
             ),
             actions: <Widget>[
               new FlatButton(
                 child: new Text(labels.auth.cancel.toUpperCase()),
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  /*setState(() {
-                    _loading = false;
-                  });*/
+                  Get.back();
                 },
               ),
               new FlatButton(
                 child: new Text(labels.auth.submit.toUpperCase()),
                 onPressed: () async {
-                  /* setState(() {
-                    _loading = true;
-                  });*/
-                  Navigator.of(context).pop();
-                  try {
-                    await authController
-                        .updateUser(updatedUser, oldEmail,
-                            authController.passwordController.text)
-                        .then((result) {
-                      /* setState(() {
-                        _loading = false;
-                      });*/
-
-                      /*if (result == true) {
-                        _scaffoldKey.currentState.showSnackBar(
-                          SnackBar(
-                            content: Text(labels.auth.updateUserSuccessNotice),
-                          ),
-                        );
-                      }*/
-                    });
-                  } on PlatformException catch (error) {
-                    //List<String> errors = error.toString().split(',');
-                    // print("Error: " + errors[1]);
-                    print(error.code);
-                    String authError;
-                    switch (error.code) {
-                      case 'ERROR_WRONG_PASSWORD':
-                        authError = labels.auth.wrongPasswordNotice;
-                        break;
-                      default:
-                        authError = labels.auth.unknownError;
-                        break;
-                    }
-                    /*_scaffoldKey.currentState.showSnackBar(SnackBar(
-                      content: Text(authError),
-                    ));
-                    setState(() {
-                      _loading = false;
-                    });*/
-                  }
+                  Get.back();
+                  await authController.updateUser(
+                      context, updatedUser, oldEmail, _password.text);
                 },
               )
             ],
