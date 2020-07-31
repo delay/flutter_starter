@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'dart:io' show Platform;
 
-//loading indicator code is a modified simplified version of this code
+//loading indicator code is a modified and simplified version of this code
 //https://github.com/fayaz07/ots
 
 final _tKey = GlobalKey(debugLabel: 'overlay_parent');
@@ -55,8 +54,7 @@ OverlayState get _overlayState {
 
   context.visitChildElements(visitor);
 
-  assert(navigator != null,
-      '''Cannot find OTS above the widget tree, unable to show overlay''');
+  assert(navigator != null, '''unable to show overlay''');
   return navigator.overlay;
 }
 
@@ -64,7 +62,7 @@ OverlayState get _overlayState {
 Future<void> showLoadingIndicator(
     {bool isModal = true, Color modalColor}) async {
   try {
-    debugPrint('Showing loading indicator');
+    debugPrint('Showing loading overlay');
     final _child = Center(
       child: SizedBox(
         child: _loadingIndicator ?? CircularProgressIndicator(),
@@ -88,18 +86,17 @@ Future<void> showLoadingIndicator(
           : _child,
     );
   } catch (err) {
-    debugPrint(
-        'Caught an exception while trying to show a Loader\n${err.toString()}');
+    debugPrint('Exception showing loading overlay\n${err.toString()}');
     throw err;
   }
 }
 
 Future<void> hideLoadingIndicator() async {
   try {
-    debugPrint('Hiding loader overlay');
+    debugPrint('Hiding loading overlay');
     await _hideOverlay();
   } catch (err) {
-    debugPrint('Caught an exception while trying to hide loader');
+    debugPrint('Exception hiding loading overlay');
     throw err;
   }
 }
@@ -123,8 +120,7 @@ Future<void> _showOverlay({@required Widget child}) async {
     _loaderEntry = overlayEntry;
     _loaderShown = true;
   } catch (err) {
-    debugPrint(
-        'Caught an exception while trying to insert Overlay\n${err.toString()}');
+    debugPrint('Exception inserting loading overlay\n${err.toString()}');
     throw err;
   }
 }
@@ -134,8 +130,7 @@ Future<void> _hideOverlay() async {
     _loaderEntry.remove();
     _loaderShown = false;
   } catch (err) {
-    debugPrint(
-        'Caught an exception while trying to remove Overlay\n${err.toString()}');
+    debugPrint('Exception removing loading overlay\n${err.toString()}');
     throw err;
   }
 }

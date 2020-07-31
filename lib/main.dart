@@ -23,29 +23,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeController.to.getThemeModeFromStore();
     return GetBuilder<LanguageController>(
-        builder: (languageController) => Loading(
-              child: GetMaterialApp(
-                //begin language translation stuff //https://github.com/aloisdeniel/flutter_sheet_localization
-                locale: languageController.getLocale, // <- Current locale
-                localizationsDelegates: [
-                  const AppLocalizationsDelegate(), // <- Your custom delegate
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                ],
-                supportedLocales: AppLocalizations.languages.keys
-                    .toList(), // <- Supported locales
-                //end language translation stuff
-                navigatorObservers: [
-                  FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
-                ],
-                debugShowCheckedModeBanner: false,
-                //defaultTransition: Transition.fade,
-                theme: AppThemes.lightTheme,
-                darkTheme: AppThemes.darkTheme,
-                themeMode: ThemeMode.system,
-                initialRoute: "/",
-                getPages: AppRoutes.routes,
-              ),
-            ));
+      builder: (languageController) => Loading(
+        child: GetMaterialApp(
+          //begin language translation stuff //https://github.com/aloisdeniel/flutter_sheet_localization
+          locale: languageController.getLocale, // <- Current locale
+          localizationsDelegates: [
+            const AppLocalizationsDelegate(), // <- Your custom delegate
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales:
+              AppLocalizations.languages.keys.toList(), // <- Supported locales
+          //end language translation stuff
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+          ],
+          debugShowCheckedModeBanner: false,
+          //defaultTransition: Transition.fade,
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+          themeMode: ThemeMode.system,
+          initialRoute: "/",
+          getPages: AppRoutes.routes,
+        ),
+      ),
+    );
   }
 }
