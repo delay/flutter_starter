@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-//import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:flutter_starter/localizations.dart';
@@ -81,7 +79,6 @@ class AuthController extends GetxController {
           .get()
           .then((documentSnapshot) => UserModel.fromMap(documentSnapshot.data));
     }
-
     return null;
   }
 
@@ -190,101 +187,3 @@ class AuthController extends GetxController {
     return _auth.signOut();
   }
 }
-
-/* Not currently used functions for managing 
-google, apple and anonymous signin 
-https://github.com/fireship-io/flutter-firebase-quizapp-course
-
-
-final GoogleSignIn _googleSignIn = GoogleSignIn();
-// Determine if Apple Signin is available on device
-  Future<bool> get appleSignInAvailable => AppleSignIn.isAvailable();
-
-  /// Sign in with Apple
-  Future<FirebaseUser> appleSignIn() async {
-    try {
-      final AuthorizationResult appleResult =
-          await AppleSignIn.performRequests([
-        AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
-      ]);
-
-      if (appleResult.error != null) {
-        // handle errors from Apple
-      }
-
-      final AuthCredential credential =
-          OAuthProvider(providerId: 'apple.com').getCredential(
-        accessToken:
-            String.fromCharCodes(appleResult.credential.authorizationCode),
-        idToken: String.fromCharCodes(appleResult.credential.identityToken),
-      );
-
-      AuthResult firebaseResult = await _auth.signInWithCredential(credential);
-      FirebaseUser user = firebaseResult.user;
-
-      // Update user data
-      updateUserData(user);
-
-      return user;
-    } catch (error) {
-      print(error);
-      return null;
-    }
-  }
-
-  /// Sign in with Google
-  Future<FirebaseUser> googleSignIn() async {
-    try {
-      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleAuth =
-          await googleSignInAccount.authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      AuthResult result = await _auth.signInWithCredential(credential);
-      FirebaseUser user = result.user;
-
-      Gravatar gravatar = Gravatar(user.email);
-      String gravatarUrl = gravatar.imageUrl(
-        size: 200,
-        defaultImage: GravatarImage.retro,
-        rating: GravatarRating.pg,
-        fileExtension: true,
-      );
-      UserModel _newUser = UserModel(
-          uid: user.uid,
-          email: user.email,
-          name: user.displayName,
-          photoUrl: gravatarUrl);
-      // _auth.signInWithEmailAndPassword(email: email, password: password);
-      UserData(collection: 'users').upsert(_newUser.toJson());
-
-      // Update user data
-      updateUserData(user);
-
-      return user;
-    } catch (error) {
-      print(error);
-      return null;
-    }
-  }
-
-  /// Anonymous Firebase login
-  Future<FirebaseUser> anonLogin() async {
-    AuthResult result = await _auth.signInAnonymously();
-    FirebaseUser user = result.user;
-
-    updateUserData(user);
-    return user;
-  }
-
-    /// Updates the User's data in Firestore on each new login
-  Future<void> updateUserData(FirebaseUser user) {
-    DocumentReference reportRef = _db.collection('reports').document(user.uid);
-    return reportRef.setData({'uid': user.uid, 'lastActivity': DateTime.now()},
-        merge: true);
-  }
-  */
