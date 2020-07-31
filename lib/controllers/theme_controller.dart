@@ -18,9 +18,8 @@ class ThemeController extends GetxController {
     theme.value = value;
     _themeMode = getThemeModeFromString(value);
     Get.changeThemeMode(_themeMode);
-
-    update();
     await store.write('theme', value);
+    update();
   }
 
   ThemeMode getThemeModeFromString(String themeString) {
@@ -37,19 +36,5 @@ class ThemeController extends GetxController {
   getThemeModeFromStore() async {
     String _themeString = await store.read('theme') ?? 'system';
     setThemeMode(_themeString);
-  }
-
-  // checks whether darkmode is set via system or previously by user
-  bool get isDarkModeOn {
-    if (currentTheme == 'system') {
-      if (WidgetsBinding.instance.window.platformBrightness ==
-          Brightness.dark) {
-        return true;
-      }
-    }
-    if (currentTheme == 'dark') {
-      return true;
-    }
-    return false;
   }
 }

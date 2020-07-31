@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/controllers/controllers.dart';
+import 'package:get/get.dart';
 
 class LogoGraphicHeader extends StatelessWidget {
   LogoGraphicHeader();
-  final ThemeController themeController = ThemeController.to;
 
   @override
   Widget build(BuildContext context) {
     String _imageLogo = 'assets/images/default.png';
-    if (themeController.isDarkModeOn == true) {
+    if (Get.isDarkMode == true) {
       _imageLogo = 'assets/images/defaultDark.png';
     }
     return Hero(
