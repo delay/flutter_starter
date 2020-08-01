@@ -22,14 +22,10 @@ dependencies:
   # apple_sign_in:
   get: ^3.4.1
   get_storage: ^1.2.1
-  provider:
-  shared_preferences:
-  # upstate:
 
-  flutter_platform_widgets:
+  # flutter_platform_widgets:
   flutter_sheet_localization: ^1.0.0
   simple_gravatar:
-  # flutter_auth_buttons:
 
 dev_dependencies:
   flutter_test:
