@@ -10,7 +10,7 @@ So why would you want to use GetX? Let me give you an example of how it simplifi
 
 ![Provider vs. GetX main.dart](https://cdn-images-1.medium.com/max/3932/1*xhycO4bq0SLsrNI0g1bQqw.png)
 
-Once you understand the GetX way it becomes much easier to organize your code and separate your concerns between your UI and functions. For instance when calling a function in the UI I was having to handle the results from the function in the UI and display snackbars with the results. With GetX I was able to move the snackbars into the actual function which makes more sense for me since I no longer have to send success and fail messages in and out of functions. I also keep all the logic in the function rather than having to also handle certain parts in the UI. Below I show a button which signs in the user with the old way vs GetX way. I prefer the GetX way even though it isn’t a lot shorter, but I like having my logic all separated from the UI.
+Once you understand the GetX way it becomes much easier to organize your code and separate your concerns between your UI and functions. For instance when calling a function in the UI I was having to handle the results from the function in the UI and display snackbars with the results. With GetX I was able to move the snackbars into the actual function which makes more sense for me since I no longer have to send success and fail messages in and out of functions. Below I show a button which signs in the user with the old way vs GetX way. I prefer the GetX way even though it isn’t a lot shorter, but I like having my logic all separated from the UI.
 
 ![](https://cdn-images-1.medium.com/max/3580/1*YWsqOuTY1xvqkVvGrt2BLQ.png)
 
@@ -36,7 +36,7 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 ## Overview of project
 
-**main.dart** — contains provider info for maintaining the state of the app for the theme, language and user. It initializes language and theme settings. Sets up routing and monitors the user for changes.
+**main.dart** — contains info for maintaining the state of the app for the theme, language and user. It initializes language and theme settings. Sets up routing.
 
 **localizations.dart** — controls the language for the app.
 
