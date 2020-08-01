@@ -2,19 +2,19 @@
 
 ![](https://cdn-images-1.medium.com/max/4776/1*OKSIgkZpss30GYT9TwQcJg.png)
 
-GetX is a relatively new package for flutter that provides the missing link in making Flutter development simpler. I recently converted a [firebase auth project](https://medium.com/@jeffmcmorris/flutter-firebase-auth-starter-project-b0f91a6503b7) I had created mostly using provider for state management. Switching to GetX simplified many of the pain points I have had with Flutter development. I no longer was having to pass context into functions. I could also better separate my logic from the UI. GetX also greatly simplifies routing, displaying snackbars and dialogs.
+GetX is a relatively new package for Flutter that provides the missing link in making Flutter development simpler. I recently converted a [firebase auth project](https://medium.com/@jeffmcmorris/flutter-firebase-auth-starter-project-b0f91a6503b7) I had created which used provider for state management. Switching to GetX simplified many of the pain points I have had with Flutter development. I no longer was having to pass context into functions. I could also better separate my logic from the UI. GetX also greatly simplifies routing, displaying snackbars and dialogs.
 
 There are some really good projects and tutorials that I made use of in making [this project](https://github.com/delay/flutter_starter). See these links for more help with GetX. [GetX Documentation](https://github.com/jonataslaw/getx), [Todo GetX example](https://medium.com/@loicgeek/flutter-how-to-create-a-todo-app-using-firebase-firestore-and-firebase-authentication-with-getx-89bdaacc6de6), [Amateur Coder GetX Videos](https://www.youtube.com/watch?v=CNpXbeI_slw) and [Loading Overlay](https://medium.com/@fayaz07/dont-kill-app-s-ui-thread-for-showing-loading-indicators-809e5a992230).
 
-So why would you want to use GetX? Let me give you an example of how it simplified my own code. When I used Provider there was a lot more boilerplate code. It also felt much more esoteric to use. GetX is easier for me to understand. Here is my code for main.dart using Provider vs. GetX.
+So why would you want to use GetX? Let me give you an example of how it simplified my own code. When I used Provider there was a lot more boilerplate code. It felt much more esoteric to use. GetX made my code easier to understand. Here is my code for main.dart original vs. GetX.
 
-![Provider vs. GetX main.dart](https://cdn-images-1.medium.com/max/3932/1*xhycO4bq0SLsrNI0g1bQqw.png)
+![](https://cdn-images-1.medium.com/max/3932/1*Sg7dajwS-q-I_G4KLDx_ow.png)
 
-Once you understand the GetX way it becomes much easier to organize your code and separate your concerns between your UI and functions. For instance when calling a function in the UI I was having to handle the results from the function in the UI and display snackbars with the results. With GetX I was able to move the snackbars into the actual function which makes more sense for me since I no longer have to send success and fail messages in and out of functions. Below I show a button which signs in the user with the old way vs GetX way. I prefer the GetX way even though it isn’t a lot shorter, but I like having my logic all separated from the UI.
+Once you understand the GetX way it becomes much easier to organize your code and separate your concerns between your UI and functions. For instance when calling a function in the UI I was having to handle the results from the function and display snackbars with the results. With GetX I was able to move the snackbars into the actual function which makes more sense since I no longer have to send success and fail messages in and out of functions. Below I show a button which signs in the user with the old way vs GetX way. I prefer the GetX way even though it isn’t a lot shorter, but I like having my logic all separated from the UI.
 
 ![](https://cdn-images-1.medium.com/max/3580/1*YWsqOuTY1xvqkVvGrt2BLQ.png)
 
-GetX also has a storage package called [get_storage](https://github.com/jonataslaw/get_storage). It is meant to take the place of shared preferences. It simplifies the way to store data on the device. Here is another example of before and after code.
+GetX also has a storage package called [get_storage](https://github.com/jonataslaw/get_storage). It can take the place of shared preferences. It simplifies the way to store data on the device. Here is another example of before and after code.
 
 ![](https://cdn-images-1.medium.com/max/2600/1*kyYboVrB1BYcMkeHsSNeSw.png)
 
