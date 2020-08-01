@@ -20,7 +20,7 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
   Rx<FirebaseUser> firebaseUser = Rx<FirebaseUser>();
-  Rx<UserModel> fireStoreUser = Rx<UserModel>();
+  Rx<UserModel> firestoreUser = Rx<UserModel>();
   final RxBool admin = false.obs;
 
   @override
@@ -43,7 +43,7 @@ class AuthController extends GetxController {
   handleAuthChanged(_firebaseUser) async {
     //get user data from firestore
     if (_firebaseUser?.uid != null) {
-      fireStoreUser.bindStream(streamFirestoreUser());
+      firestoreUser.bindStream(streamFirestoreUser());
       await isAdmin();
     }
 
@@ -85,7 +85,8 @@ class AuthController extends GetxController {
   }
 
   //Method to handle user sign in using email and password
-  signInWithEmailAndPassword() async {
+  signInWithEmailAndPassword(BuildContext context) async {
+    final labels = AppLocalizations.of(context);
     showLoadingIndicator();
     try {
       await _auth.signInWithEmailAndPassword(
@@ -105,7 +106,8 @@ class AuthController extends GetxController {
   }
 
   // User registration using email and password
-  registerWithEmailAndPassword() async {
+  registerWithEmailAndPassword(BuildContext context) async {
+    final labels = AppLocalizations.of(context);
     showLoadingIndicator();
     try {
       await _auth
@@ -145,8 +147,9 @@ class AuthController extends GetxController {
   }
 
   //handles updating the user when updating profile
-  Future<void> updateUser(
-      UserModel user, String oldEmail, String password) async {
+  Future<void> updateUser(BuildContext context, UserModel user, String oldEmail,
+      String password) async {
+    final labels = AppLocalizations.of(context);
     try {
       showLoadingIndicator();
       await _auth
@@ -186,10 +189,11 @@ class AuthController extends GetxController {
   }
 
   //updates the firestore users collection
-  void _updateUserFirestore(UserModel user, FirebaseUser firebaseUser) {
+  void _updateUserFirestore(UserModel user, FirebaseUser _firebaseUser) {
     _db
-        .document('/users/${firebaseUser.uid}')
+        .document('/users/${_firebaseUser.uid}')
         .setData(user.toJson(), merge: true);
+    update();
   }
 
   //password reset email

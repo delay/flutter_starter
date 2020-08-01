@@ -12,7 +12,7 @@ class HomeUI extends StatelessWidget {
 
     return GetBuilder<AuthController>(
       init: AuthController(),
-      builder: (controller) => controller?.fireStoreUser?.value?.uid == null
+      builder: (controller) => controller?.firestoreUser?.value?.uid == null
           ? Center(
               child: CircularProgressIndicator(),
             )
@@ -31,7 +31,7 @@ class HomeUI extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 120),
-                    Avatar(controller.fireStoreUser.value),
+                    Avatar(controller.firestoreUser.value),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,19 +40,19 @@ class HomeUI extends StatelessWidget {
                         Text(
                             labels.home.uidLabel +
                                 ': ' +
-                                controller.fireStoreUser.value.uid,
+                                controller.firestoreUser.value.uid,
                             style: TextStyle(fontSize: 16)),
                         FormVerticalSpace(),
                         Text(
                             labels.home.nameLabel +
                                 ': ' +
-                                controller.fireStoreUser.value.name,
+                                controller.firestoreUser.value.name,
                             style: TextStyle(fontSize: 16)),
                         FormVerticalSpace(),
                         Text(
                             labels.home.emailLabel +
                                 ': ' +
-                                controller.fireStoreUser.value.email,
+                                controller.firestoreUser.value.email,
                             style: TextStyle(fontSize: 16)),
                         FormVerticalSpace(),
                         Text(

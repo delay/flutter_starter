@@ -17,9 +17,9 @@ class UpdateProfileUI extends StatelessWidget {
 
     //print('user.name: ' + user?.value?.name);
     authController.nameController.text =
-        authController?.fireStoreUser?.value?.name;
+        authController?.firestoreUser?.value?.name;
     authController.emailController.text =
-        authController?.fireStoreUser?.value?.email;
+        authController?.firestoreUser?.value?.email;
     return Scaffold(
       appBar: AppBar(title: Text(labels.auth.updateProfileTitle)),
       body: Form(
@@ -62,13 +62,13 @@ class UpdateProfileUI extends StatelessWidget {
                           SystemChannels.textInput
                               .invokeMethod('TextInput.hide');
                           UserModel _updatedUser = UserModel(
-                              uid: authController?.fireStoreUser?.value?.uid,
+                              uid: authController?.firestoreUser?.value?.uid,
                               name: authController.nameController.text,
                               email: authController.emailController.text,
                               photoUrl: authController
-                                  ?.fireStoreUser?.value?.photoUrl);
+                                  ?.firestoreUser?.value?.photoUrl);
                           _updateUserConfirm(context, _updatedUser,
-                              authController?.fireStoreUser?.value?.email);
+                              authController?.firestoreUser?.value?.email);
                         }
                       }),
                   FormVerticalSpace(),
@@ -118,7 +118,7 @@ class UpdateProfileUI extends StatelessWidget {
           onPressed: () async {
             Get.back();
             await authController.updateUser(
-                updatedUser, oldEmail, _password.text);
+                context, updatedUser, oldEmail, _password.text);
           },
         )
       ],
