@@ -18,8 +18,8 @@ class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final Firestore _db = Firestore.instance;
-  Rx<FirebaseUser> firebaseUser = Rx<FirebaseUser>();
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  Rx<User> firebaseUser = Rx<User>();
   Rx<UserModel> firestoreUser = Rx<UserModel>();
   final RxBool admin = false.obs;
 
@@ -55,19 +55,19 @@ class AuthController extends GetxController {
   }
 
   // Firebase user one-time fetch
-  Future<FirebaseUser> get getUser => _auth.currentUser();
+  Future<User> get getUser async => _auth.currentUser;
 
   // Firebase user a realtime stream
-  Stream<FirebaseUser> get user => _auth.onAuthStateChanged;
+  Stream<User> get user => _auth.authStateChanges();
 
   //Streams the firestore user from the firestore collection
   Stream<UserModel> streamFirestoreUser() {
     print('streamFirestoreUser()');
     if (firebaseUser?.value?.uid != null) {
       return _db
-          .document('/users/${firebaseUser.value.uid}')
+          .doc('/users/${firebaseUser.value.uid}')
           .snapshots()
-          .map((snapshot) => UserModel.fromMap(snapshot.data));
+          .map((snapshot) => UserModel.fromMap(snapshot.data()));
     }
 
     return null;
@@ -76,10 +76,8 @@ class AuthController extends GetxController {
   //get the firestore user from the firestore collection
   Future<UserModel> getFirestoreUser() {
     if (firebaseUser?.value?.uid != null) {
-      return _db
-          .document('/users/${firebaseUser.value.uid}')
-          .get()
-          .then((documentSnapshot) => UserModel.fromMap(documentSnapshot.data));
+      return _db.doc('/users/${firebaseUser.value.uid}').get().then(
+          (documentSnapshot) => UserModel.fromMap(documentSnapshot.data()));
     }
     return null;
   }
@@ -189,10 +187,8 @@ class AuthController extends GetxController {
   }
 
   //updates the firestore users collection
-  void _updateUserFirestore(UserModel user, FirebaseUser _firebaseUser) {
-    _db
-        .document('/users/${_firebaseUser.uid}')
-        .setData(user.toJson(), merge: true);
+  void _updateUserFirestore(UserModel user, User _firebaseUser) {
+    _db.doc('/users/${_firebaseUser.uid}').update(user.toJson());
     update();
   }
 
@@ -223,7 +219,7 @@ class AuthController extends GetxController {
   isAdmin() async {
     await getUser.then((user) async {
       DocumentSnapshot adminRef =
-          await _db.collection('admin').document(user?.uid).get();
+          await _db.collection('admin').doc(user?.uid).get();
       if (adminRef.exists) {
         admin.value = true;
       } else {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter/ui/components/sliding_segmented_control.dart';
+import 'package:flutter/cupertino.dart';
+//import 'package:flutter_starter/ui/components/sliding_segmented_control.dart';
 /*
 SegmentedSelector(
                 menuOptions: list of dropdown options in key value pairs,
