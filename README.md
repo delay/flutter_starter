@@ -46,7 +46,7 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **localizations.dart** — controls the language for the app.
 
-**localizations.g.dart **— this file is generated from our google sheet by the [flutter_sheet_localization](https://github.com/aloisdeniel/flutter_sheet_localization) package (do not manually edit this file).
+**localizations.g.dart** — this file is generated from our google sheet by the [flutter_sheet_localization](https://github.com/aloisdeniel/flutter_sheet_localization) package (do not manually edit this file).
 
 ## /constants/
 
@@ -54,7 +54,7 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **globals.dart** — contains some global app settings
 
-**app_routes.dart **— contains the app routes.
+**app_routes.dart** — contains the app routes.
 
 ## /controllers/
 
@@ -76,11 +76,11 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 ## /ui/
 
-**home_ui.dart **— contains the ui for the home which shows info about the user.
+**home_ui.dart** — contains the ui for the home which shows info about the user.
 
 **settings_ui.dart** — contains the settings screen for setting the theme and language and some user settings.
 
-**splash_ui.dart **— contains the initial loading screen, currently just a circular progress indicator.
+**splash_ui.dart** — contains the initial loading screen, currently just a circular progress indicator.
 
 ## /ui/auth/
 
@@ -88,7 +88,7 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **sign_in_ui.dart** — allows user to login with email and password.
 
-**sign_up_ui.dart **— allows user to create a new account.
+**sign_up_ui.dart** — allows user to create a new account.
 
 **update_profile_ui.dart** — allows user to change his email or name.
 
@@ -98,9 +98,9 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 
 **dropdown_picker.dart** — shows a dropdown list.
 
-**dropdown_picker_with_icon.dart **— shows a dropdown list with icons.
+**dropdown_picker_with_icon.dart** — shows a dropdown list with icons.
 
-**form_input_field.dart **— handles our form field elements.
+**form_input_field.dart** — handles our form field elements.
 
 **form_input_field_with_icon.dart** — handles our form field elements but has an icon too.
 
