@@ -128,8 +128,8 @@ class AuthController extends GetxController {
             email: result.user.email,
             name: nameController.text,
             photoUrl: gravatarUrl);
-        //update the user in firestore
-        _updateUserFirestore(_newUser, result.user);
+        //create the user in firestore
+        _createUserFirestore(_newUser, result.user);
         emailController.clear();
         passwordController.clear();
         hideLoadingIndicator();
@@ -186,9 +186,15 @@ class AuthController extends GetxController {
     }
   }
 
-  //updates the firestore users collection
+  //updates the firestore user in users collection
   void _updateUserFirestore(UserModel user, User _firebaseUser) {
     _db.doc('/users/${_firebaseUser.uid}').update(user.toJson());
+    update();
+  }
+
+  //create the firestore user in users collection
+  void _createUserFirestore(UserModel user, User _firebaseUser) {
+    _db.doc('/users/${_firebaseUser.uid}').set(user.toJson());
     update();
   }
 
