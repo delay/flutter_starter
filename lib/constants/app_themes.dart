@@ -23,6 +23,7 @@ class AppThemes {
   static const Color _lightBackgroundAppBarColor = _lightPrimaryColor;
   static const Color _lightBackgroundSecondaryColor = white;
   static const Color _lightBackgroundAlertColor = blackPearl;
+  static const Color _lightBackgroundActionTextColor = white;
   static const Color _lightBackgroundErrorColor = brinkPink;
   static const Color _lightBackgroundSuccessColor = juneBud;
 
@@ -50,7 +51,9 @@ class AppThemes {
   static const Color _darkBackgroundAppBarColor = _darkPrimaryColor;
   static const Color _darkBackgroundSecondaryColor =
       Color.fromRGBO(0, 0, 0, .6);
-  static const Color _darkBackgroundAlertColor = Colors.black;
+  static const Color _darkBackgroundAlertColor = blackPearl;
+  static const Color _darkBackgroundActionTextColor = white;
+
   static const Color _darkBackgroundErrorColor =
       Color.fromRGBO(255, 97, 136, 1);
   static const Color _darkBackgroundSuccessColor =
@@ -101,8 +104,9 @@ class AppThemes {
       primaryVariant: _lightBackgroundColor,
       // secondary: _lightSecondaryColor,
     ),
-    snackBarTheme:
-        SnackBarThemeData(backgroundColor: _lightBackgroundAlertColor),
+    snackBarTheme: SnackBarThemeData(
+        backgroundColor: _lightBackgroundAlertColor,
+        actionTextColor: _lightBackgroundActionTextColor),
     iconTheme: IconThemeData(
       color: _lightIconColor,
     ),
@@ -192,9 +196,10 @@ class AppThemes {
     ),
     snackBarTheme: SnackBarThemeData(
         contentTextStyle: TextStyle(color: Colors.white),
-        backgroundColor: _darkBackgroundAlertColor),
+        backgroundColor: _darkBackgroundAlertColor,
+        actionTextColor: _darkBackgroundActionTextColor),
     iconTheme: IconThemeData(
-      color: Colors.white, //_darkIconColor,
+      color: _darkIconColor, //_darkIconColor,
     ),
     popupMenuTheme: PopupMenuThemeData(color: _darkBackgroundAppBarColor),
     textTheme: _darkTextTheme,

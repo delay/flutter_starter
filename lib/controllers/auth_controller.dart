@@ -98,8 +98,8 @@ class AuthController extends GetxController {
       Get.snackbar(labels.auth.signInErrorTitle, labels.auth.signInError,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 7),
-          backgroundColor: Colors.black,
-          colorText: Colors.white);
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
     }
   }
 
@@ -139,8 +139,8 @@ class AuthController extends GetxController {
       Get.snackbar(labels.auth.signUpErrorTitle, error.message,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 10),
-          backgroundColor: Colors.black,
-          colorText: Colors.white);
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
     }
   }
 
@@ -162,8 +162,8 @@ class AuthController extends GetxController {
           labels.auth.updateUserSuccessNotice,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 5),
-          backgroundColor: Colors.black,
-          colorText: Colors.white);
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
     } on PlatformException catch (error) {
       //List<String> errors = error.toString().split(',');
       // print("Error: " + errors[1]);
@@ -181,8 +181,8 @@ class AuthController extends GetxController {
       Get.snackbar(labels.auth.wrongPasswordNoticeTitle, authError,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 10),
-          backgroundColor: Colors.black,
-          colorText: Colors.white);
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
     }
   }
 
@@ -209,15 +209,15 @@ class AuthController extends GetxController {
           labels.auth.resetPasswordNoticeTitle, labels.auth.resetPasswordNotice,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 5),
-          backgroundColor: Colors.black,
-          colorText: Colors.white);
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
     } catch (error) {
       hideLoadingIndicator();
       Get.snackbar(labels.auth.resetPasswordFailed, error.message,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 10),
-          backgroundColor: Colors.black,
-          colorText: Colors.white);
+          backgroundColor: Get.theme.snackBarTheme.backgroundColor,
+          colorText: Get.theme.snackBarTheme.actionTextColor);
     }
   }
 
