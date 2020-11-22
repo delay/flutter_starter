@@ -29,7 +29,7 @@ class AuthController extends GetxController {
     ever(firebaseUser, handleAuthChanged);
     firebaseUser.value = await getUser;
     firebaseUser.bindStream(user);
-    super.onInit();
+    super.onReady();
   }
 
   @override
