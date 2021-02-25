@@ -25,9 +25,11 @@ class SignInUI extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  LogoGraphicHeader(),
+                  //LogoGraphicHeader(),
+                  Text("sumascripts",
+                      style: Theme.of(context).textTheme.headline4),
                   SizedBox(height: 48.0),
                   FormInputFieldWithIcon(
                     controller: authController.emailController,

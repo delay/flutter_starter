@@ -18,7 +18,12 @@ class HomeUI extends StatelessWidget {
             )
           : Scaffold(
               appBar: AppBar(
-                title: Text(labels?.home?.title),
+                title: IconButton(
+                    icon: Icon(Icons.menu),
+                    onPressed: () {
+                      Get.to(DeliveriesUI());
+                    }),
+                //Icon(Icons.menu), //Text(labels?.home?.title),
                 actions: [
                   IconButton(
                       icon: Icon(Icons.settings),
