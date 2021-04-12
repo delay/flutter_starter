@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'localizations.dart';
+//import 'package:firebase_analytics/firebase_analytics.dart';
+//import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_starter/controllers/controllers.dart';
 import 'package:flutter_starter/constants/constants.dart';
 import 'package:flutter_starter/ui/components/components.dart';
+import 'package:flutter_starter/helpers/helpers.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -27,18 +26,10 @@ class MyApp extends StatelessWidget {
     return GetBuilder<LanguageController>(
       builder: (languageController) => Loading(
         child: GetMaterialApp(
-          //begin language translation stuff //https://github.com/aloisdeniel/flutter_sheet_localization
+          translations: Localization(),
           locale: languageController.getLocale, // <- Current locale
-          localizationsDelegates: [
-            const AppLocalizationsDelegate(), // <- Your custom delegate
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales:
-              AppLocalizations.languages.keys.toList(), // <- Supported locales
-          //end language translation stuff
           navigatorObservers: [
-            FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+            // FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
           ],
           debugShowCheckedModeBanner: false,
           //defaultTransition: Transition.fade,

@@ -14,27 +14,27 @@ FormInputFieldWithIcon(
 
 class FormInputFieldWithIcon extends StatelessWidget {
   FormInputFieldWithIcon(
-      {this.controller,
-      this.iconPrefix,
-      this.labelText,
-      this.validator,
+      {required this.controller,
+      required this.iconPrefix,
+      required this.labelText,
+      required this.validator,
       this.keyboardType = TextInputType.text,
       this.obscureText = false,
       this.minLines = 1,
       this.maxLines,
-      this.onChanged,
-      this.onSaved});
+      required this.onChanged,
+      required this.onSaved});
 
   final TextEditingController controller;
   final IconData iconPrefix;
   final String labelText;
-  final String Function(String) validator;
+  final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final bool obscureText;
   final int minLines;
-  final int maxLines;
+  final int? maxLines;
   final void Function(String) onChanged;
-  final void Function(String) onSaved;
+  final void Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {

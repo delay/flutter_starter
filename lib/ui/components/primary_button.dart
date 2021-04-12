@@ -8,16 +8,15 @@ PrimaryButton(
 */
 
 class PrimaryButton extends StatelessWidget {
-  PrimaryButton({this.labelText, this.onPressed});
+  PrimaryButton({required this.labelText, required this.onPressed});
 
   final String labelText;
   final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       onPressed: onPressed,
-      padding: EdgeInsets.all(22),
       child: Text(
         labelText.toUpperCase(),
         style: TextStyle(fontWeight: FontWeight.bold),

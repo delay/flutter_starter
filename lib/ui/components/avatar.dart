@@ -10,7 +10,7 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ((user?.photoUrl == '') || (user?.photoUrl == null)) {
+    if (user.photoUrl == '') {
       return LogoGraphicHeader();
     }
     return Hero(
@@ -21,7 +21,7 @@ class Avatar extends StatelessWidget {
           radius: 70.0,
           child: ClipOval(
             child: Image.network(
-              user?.photoUrl,
+              user.photoUrl,
               fit: BoxFit.cover,
               width: 120.0,
               height: 120.0,

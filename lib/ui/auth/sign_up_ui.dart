@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_starter/localizations.dart';
 import 'package:flutter_starter/ui/components/components.dart';
 import 'package:flutter_starter/helpers/helpers.dart';
 import 'package:flutter_starter/controllers/controllers.dart';
@@ -12,8 +11,6 @@ class SignUpUI extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
-    final labels = AppLocalizations.of(context);
-
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -30,40 +27,63 @@ class SignUpUI extends StatelessWidget {
                   FormInputFieldWithIcon(
                     controller: authController.nameController,
                     iconPrefix: Icons.person,
-                    labelText: labels?.auth?.nameFormField,
-                    validator: Validator(labels).name,
+                    labelText: 'auth.nameFormField'.tr,
+                    validator: (value) {
+                      String pattern =
+                          r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
+                      RegExp regex = RegExp(pattern);
+                      if (!regex.hasMatch(value!))
+                        return 'validator.name'.tr;
+                      else
+                        return null;
+                    },
                     onChanged: (value) => null,
                     onSaved: (value) =>
-                        authController.nameController.text = value,
+                        authController.nameController.text = value!,
                   ),
                   FormVerticalSpace(),
                   FormInputFieldWithIcon(
                     controller: authController.emailController,
                     iconPrefix: Icons.email,
-                    labelText: labels?.auth?.emailFormField,
-                    validator: Validator(labels).email,
+                    labelText: 'auth.emailFormField'.tr,
+                    validator: (value) {
+                      String pattern =
+                          r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                      RegExp regex = RegExp(pattern);
+                      if (!regex.hasMatch(value!))
+                        return 'validator.email'.tr;
+                      else
+                        return null;
+                    },
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) => null,
                     onSaved: (value) =>
-                        authController.emailController.text = value,
+                        authController.emailController.text = value!,
                   ),
                   FormVerticalSpace(),
                   FormInputFieldWithIcon(
                     controller: authController.passwordController,
                     iconPrefix: Icons.lock,
-                    labelText: labels?.auth?.passwordFormField,
-                    validator: Validator(labels).password,
+                    labelText: 'auth.passwordFormField'.tr,
+                    validator: (value) {
+                      String pattern = r'^.{6,}$';
+                      RegExp regex = RegExp(pattern);
+                      if (!regex.hasMatch(value!))
+                        return 'validator.password'.tr;
+                      else
+                        return null;
+                    },
                     obscureText: true,
                     onChanged: (value) => null,
                     onSaved: (value) =>
-                        authController.passwordController.text = value,
+                        authController.passwordController.text = value!,
                     maxLines: 1,
                   ),
                   FormVerticalSpace(),
                   PrimaryButton(
-                      labelText: labels?.auth?.signUpButton,
+                      labelText: 'auth.signUpButton'.tr,
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           SystemChannels.textInput.invokeMethod(
                               'TextInput.hide'); //to hide the keyboard - if any
                           authController.registerWithEmailAndPassword(context);
@@ -71,7 +91,7 @@ class SignUpUI extends StatelessWidget {
                       }),
                   FormVerticalSpace(),
                   LabelButton(
-                    labelText: labels?.auth?.signInLabelButton,
+                    labelText: 'auth.signInLabelButton'.tr,
                     onPressed: () => Get.to(SignInUI()),
                   ),
                 ],
