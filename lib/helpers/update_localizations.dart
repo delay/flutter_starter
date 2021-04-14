@@ -9,7 +9,6 @@ void main() {
 }
 
 Future updateLocalizationFile() async {
-  //if user fails to add arguments to commandline output error message
   //the document id for your google sheet
   String documentId = "1oS7iJ6ocrZBA53SxRfKF0CG9HAaXeKtzvsTBhgG4Zzk";
   //the sheetid of your google sheet
@@ -25,7 +24,6 @@ class Localization extends Translations {
     """;
 
   try {
-    //query google voice api and get response which is base 64 encoded.
     final url =
         'https://docs.google.com/spreadsheets/d/$documentId/export?format=csv&id=$documentId&gid=$sheetId';
 
@@ -33,7 +31,6 @@ class Localization extends Translations {
     stdout.writeln('---------------------------------------');
     stdout.writeln('Downloading Google sheet url "$url" ...');
     stdout.writeln('---------------------------------------');
-    //decode base64 file and save as binary audio file (mp3)
     var response = await http
         .get(Uri.parse(url), headers: {'accept': 'text/csv;charset=UTF-8'});
 
