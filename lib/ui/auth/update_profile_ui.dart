@@ -35,15 +35,7 @@ class UpdateProfileUI extends StatelessWidget {
                     controller: authController.nameController,
                     iconPrefix: Icons.person,
                     labelText: 'auth.nameFormField'.tr,
-                    validator: (value) {
-                      String pattern =
-                          r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-                      RegExp regex = RegExp(pattern);
-                      if (!regex.hasMatch(value!))
-                        return 'validator.name'.tr;
-                      else
-                        return null;
-                    },
+                    validator: Validator().name,
                     onChanged: (value) => null,
                     onSaved: (value) =>
                         authController.nameController.text = value!,
@@ -53,15 +45,7 @@ class UpdateProfileUI extends StatelessWidget {
                     controller: authController.emailController,
                     iconPrefix: Icons.email,
                     labelText: 'auth.emailFormField'.tr,
-                    validator: (value) {
-                      String pattern =
-                          r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-                      RegExp regex = RegExp(pattern);
-                      if (!regex.hasMatch(value!))
-                        return 'validator.email'.tr;
-                      else
-                        return null;
-                    },
+                    validator: Validator().email,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) => null,
                     onSaved: (value) =>
