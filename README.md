@@ -67,7 +67,8 @@ Finally I wanted to explain a little bit about my ui. I try to control as much a
 ## /helpers/
 
 **validator.dart** — contains some validation functions for our form fields.
-**update_localizations.dart** — commandline dart app that generates the localization.g.dart file.
+
+**update_localizations.dart** — command line dart app that generates the localization.g.dart file.
 
 **localizations.g.dart** — this file is generated from our google sheet (do not manually edit this file).
 
