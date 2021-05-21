@@ -139,18 +139,25 @@ class AuthController extends GetxController {
   //handles updating the user when updating profile
   Future<void> updateUser(BuildContext context, UserModel user, String oldEmail,
       String password) async {
+    String _authUpdateUserNoticeTitle = 'auth.updateUserSuccessNoticeTitle'.tr;
+    String _authUpdateUserNotice = 'auth.updateUserSuccessNotice'.tr;
     try {
       showLoadingIndicator();
-      await _auth
-          .signInWithEmailAndPassword(email: oldEmail, password: password)
-          .then((_firebaseUser) {
-        _firebaseUser.user!
-            .updateEmail(user.email)
-            .then((value) => _updateUserFirestore(user, _firebaseUser.user!));
-      });
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: oldEmail, password: password)
+            .then((_firebaseUser) {
+          _firebaseUser.user!
+              .updateEmail(user.email)
+              .then((value) => _updateUserFirestore(user, _firebaseUser.user!));
+        });
+      } catch (err) {
+        print('Caught error: $err');
+        _authUpdateUserNoticeTitle = 'auth.wrongPasswordNotice'.tr;
+        _authUpdateUserNotice = 'auth.wrongPasswordNotice'.tr;
+      }
       hideLoadingIndicator();
-      Get.snackbar('auth.updateUserSuccessNoticeTitle'.tr,
-          'auth.updateUserSuccessNotice'.tr,
+      Get.snackbar(_authUpdateUserNoticeTitle, _authUpdateUserNotice,
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 5),
           backgroundColor: Get.theme.snackBarTheme.backgroundColor,
