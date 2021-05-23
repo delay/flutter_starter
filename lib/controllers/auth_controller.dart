@@ -153,8 +153,16 @@ class AuthController extends GetxController {
         });
       } catch (err) {
         print('Caught error: $err');
-        _authUpdateUserNoticeTitle = 'auth.wrongPasswordNotice'.tr;
-        _authUpdateUserNotice = 'auth.wrongPasswordNotice'.tr;
+        //not yet working, see this issue https://github.com/delay/flutter_starter/issues/21
+        if (err ==
+            "Error: [firebase_auth/email-already-in-use] The email address is already in use by another account.") {
+          _authUpdateUserNoticeTitle = 'auth.updateUserEmailInUse'.tr;
+          _authUpdateUserNotice = 'auth.updateUserEmailInUse'.tr;
+        } else {
+          
+          _authUpdateUserNoticeTitle = 'auth.wrongPasswordNotice'.tr;
+          _authUpdateUserNotice = 'auth.wrongPasswordNotice'.tr;
+        }
       }
       hideLoadingIndicator();
       Get.snackbar(_authUpdateUserNoticeTitle, _authUpdateUserNotice,
